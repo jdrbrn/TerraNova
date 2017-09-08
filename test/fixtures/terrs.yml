@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  region: MyString
+  datecomp: 2017-09-08
+  notes: MyString
+  history: MyText
+
+two:
+  name: MyString
+  region: MyString
+  datecomp: 2017-09-08
+  notes: MyString
+  history: MyText

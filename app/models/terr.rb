@@ -1,0 +1,2 @@
+class Terr < ApplicationRecord
+end

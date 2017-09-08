@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Terrins</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Terrid</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @terrins.each do |terrin| %>
+      <tr>
+        <td><%= terrin.terrid %></td>
+        <td><%= link_to 'Show', terrin %></td>
+        <td><%= link_to 'Edit', edit_terrin_path(terrin) %></td>
+        <td><%= link_to 'Destroy', terrin, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Terrin', new_terrin_path %>

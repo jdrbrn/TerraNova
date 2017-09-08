@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Dncs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Terrid</th>
+      <th>Number</th>
+      <th>Street</th>
+      <th>Name</th>
+      <th>Publisher</th>
+      <th>Date</th>
+      <th>Notes</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @dncs.each do |dnc| %>
+      <tr>
+        <td><%= dnc.terrid %></td>
+        <td><%= dnc.number %></td>
+        <td><%= dnc.street %></td>
+        <td><%= dnc.name %></td>
+        <td><%= dnc.publisher %></td>
+        <td><%= dnc.date %></td>
+        <td><%= dnc.notes %></td>
+        <td><%= link_to 'Show', dnc %></td>
+        <td><%= link_to 'Edit', edit_dnc_path(dnc) %></td>
+        <td><%= link_to 'Destroy', dnc, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Dnc', new_dnc_path %>

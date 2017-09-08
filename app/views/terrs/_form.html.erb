@@ -1,0 +1,42 @@
+<%= form_with(model: terr, local: true) do |form| %>
+  <% if terr.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(terr.errors.count, "error") %> prohibited this terr from being saved:</h2>
+
+      <ul>
+      <% terr.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :terr_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :region %>
+    <%= form.text_field :region, id: :terr_region %>
+  </div>
+
+  <div class="field">
+    <%= form.label :datecomp %>
+    <%= form.date_select :datecomp, id: :terr_datecomp %>
+  </div>
+
+  <div class="field">
+    <%= form.label :notes %>
+    <%= form.text_field :notes, id: :terr_notes %>
+  </div>
+
+  <div class="field">
+    <%= form.label :history %>
+    <%= form.text_area :history, id: :terr_history %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

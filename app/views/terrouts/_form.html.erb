@@ -1,0 +1,37 @@
+<%= form_with(model: terrout, local: true) do |form| %>
+  <% if terrout.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(terrout.errors.count, "error") %> prohibited this terrout from being saved:</h2>
+
+      <ul>
+      <% terrout.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :terrid %>
+    <%= form.number_field :terrid, id: :terrout_terrid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :publisher %>
+    <%= form.text_field :publisher, id: :terrout_publisher %>
+  </div>
+
+  <div class="field">
+    <%= form.label :dateout %>
+    <%= form.date_select :dateout, id: :terrout_dateout %>
+  </div>
+
+  <div class="field">
+    <%= form.label :datedue %>
+    <%= form.date_select :datedue, id: :terrout_datedue %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

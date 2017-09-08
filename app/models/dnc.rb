@@ -1,0 +1,2 @@
+class Dnc < ApplicationRecord
+end

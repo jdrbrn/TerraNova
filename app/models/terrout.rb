@@ -1,0 +1,2 @@
+class Terrout < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+class Terrin < ApplicationRecord
+end

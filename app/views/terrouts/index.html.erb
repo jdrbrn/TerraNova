@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Terrouts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Terrid</th>
+      <th>Publisher</th>
+      <th>Dateout</th>
+      <th>Datedue</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @terrouts.each do |terrout| %>
+      <tr>
+        <td><%= terrout.terrid %></td>
+        <td><%= terrout.publisher %></td>
+        <td><%= terrout.dateout %></td>
+        <td><%= terrout.datedue %></td>
+        <td><%= link_to 'Show', terrout %></td>
+        <td><%= link_to 'Edit', edit_terrout_path(terrout) %></td>
+        <td><%= link_to 'Destroy', terrout, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Terrout', new_terrout_path %>

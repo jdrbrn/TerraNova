@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  terrid: 1
+  publisher: MyString
+  dateout: 2017-09-08
+  datedue: 2017-09-08
+
+two:
+  terrid: 1
+  publisher: MyString
+  dateout: 2017-09-08
+  datedue: 2017-09-08

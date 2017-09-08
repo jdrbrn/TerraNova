@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @terr.name %>
+</p>
+
+<p>
+  <strong>Region:</strong>
+  <%= @terr.region %>
+</p>
+
+<p>
+  <strong>Datecomp:</strong>
+  <%= @terr.datecomp %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @terr.notes %>
+</p>
+
+<p>
+  <strong>History:</strong>
+  <%= @terr.history %>
+</p>
+
+<%= link_to 'Edit', edit_terr_path(@terr) %> |
+<%= link_to 'Back', terrs_path %>

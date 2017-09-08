@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Terrid:</strong>
+  <%= @terrout.terrid %>
+</p>
+
+<p>
+  <strong>Publisher:</strong>
+  <%= @terrout.publisher %>
+</p>
+
+<p>
+  <strong>Dateout:</strong>
+  <%= @terrout.dateout %>
+</p>
+
+<p>
+  <strong>Datedue:</strong>
+  <%= @terrout.datedue %>
+</p>
+
+<%= link_to 'Edit', edit_terrout_path(@terrout) %> |
+<%= link_to 'Back', terrouts_path %>
