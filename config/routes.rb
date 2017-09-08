@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :report
+
   resources :dncs
   resources :terrouts
   resources :terrins
