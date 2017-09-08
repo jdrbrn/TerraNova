@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'report#index'
   resources :report
 
   resources :dncs
