@@ -13,25 +13,26 @@
 </script>
 
 <!-- Ruby pre-render functions -->
-//calculate when start of service year was
-<%= now=Time.now %>
-<%= if now.month>=9 %>
-  <%= svcYearStart=Time.new(now.year,9,1) %>
-<%= else %>
-  <%= svcYearStart=Time.new(now.year-1,9,1) %>
-<%= end %>
-//calculate how many territories completed during service year
-<%= compCurYear=0 %>
+<%# calculate when start of service year was %>
+<% if Time.now.month>=9 %>
+  <% svcYearStart=Time.new(Time.now.year,9,1) %>
+<% else %>
+  <% svcYearStart=Time.new(Time.now.year-1,9,1) %>
+<% end %>
+<%# calculate how many territories completed during service year %>
+<% compCurYear=0 %>
 <% @terrs.each do |terr| %>
-  <%= if terr.datecomp > svcYearStart then compCurYear+=1 end %>
-<%= end %>
-//If current month is Sep do the same for last service year for record keeping
-<%= lastSvcYear=false %>
-<%= if now.month==9 %>
-  <%= lastSvcYear=Time.new(svcYearStart.year-1,9,1) %>
-  <%= compLastYear=0 %>
-  <%= if terr.datecomp>lastSvcYear && terr.datecomp<svcYearStart then compLastYear+=1 end %>
-<%= end %>
+  <% if terr.datecomp > svcYearStart then compCurYear+=1 end %>
+<% end %>
+<%# If current month is Sep do the same for last service year for record keeping %>
+<% lastSvcYear=false %>
+<% if Time.now.month==9 %>
+  <% lastSvcYear=Time.new(svcYearStart.year-1,9,1) %>
+  <% compLastYear=0 %>
+  <% @terrs.each do |terr| %>
+    <% if terr.datecomp>lastSvcYear && terr.datecomp<svcYearStart then compLastYear+=1 end %>
+  <% end %>
+<% end %>
 
 <%= compCurYear %>
 <%= compLastYear %>

@@ -1,6 +1,7 @@
 class ReportController < ApplicationController
   def index
-  end
-  def report
+    @terrins=Terrin.all
+    @terrouts=Terrout.all
+    @terrs=Terr.all
   end
 end

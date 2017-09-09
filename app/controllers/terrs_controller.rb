@@ -15,6 +15,7 @@ class TerrsController < ApplicationController
   # GET /terrs/new
   def new
     @terr = Terr.new
+    @terr.history=[]
   end
 
   # GET /terrs/1/edit
