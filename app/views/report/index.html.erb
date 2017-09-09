@@ -83,7 +83,7 @@
   </thead>
 
   <tbody>
-    <% @terrouts.sort_by{|terr| terr.datedue}.each do |terrout| %>
+    <% @terrouts.sort_by{|terrout| terrout.datedue}.each do |terrout| %>
 
       <tr>
         <td style="white-space:pre"><%= @terrs.find(terrout.terrid).name %><br><%= @terrs.find(terrout.terrid).region %></td>
@@ -99,5 +99,28 @@
 </table>
 
 <!-- table to display terrins -->
+<h2>Checked In Territories</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Territory</th>
+      <th>Last Complete</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @terrins.sort_by{|terrin| @terrs.find(terrin.terrid).datecomp}.reverse.each do |terrin| %>
+
+      <tr>
+        <td style="white-space:pre"><%= @terrs.find(terrin.terrid).name %><br><%= @terrs.find(terrin.terrid).region %></td>
+        <td><%= @terrs.find(terrin.terrid).datecomp %></td>
+        <td>View Details</td>
+        <td>Check Out</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <!-- table to display terrs that aren't our or in -->
