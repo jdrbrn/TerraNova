@@ -3,11 +3,11 @@
   var congName = "Name"
   //enable true if multiple reports are needed. If false will use report from same server
   //If true will load report from first server in list on load
-  var multiLinksEnabled = false
+  var multiLinksEnabled = true
   var multiServers=[]
   //multiServers.push(["Type of Territory","IP of TerraNova Server for type"])
-  multiServers.push(["Residential","10.0.20.2"])
-  multiServers.push(["Residential2","10.0.20.2"])
+  multiServers.push(["Residential","10.0.20.2:3000"])
+  multiServers.push(["Residential2","10.0.20.2:3001"])
   multiServers.push(["Residential3","10.0.20.2"])
 </script>
 
@@ -27,12 +27,13 @@
       for (id=0; id<multiServers.length; id++){
         appendHTML("toolLinks",("<td id='server"+id+"Link'><a onclick=loadServer("+id+")>"+multiServers[id][0]+"</td>"))
       }
+      document.getElementById("reportWindow").innerHTML=("<iframe style='width:99%;height:99%' src=\'http://"+multiServers[0][1]+"/report\'> </iframe>")
     } else {
       insertHTML("reportWindow","<iframe style='width:99%;height:99%' src='report'> </iframe>")
     }
   }
   function loadServer(id){
-    alert(id)
+    document.getElementById("reportWindow").innerHTML=("<iframe style='width:99%;height:99%' src='http://"+multiServers[id][1]+"/report'> </iframe>")
   }
   window.onload = setToolbar;
 </script>
