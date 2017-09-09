@@ -4,11 +4,16 @@
 
 <!-- Javascript Functions -->
 <script>
-  function appendHTML(element, contents) {
-    document.getElementById(element).innerHTML=(document.getElementById(element).innerHTML + contents)
+  function terrinsViewDetails(terrinid) {
+    document.getElementById("detailFrame").src = ("terrins/" + terrinid)
   }
-  function insertHTML(element, contents) {
-    document.getElementById(element).innerHTML=(contents + document.getElementById(element).innerHTML)
+
+  function terroutsViewDetails(terroutid) {
+    document.getElementById("detailFrame").src = ("terrouts/" + terroutid)
+  }
+
+  function terrsViewDetails(terrid) {
+    document.getElementById("detailFrame").src = ("terrs/" + terrid)
   }
 </script>
 
@@ -36,115 +41,129 @@
   <% end %>
 <% end %>
 
-<!-- table to display service year completion stats -->
-<div id="svcYearStats">
-  <table>
-    <thead>
-      <tr>
-        <th>Year</th>
-        <th>Completed</th>
-        <th>Total</th>
-        <th>Percent</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><%= svcYearStart.year %></td>
-        <td><%= compCurYear %></td>
-        <td><%= @terrs.length %></td>
-        <td><%= compCurYear.to_f/@terrs.length %></td>
-      </tr>
-      <% if lastSvcYear %>
+<!-- Left side report view -->
+<div id="reportWindow" style="width:49vw;position:absolute;left:1vw">
+  <!-- table to display service year completion stats -->
+  <div id="svcYearStats">
+    <table>
+      <thead>
         <tr>
-          <td><%= lastSvcYear.year %></td>
-          <td><%= compLastYear %></td>
-          <td><%= @terrs.length %></td>
-          <td><%= compLastYear.to_f/@terrs.length %></td>
+          <th>Year</th>
+          <th>Completed</th>
+          <th>Total</th>
+          <th>Percent</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= svcYearStart.year %></td>
+          <td><%= compCurYear %></td>
+          <td><%= @terrs.length %></td>
+          <td><%= compCurYear.to_f/@terrs.length %></td>
+        </tr>
+        <% if lastSvcYear %>
+          <tr>
+            <td><%= lastSvcYear.year %></td>
+            <td><%= compLastYear %></td>
+            <td><%= @terrs.length %></td>
+            <td><%= compLastYear.to_f/@terrs.length %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- table to display terrouts -->
+  <div id="terrOuts">
+    <h2>Checked Out Territories</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Territory</th>
+          <th>Last Complete</th>
+          <th>Publisher</th>
+          <th>Date Out</th>
+          <th>Date Due</th>
+          <th colspan="2"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @terrouts.sort_by{|terrout| terrout.datedue}.each do |terrout| %>
+          <% categorizedTerrs<<terrout.terrid %>
+          <tr>
+            <td style="white-space:pre"><%= @terrs.find(terrout.terrid).name %><br><%= @terrs.find(terrout.terrid).region %></td>
+            <td><%= @terrs.find(terrout.terrid).datecomp %></td>
+            <td><%= terrout.publisher %></td>
+            <td><%= terrout.dateout %></td>
+            <td><%= terrout.datedue %></td>
+            <td><a href="#" onclick="terroutsViewDetails('<%= terrout.id %>');return false;">View Details</a></td>
+            <td>Check In</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- table to display terrins -->
+  <div id="terrIns">
+    <h2>Checked In Territories</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Territory</th>
+          <th>Last Complete</th>
+          <th colspan="2"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @terrins.sort_by{|terrin| @terrs.find(terrin.terrid).datecomp}.each do |terrin| %>
+        <% categorizedTerrs<<terrin.terrid %>
+          <tr>
+            <td style="white-space:pre"><%= @terrs.find(terrin.terrid).name %><br><%= @terrs.find(terrin.terrid).region %></td>
+            <td><%= @terrs.find(terrin.terrid).datecomp %></td>
+            <td><a href="#" onclick="terrinsViewDetails('<%= terrin.id %>');return false;">View Details</a></td>
+            <td>Check Out</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- table to display terrs that aren't our or in -->
+  <div id="otherTerrs">
+    <h2>Other Territories</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Territory</th>
+          <th>Last Complete</th>
+          <th colspan="2"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @terrs.sort_by{|terr| terr.datecomp}.each do |terr| %>
+          <% if categorizedTerrs.find_index(terr.id) %>
+          <% else %>
+            <tr>
+              <td style="white-space:pre"><%= terr.name %><br><%=terr.region %></td>
+              <td><%= terr.datecomp %></td>
+              <td><a href='#' onclick="terrsViewDetails('<%= terr.id %>');return false;">View Details</a></td>
+              <td>Check Out</td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
 
-<!-- table to display terrouts -->
-<h2>Checked Out Territories</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>Territory</th>
-      <th>Last Complete</th>
-      <th>Publisher</th>
-      <th>Date Out</th>
-      <th>Date Due</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @terrouts.sort_by{|terrout| terrout.datedue}.each do |terrout| %>
-      <% categorizedTerrs<<terrout.terrid %>
-      <tr>
-        <td style="white-space:pre"><%= @terrs.find(terrout.terrid).name %><br><%= @terrs.find(terrout.terrid).region %></td>
-        <td><%= @terrs.find(terrout.terrid).datecomp %></td>
-        <td><%= terrout.publisher %></td>
-        <td><%= terrout.dateout %></td>
-        <td><%= terrout.datedue %></td>
-        <td>View Details</td>
-        <td>Check In</td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<!-- table to display terrins -->
-<h2>Checked In Territories</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>Territory</th>
-      <th>Last Complete</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @terrins.sort_by{|terrin| @terrs.find(terrin.terrid).datecomp}.each do |terrin| %>
-    <% categorizedTerrs<<terrin.terrid %>
-      <tr>
-        <td style="white-space:pre"><%= @terrs.find(terrin.terrid).name %><br><%= @terrs.find(terrin.terrid).region %></td>
-        <td><%= @terrs.find(terrin.terrid).datecomp %></td>
-        <td>View Details</td>
-        <td>Check Out</td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<!-- table to display terrs that aren't our or in -->
-<h2>Other Territories</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>Territory</th>
-      <th>Last Complete</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @terrs.sort_by{|terr| terr.datecomp}.each do |terr| %>
-      <% if categorizedTerrs.find_index(terr.id) %>
-      <% else %>
-        <tr>
-          <td style="white-space:pre"><%= terr.name %><br><%=terr.region %></td>
-          <td><%= terr.datecomp %></td>
-          <td>View Details</td>
-          <td>Check Out</td>
-        </tr>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
+<!--Detail display window off to right side-->
+<div id="detailWindow" style="width:49vw;height:99vh;position:absolute;right:2px;top:3px;border:1px solid #000000">
+  <iframe id="detailFrame" style='width:99%;height:99%'> </iframe>
+</div>
