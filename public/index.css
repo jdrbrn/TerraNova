@@ -1,0 +1,13 @@
+body {
+	background-color: #ecfbff
+}
+
+table, th, td
+{
+border:1px solid #000000;
+border-collapse:collapse;
+vertical-align:top;
+text-align:center;
+word-wrap:break-word;
+white-space:normal;
+}
