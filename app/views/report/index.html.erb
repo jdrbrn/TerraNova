@@ -13,9 +13,8 @@
 </script>
 
 <%# Ruby pre-render functions %>
-<%# get a local working copy of @terrs %>
-<% workingTerrs=[] %>
-<% @terrs.each { |terr| workingTerrs<<terr } %>
+<%# will store terrid of all territories check in or out %>
+<% categorizedTerrs =[] %>
 <%# calculate when start of service year was %>
 <% if Time.now.month>=9 %>
   <% svcYearStart=Time.new(Time.now.year,9,1) %>
@@ -24,7 +23,7 @@
 <% end %>
 <%# calculate how many territories completed during service year %>
 <% compCurYear=0 %>
-<% workingTerrs.each do |terr| %>
+<% @terrs.each do |terr| %>
   <% if terr.datecomp > svcYearStart then compCurYear+=1 end %>
 <% end %>
 <%# If current month is Sep do the same for last service year for record keeping %>
@@ -32,7 +31,7 @@
 <% if Time.now.month==9 %>
   <% lastSvcYear=Time.new(svcYearStart.year-1,9,1) %>
   <% compLastYear=0 %>
-  <% workingTerrs.each do |terr| %>
+  <% @terrs.each do |terr| %>
     <% if terr.datecomp>lastSvcYear && terr.datecomp<svcYearStart then compLastYear+=1 end %>
   <% end %>
 <% end %>
@@ -52,15 +51,15 @@
       <tr>
         <td><%= svcYearStart.year %></td>
         <td><%= compCurYear %></td>
-        <td><%= workingTerrs.length %></td>
-        <td><%= compCurYear.to_f/workingTerrs.length %></td>
+        <td><%= @terrs.length %></td>
+        <td><%= compCurYear.to_f/@terrs.length %></td>
       </tr>
       <% if lastSvcYear %>
         <tr>
           <td><%= lastSvcYear.year %></td>
           <td><%= compLastYear %></td>
-          <td><%= workingTerrs.length %></td>
-          <td><%= compLastYear.to_f/workingTerrs.length %></td>
+          <td><%= @terrs.length %></td>
+          <td><%= compLastYear.to_f/@terrs.length %></td>
         </tr>
       <% end %>
     </tbody>
@@ -84,7 +83,7 @@
 
   <tbody>
     <% @terrouts.sort_by{|terrout| terrout.datedue}.each do |terrout| %>
-
+      <% categorizedTerrs<<terrout.terrid %>
       <tr>
         <td style="white-space:pre"><%= @terrs.find(terrout.terrid).name %><br><%= @terrs.find(terrout.terrid).region %></td>
         <td><%= @terrs.find(terrout.terrid).datecomp %></td>
@@ -111,8 +110,8 @@
   </thead>
 
   <tbody>
-    <% @terrins.sort_by{|terrin| @terrs.find(terrin.terrid).datecomp}.reverse.each do |terrin| %>
-
+    <% @terrins.sort_by{|terrin| @terrs.find(terrin.terrid).datecomp}.each do |terrin| %>
+    <% categorizedTerrs<<terrin.terrid %>
       <tr>
         <td style="white-space:pre"><%= @terrs.find(terrin.terrid).name %><br><%= @terrs.find(terrin.terrid).region %></td>
         <td><%= @terrs.find(terrin.terrid).datecomp %></td>
@@ -124,3 +123,28 @@
 </table>
 
 <!-- table to display terrs that aren't our or in -->
+<h2>Other Territories</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Territory</th>
+      <th>Last Complete</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @terrs.sort_by{|terr| terr.datecomp}.each do |terr| %>
+      <% if categorizedTerrs.find_index(terr.id) %>
+      <% else %>
+        <tr>
+          <td style="white-space:pre"><%= terr.name %><br><%=terr.region %></td>
+          <td><%= terr.datecomp %></td>
+          <td>View Details</td>
+          <td>Check Out</td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
