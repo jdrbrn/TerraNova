@@ -1,2 +1,37 @@
-<h1>Report#index</h1>
-<p>Find me in app/views/report/index.html.erb</p>
+<!-- User Settings -->
+<script>
+</script>
+
+<!-- Javascript Functions -->
+<script>
+  function appendHTML(element, contents) {
+    document.getElementById(element).innerHTML=(document.getElementById(element).innerHTML + contents)
+  }
+  function insertHTML(element, contents) {
+    document.getElementById(element).innerHTML=(contents + document.getElementById(element).innerHTML)
+  }
+</script>
+
+<!-- Ruby pre-render functions -->
+//calculate when start of service year was
+<%= now=Time.now %>
+<%= if now.month>=9 %>
+  <%= svcYearStart=Time.new(now.year,9,1) %>
+<%= else %>
+  <%= svcYearStart=Time.new(now.year-1,9,1) %>
+<%= end %>
+//calculate how many territories completed during service year
+<%= compCurYear=0 %>
+<% @terrs.each do |terr| %>
+  <%= if terr.datecomp > svcYearStart then compCurYear+=1 end %>
+<%= end %>
+//If current month is Sep do the same for last service year for record keeping
+<%= lastSvcYear=false %>
+<%= if now.month==9 %>
+  <%= lastSvcYear=Time.new(svcYearStart.year-1,9,1) %>
+  <%= compLastYear=0 %>
+  <%= if terr.datecomp>lastSvcYear && terr.datecomp<svcYearStart then compLastYear+=1 end %>
+<%= end %>
+
+<%= compCurYear %>
+<%= compLastYear %>
