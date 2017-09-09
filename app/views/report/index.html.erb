@@ -12,7 +12,7 @@
   }
 </script>
 
-<!-- Ruby pre-render functions -->
+<%# Ruby pre-render functions %>
 <%# calculate when start of service year was %>
 <% if Time.now.month>=9 %>
   <% svcYearStart=Time.new(Time.now.year,9,1) %>
@@ -33,6 +33,31 @@
     <% if terr.datecomp>lastSvcYear && terr.datecomp<svcYearStart then compLastYear+=1 end %>
   <% end %>
 <% end %>
-
-<%= compCurYear %>
-<%= compLastYear %>
+<div id="svcYearStats">
+  <table>
+    <thead>
+      <tr>
+        <th>Year</th>
+        <th>Completed</th>
+        <th>Total</th>
+        <th>Percent</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= svcYearStart.year %></td>
+        <td><%= compCurYear %></td>
+        <td><%= @terrs.length %></td>
+        <td><%= compCurYear.to_f/@terrs.length %></td>
+      </tr>
+      <% if lastSvcYear %>
+        <tr>
+          <td><%= lastSvcYear.year %></td>
+          <td><%= compLastYear %></td>
+          <td><%= @terrs.length %></td>
+          <td><%= compLastYear.to_f/@terrs.length %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
