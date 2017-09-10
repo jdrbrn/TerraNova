@@ -88,8 +88,16 @@
 
 <p>
   <strong>History:</strong>
-  <%= terr.history %>
+  <table>
+    <% terr.history.reverse.each do |entry| %>
+      <tr>
+        <% entry.each do |detail| %>
+          <td><%= detail %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
 </p>
 
-<%# link_to 'Edit', edit_terrout_path(@terrout) %> 
+<%# link_to 'Edit', edit_terrout_path(@terrout) %>
 <%# link_to 'Back', terrouts_path %>

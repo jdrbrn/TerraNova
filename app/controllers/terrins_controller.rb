@@ -26,10 +26,11 @@ class TerrinsController < ApplicationController
   def create
     @terrin = Terrin.new({"terrid"=>terrin_params["terrid"]})
     datecomp=Date.new(terrin_params["datecomp(1i)"].to_i,terrin_params["datecomp(2i)"].to_i,terrin_params["datecomp(3i)"].to_i)
-    Terr.all.find(terrin_params["terrid"]).update(datecomp: datecomp)
     respond_to do |format|
       if @terrin.save
         if terrin_params["checkin"]
+          Terr.all.find(terrin_params["terrid"]).update(datecomp: datecomp)
+          Terr.all.find(@terrin.terrid).update(history: Terr.all.find(@terrin.terrid).history<<["Checked In",datecomp])
           format.html { redirect_to :controller => "report", :action => "index"}
           format.json { render :show, status: :created, location: @terrin }
         else
