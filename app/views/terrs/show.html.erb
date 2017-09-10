@@ -1,23 +1,46 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @terr.name %>
-</p>
+<h1><%= @terr.region %> - <%= @terr.name %></h1>
+<h3>Last Completed: <%= @terr.datecomp %></h3>
 
 <p>
-  <strong>Region:</strong>
-  <%= @terr.region %>
-</p>
-
-<p>
-  <strong>Datecomp:</strong>
-  <%= @terr.datecomp %>
+  <strong>Status:</strong> Unknown
 </p>
 
 <p>
   <strong>Notes:</strong>
   <%= @terr.notes %>
+</p>
+
+</p>
+  <strong>DNCs:</strong>
+  <% @dncs=Dnc.all.select{|dnc| dnc.terrid==@terr.id} %>
+  <table>
+  	<thead>
+  		<tr>
+  			<th>Number</th>
+  			<th>Street</th>
+  			<th>Name</th>
+  			<th>Publisher</th>
+  			<th>Date</th>
+  			<th>Notes</th>
+        <th><a href>New DNC</a></th>
+  		</tr>
+  	</thead>
+
+  	<tbody>
+  		<% @dncs.each do |dnc| %>
+  			<tr>
+  				<td><%= dnc.number %></td>
+  				<td><%= dnc.street %></td>
+  				<td><%= dnc.name %></td>
+  				<td><%= dnc.publisher %></td>
+  				<td><%= dnc.date %></td>
+  				<td><%= dnc.notes %></td>
+  			</tr>
+  		<% end %>
+  	</tbody>
+  </table>
 </p>
 
 <p>
