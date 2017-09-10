@@ -55,9 +55,13 @@ class TerrinsController < ApplicationController
   # DELETE /terrins/1.json
   def destroy
     @terrin.destroy
-    respond_to do |format|
-      format.html { redirect_to terrins_url, notice: 'Terrin was successfully destroyed.' }
-      format.json { head :no_content }
+    if params[:checkin]
+      redirect_to :controller => 'terrins', :action => 'new', :terrid => params[:checkin]
+    else
+      respond_to do |format|
+        format.html { redirect_to terrins_url, notice: 'Terrin was successfully destroyed.' }
+        format.json { head :no_content }
+      end
     end
   end
 
