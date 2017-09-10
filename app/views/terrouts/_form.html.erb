@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= form.label :terrid %>
-    <%= form.number_field :terrid, id: :terrout_terrid %>
+    <%= form.select :terrid, options_for_select(Terr.all.map{|t|[t.name, t.id]}, selected=params[:terrid]), id: :terrin_terrid %>
   </div>
 
   <div class="field">
@@ -30,6 +30,10 @@
     <%= form.label :datedue %>
     <%= form.date_select :datedue, id: :terrout_datedue %>
   </div>
+
+  <% if params[:terrid] %>
+    <%= form.hidden_field :checkout, :value=> true %>
+  <% end %>
 
   <div class="actions">
     <%= form.submit %>

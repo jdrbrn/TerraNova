@@ -34,7 +34,7 @@ class TerrinsController < ApplicationController
           format.json { render :show, status: :created, location: @terrin }
         else
           format.html { redirect_to @terrin, notice: 'Terrin was successfully created.' }
-        format.json { render :show, status: :created, location: @terrin }
+          format.json { render :show, status: :created, location: @terrin }
         end
       else
         format.html { render :new }
@@ -61,8 +61,8 @@ class TerrinsController < ApplicationController
   # DELETE /terrins/1.json
   def destroy
     @terrin.destroy
-    if params[:checkin]
-      redirect_to :controller => 'terrins', :action => 'new', :terrid => params[:checkin]
+    if params[:checkout]
+      redirect_to :controller => 'terrouts', :action => 'new', :terrid => params[:checkout]
     else
       respond_to do |format|
         format.html { redirect_to terrins_url, notice: 'Terrin was successfully destroyed.' }

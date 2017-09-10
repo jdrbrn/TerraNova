@@ -24,12 +24,19 @@ class TerroutsController < ApplicationController
   # POST /terrouts
   # POST /terrouts.json
   def create
-    @terrout = Terrout.new(terrout_params)
+    terrout_contents=terrout_params
+    terrout_contents.delete("checkout")
+    @terrout = Terrout.new(terrout_contents)
 
     respond_to do |format|
       if @terrout.save
-        format.html { redirect_to @terrout, notice: 'Terrout was successfully created.' }
-        format.json { render :show, status: :created, location: @terrout }
+        if terrout_params["checkout"]
+          format.html { redirect_to :controller => "report", :action => "index"}
+          format.json { render :show, status: :created, location: @terrout }
+        else
+          format.html { redirect_to @terrout, notice: 'Terrout was successfully created.' }
+          format.json { render :show, status: :created, location: @terrout }
+        end
       else
         format.html { render :new }
         format.json { render json: @terrout.errors, status: :unprocessable_entity }
@@ -73,6 +80,6 @@ class TerroutsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def terrout_params
-      params.require(:terrout).permit(:terrid, :publisher, :dateout, :datedue, :checkin)
+      params.require(:terrout).permit(:terrid, :publisher, :dateout, :datedue, :checkin, :checkout)
     end
 end
