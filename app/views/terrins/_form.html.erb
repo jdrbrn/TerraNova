@@ -13,8 +13,17 @@
 
   <div class="field">
     <%= form.label :terrid %>
-    <%= form.number_field :terrid, id: :terrin_terrid %>
+    <%= form.select :terrid, options_for_select(Terr.all.map{|t|[t.name, t.id]}, selected=params[:terrid]), id: :terrin_terrid %>
   </div>
+
+  <div class="field">
+    <%= form.label "Check In Date" %>
+    <%= form.date_select :datecomp, id: :terrin_datecomp %>
+  </div>
+
+  <% if params[:terrid] %>
+    <%= form.hidden_field :checkin, :value=> true %>
+  <% end %>
 
   <div class="actions">
     <%= form.submit %>

@@ -24,12 +24,18 @@ class TerrinsController < ApplicationController
   # POST /terrins
   # POST /terrins.json
   def create
-    @terrin = Terrin.new(terrin_params)
-
+    @terrin = Terrin.new({"terrid"=>terrin_params["terrid"]})
+    datecomp=Date.new(terrin_params["datecomp(1i)"].to_i,terrin_params["datecomp(2i)"].to_i,terrin_params["datecomp(3i)"].to_i)
+    Terr.all.find(terrin_params["terrid"]).update(datecomp: datecomp)
     respond_to do |format|
       if @terrin.save
-        format.html { redirect_to @terrin, notice: 'Terrin was successfully created.' }
+        if terrin_params["checkin"]
+          format.html { redirect_to :controller => "report", :action => "index"}
+          format.json { render :show, status: :created, location: @terrin }
+        else
+          format.html { redirect_to @terrin, notice: 'Terrin was successfully created.' }
         format.json { render :show, status: :created, location: @terrin }
+        end
       else
         format.html { render :new }
         format.json { render json: @terrin.errors, status: :unprocessable_entity }
@@ -73,6 +79,6 @@ class TerrinsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def terrin_params
-      params.require(:terrin).permit(:terrid, :checkout)
+      params.require(:terrin).permit(:terrid, :checkout, :checkin, :datecomp)
     end
 end
