@@ -59,14 +59,14 @@
           <td><%= svcYearStart.year %></td>
           <td><%= compCurYear %></td>
           <td><%= @terrs.length %></td>
-          <td><%= compCurYear.to_f/@terrs.length %></td>
+          <td><%= compCurYear.to_f/@terrs.length*100 %></td>
         </tr>
         <% if lastSvcYear %>
           <tr>
             <td><%= lastSvcYear.year %></td>
             <td><%= compLastYear %></td>
             <td><%= @terrs.length %></td>
-            <td><%= compLastYear.to_f/@terrs.length %></td>
+            <td><%= compLastYear.to_f/@terrs.length*100 %></td>
           </tr>
         <% end %>
       </tbody>

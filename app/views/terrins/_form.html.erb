@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :terrid %>
+    <%= form.label "Territory" %>
     <%= form.select :terrid, options_for_select(Terr.all.map{|t|[t.name, t.id]}, selected=params[:terrid]), id: :terrin_terrid %>
   </div>
 
