@@ -99,7 +99,7 @@
             <td><%= terrout.dateout %></td>
             <td><%= terrout.datedue %></td>
             <td><a href="#" onclick="terroutsViewDetails('<%= terrout.id %>');return false;">View Details</a></td>
-            <td>Check In</td>
+            <td><%= link_to 'Check In', [terrout,checkin: terrout.terrid], method: :delete, data: { confirm: "Are you sure you want to check in #{@terrs.find(terrout.terrid).name}?" } %></td>
           </tr>
         <% end %>
       </tbody>
@@ -126,7 +126,7 @@
             <td style="white-space:pre"><%= @terrs.find(terrin.terrid).name %><br><%= @terrs.find(terrin.terrid).region %></td>
             <td><%= @terrs.find(terrin.terrid).datecomp %></td>
             <td><a href="#" onclick="terrinsViewDetails('<%= terrin.id %>');return false;">View Details</a></td>
-            <td>Check Out</td>
+            <td><%= link_to 'Check Out', [terrin,checkout: terrin.terrid], method: :delete, data: { confirm: "Are you sure you want to check out #{@terrs.find(terrin.terrid).name}?" } %></td>
           </tr>
         <% end %>
       </tbody>
@@ -154,7 +154,7 @@
               <td style="white-space:pre"><%= terr.name %><br><%=terr.region %></td>
               <td><%= terr.datecomp %></td>
               <td><a href='#' onclick="terrsViewDetails('<%= terr.id %>');return false;">View Details</a></td>
-              <td>Check Out</td>
+              <td><%= link_to 'Check Out', {:controller => "terrouts", :action => "new", :terrid => terr.id} %></td>
             </tr>
           <% end %>
         <% end %>

@@ -69,6 +69,6 @@ class TerroutsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def terrout_params
-      params.require(:terrout).permit(:terrid, :publisher, :dateout, :datedue)
+      params.require(:terrout).permit(:terrid, :publisher, :dateout, :datedue, :checkin)
     end
 end

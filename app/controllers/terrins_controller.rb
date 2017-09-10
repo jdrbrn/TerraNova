@@ -69,6 +69,6 @@ class TerrinsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def terrin_params
-      params.require(:terrin).permit(:terrid)
+      params.require(:terrin).permit(:terrid, :checkout)
     end
 end
