@@ -30,8 +30,8 @@ class TerroutsController < ApplicationController
 
     respond_to do |format|
       if @terrout.save
+        Terr.all.find(@terrout.terrid).update(history: Terr.all.find(@terrout.terrid).history<<["Checked Out", @terrout.dateout, @terrout.publisher])
         if terrout_params["checkout"]
-          Terr.all.find(@terrout.terrid).update(history: Terr.all.find(@terrout.terrid).history<<["Checked Out", @terrout.dateout, @terrout.publisher])
           format.html { redirect_to :controller => "report", :action => "index"}
           format.json { render :show, status: :created, location: @terrout }
         else

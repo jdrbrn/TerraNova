@@ -42,7 +42,7 @@
 <% end %>
 
 <!-- Left side report view -->
-<div id="reportWindow" style="width:49vw;position:absolute;left:1vw">
+<div id="reportWindow" style="width:48vw;position:absolute;left:1vw">
   <!-- table to display service year completion stats -->
   <div id="svcYearStats">
     <table>
@@ -59,14 +59,14 @@
           <td><%= svcYearStart.year %></td>
           <td><%= compCurYear %></td>
           <td><%= @terrs.length %></td>
-          <td><%= compCurYear.to_f/@terrs.length*100 %></td>
+          <td><%= (compCurYear.to_f/@terrs.length*100).round(2) %></td>
         </tr>
         <% if lastSvcYear %>
           <tr>
             <td><%= lastSvcYear.year %></td>
             <td><%= compLastYear %></td>
             <td><%= @terrs.length %></td>
-            <td><%= compLastYear.to_f/@terrs.length*100 %></td>
+            <td><%= (compLastYear.to_f/@terrs.length*100).round(2) %></td>
           </tr>
         <% end %>
       </tbody>
@@ -164,6 +164,6 @@
 </div>
 
 <!--Detail display window off to right side-->
-<div id="detailWindow" style="width:49vw;height:99vh;position:absolute;right:2px;top:3px;border:1px solid #000000">
+<div id="detailWindow" style="width:49vw;height:99vh;position:fixed;right:2px;top:3px;border:1px solid #000000">
   <iframe id="detailFrame" style='width:99%;height:99%'> </iframe>
 </div>
