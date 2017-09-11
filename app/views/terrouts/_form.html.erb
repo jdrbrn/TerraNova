@@ -10,10 +10,16 @@
       </ul>
     </div>
   <% end %>
-
+  
   <div class="field">
     <%= form.label "Territory" %>
-    <%= form.select :terrid, options_for_select(Terr.all.map{|t|[t.name, t.id]}, selected=params[:terrid]), id: :terrin_terrid %>
+    <% if params[:terrid] %>
+      <%= form.select :terrid, options_for_select(Terr.all.map{|t|[t.name, t.id]}, selected=params[:terrid]), id: :terrin_terrid %>
+    <% elsif @terrout.terrid %>
+      <%= form.select :terrid, options_for_select(Terr.all.map{|t|[t.name, t.id]}, selected=@terrout.terrid), id: :terrin_terrid %>
+    <% else %>
+      <%= form.select :terrid, options_for_select(Terr.all.map{|t|[t.name, t.id]}), id: :terrin_terrid %>
+    <% end %>
   </div>
 
   <div class="field">

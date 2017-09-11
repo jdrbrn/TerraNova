@@ -34,7 +34,7 @@ class TerroutsController < ApplicationController
         format.html { redirect_to :controller => "report", :action => "index"}
         format.json { render :show, status: :created, location: @terrout }
       else
-        format.html { render :new, :locals => {:terrid => @terrout.terrid} }
+        format.html { render :new }
         format.json { render json: @terrout.errors, status: :unprocessable_entity }
       end
     end

@@ -33,7 +33,7 @@ class TerrinsController < ApplicationController
         format.html { redirect_to :controller => "report", :action => "index"}
         format.json { render :show, status: :created, location: @terrin }
       else
-        format.html { render :new, :terrid => @terrin.terrid }
+        format.html { render :new }
         format.json { render json: @terrin.errors, status: :unprocessable_entity }
       end
     end
