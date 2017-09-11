@@ -27,19 +27,24 @@ class TerrinsController < ApplicationController
     @terrin = Terrin.new({"terrid"=>terrin_params["terrid"]})
     datecomp=Date.new(terrin_params["datecomp(1i)"].to_i,terrin_params["datecomp(2i)"].to_i,terrin_params["datecomp(3i)"].to_i)
     respond_to do |format|
-      if @terrin.save
-        Terr.all.find(terrin_params["terrid"]).update(datecomp: datecomp)
-        Terr.all.find(@terrin.terrid).update(history: Terr.all.find(@terrin.terrid).history<<["Checked In",datecomp])
-        if terrin_params["checkin"]
+      if terrin_params["checkout"]
+        if @terrin.save
+          Terr.all.find(terrin_params["terrid"]).update(datecomp: datecomp)
+          Terr.all.find(@terrin.terrid).update(history: Terr.all.find(@terrin.terrid).history<<["Checked In",datecomp])
           format.html { redirect_to :controller => "report", :action => "index"}
           format.json { render :show, status: :created, location: @terrin }
         else
-          format.html { redirect_to @terrin, notice: 'Terrin was successfully created.' }
-          format.json { render :show, status: :created, location: @terrin }
+          format.html { render :new, :checkin => true }
+          format.json { render json: @terrin.errors, status: :unprocessable_entity }
         end
       else
-        format.html { render :new }
-        format.json { render json: @terrin.errors, status: :unprocessable_entity }
+        if @terrout.save
+          format.html { redirect_to @terrin, notice: 'Terrin was successfully created.' }
+          format.json { render :show, status: :created, location: @terrin }
+        else
+          format.html { render :new }
+          format.json { render json: @terrin.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
