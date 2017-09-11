@@ -29,23 +29,13 @@ class TerroutsController < ApplicationController
     @terrout = Terrout.new(terrout_contents)
 
     respond_to do |format|
-      if terrout_params["checkout"]
-        if @terrout.save
-          Terr.all.find(@terrout.terrid).update(history: Terr.all.find(@terrout.terrid).history<<["Checked Out", @terrout.dateout, @terrout.publisher])
-          format.html { redirect_to :controller => "report", :action => "index"}
-          format.json { render :show, status: :created, location: @terrout }
-        else
-          format.html { render :new, :checkout => true }
-          format.json { render json: @terrout.errors, status: :unprocessable_entity }
-        end
+      if @terrout.save
+        Terr.all.find(@terrout.terrid).update(history: Terr.all.find(@terrout.terrid).history<<["Checked Out", @terrout.dateout, @terrout.publisher])
+        format.html { redirect_to :controller => "report", :action => "index"}
+        format.json { render :show, status: :created, location: @terrout }
       else
-        if @terrout.save
-          format.html { redirect_to @terrout, notice: 'Terrout was successfully created.' }
-          format.json { render :show, status: :created, location: @terrout }
-        else
-          format.html { render :new }
-          format.json { render json: @terrout.errors, status: :unprocessable_entity }
-        end
+        format.html { render :new, :locals => {:terrid => @terrout.terrid} }
+        format.json { render json: @terrout.errors, status: :unprocessable_entity }
       end
     end
   end
