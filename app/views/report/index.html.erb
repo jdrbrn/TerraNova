@@ -42,7 +42,7 @@
 <% end %>
 
 <!-- Left side report view -->
-<div id="reportWindow" style="width:48vw;position:absolute;left:1vw">
+<div id="reportWindow" style="width:49vw;position:absolute;left:1px">
   <!-- table to display service year completion stats -->
   <div id="svcYearStats">
     <table>
@@ -77,7 +77,7 @@
   <div id="terrOuts">
     <h2>Checked Out Territories</h2>
 
-    <table>
+    <table style="width:48vw">
       <thead>
         <tr>
           <th>Territory</th>
@@ -121,7 +121,7 @@
         <% @terrins.sort_by{|terrin| @terrs.find(terrin.terrid).datecomp}.each do |terrin| %>
         <% categorizedTerrs<<terrin.terrid %>
           <tr>
-            <td style="white-space:pre"><%= @terrs.find(terrin.terrid).name %><br><%= @terrs.find(terrin.terrid).region %></td>
+            <td style="white-space:pre-wrap"><%= @terrs.find(terrin.terrid).name %><br><%= @terrs.find(terrin.terrid).region %></td>
             <td><%= @terrs.find(terrin.terrid).datecomp %></td>
             <td><a href="#" onclick="terrinsViewDetails('<%= terrin.id %>');return false;">View Details</a></td>
             <td><%= link_to 'Check Out', [terrin,checkout: terrin.terrid], method: :delete, data: { confirm: "Are you sure you want to check out #{@terrs.find(terrin.terrid).name}?" } %></td>
@@ -148,7 +148,7 @@
           <% if categorizedTerrs.find_index(terr.id) %>
           <% else %>
             <tr>
-              <td style="white-space:pre"><%= terr.name %><br><%=terr.region %></td>
+              <td style="white-space:pre-wrap"><%= terr.name %><br><%=terr.region %></td>
               <td><%= terr.datecomp %></td>
               <td><a href='#' onclick="terrsViewDetails('<%= terr.id %>');return false;">View Details</a></td>
               <td><%= link_to 'Check Out', {:controller => "terrouts", :action => "new", :terrid => terr.id} %></td>
@@ -161,6 +161,6 @@
 </div>
 
 <!--Detail display window off to right side-->
-<div id="detailWindow" style="width:49vw;height:99vh;position:fixed;right:2px;top:3px;border:1px solid #000000">
+<div id="detailWindow" style="width:49vw;position:fixed;right:2px;top:3px;border:0px solid #ff4a2b">
   <iframe id="detailFrame" style='width:99%;height:99%'> </iframe>
 </div>
