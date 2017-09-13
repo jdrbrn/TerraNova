@@ -32,7 +32,7 @@
 
 </p>
   <strong>DNCs:</strong>
-  <% @dncs=Dnc.all.select{|dnc| dnc.terrid==terr.id} %>
+  <% @dncs=Dnc.all.select{|dnc| dnc.terrid==terr.id}.sort_by{|dnc| [dnc.street, dnc.number.to_i]} %>
   <table>
   	<thead>
   		<tr>
