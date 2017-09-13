@@ -1,5 +1,4 @@
 <p id="notice"><%= notice %></p>
-<%= @terrout.terrid.class %>
 <% terr=Terr.all.find(@terrout.terrid) %>
 <h1><%= terr.region %> - <%= terr.name %></h1>
 <h3>Last Completed: <%= terr.datecomp %></h3>
