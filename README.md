@@ -3,7 +3,8 @@
 To get started:
 Install Ruby
 Clone the repo
-gem install bundler
+sudo apt-get install build-essential patch ruby-dev zlib1g-dev liblzma-dev libsqlite3-dev ruby
+sudo gem install bundler
 bundle install
 rake db:migrate
 RAILS_ENV=production rake secret
