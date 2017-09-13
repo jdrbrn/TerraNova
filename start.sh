@@ -1,1 +1,1 @@
-screen -dmS TerraNova bin/rails server -e production
+screen -dmS TerraNova bin/rails server -e production -b 0.0.0.0
