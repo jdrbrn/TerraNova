@@ -1,0 +1,54 @@
+<div id="dncList" >
+	<h2>Do Not Calls </h2>
+	<%= params["terrid"] %>
+	<% @dncs=Dnc.all.select{|dnc| dnc.terrid==params["terrid"]} %>
+	<table style"width=100%">
+		<thead>
+  		<tr>
+  			<th>Number</th>
+  			<th>Street</th>
+  			<th>Name</th>
+  			<th>Publisher</th>
+  			<th>Date</th>
+  			<th>Notes</th>
+  		</tr>
+  	</thead>
+
+  	<tbody>
+  		<% @dncs.each do |dnc| %>
+  			<tr>
+  				<td><%= dnc.number %></td>
+  				<td><%= dnc.street %></td>
+  				<td><%= dnc.name %></td>
+  				<td><%= dnc.publisher %></td>
+  				<td><%= dnc.date %></td>
+  				<td><%= dnc.notes %></td>
+  			</tr>
+  		<% end %>
+			<tr>
+				<td width=400px, height=45px></td>
+				<td width=400px, height=45px></td>
+				<td width=400px, height=45px></td>
+				<td width=400px, height=45px></td>
+				<td width=50px, height=45px></td>
+				<td width=400px, height=45px></td>
+			</tr>
+			<tr>
+				<td width=400px, height=45px></td>
+				<td width=400px, height=45px></td>
+				<td width=400px, height=45px></td>
+				<td width=400px, height=45px></td>
+				<td width=50px, height=45px></td>
+				<td width=400px, height=45px></td>
+			</tr>
+			<tr>
+				<td width=400px, height=45px></td>
+				<td width=400px, height=45px></td>
+				<td width=400px, height=45px></td>
+				<td width=400px, height=45px></td>
+				<td width=50px, height=45px></td>
+				<td width=400px, height=45px></td>
+			</tr>
+		</tbody>
+	</table>
+</div>

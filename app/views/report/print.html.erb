@@ -1,1 +1,76 @@
-test
+<style>
+	body{background-color:white;}
+	th{background-color:white;}
+	td,td.ok{background-color:white;}
+</style>
+
+<!-- Edited from report/index -->
+<!-- Doesn't display other territory section; Edited to be a worksheet -->
+
+  <!-- table to display terrouts -->
+  <div id="terrOuts">
+    <h2>Checked Out Territories</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Territory</th>
+          <th>Last Complete</th>
+          <th>Publisher</th>
+          <th>Date Out</th>
+          <th>Date Due</th>
+          <th>Date Turned In</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @terrouts.sort_by{|terrout| terrout.datedue}.each do |terrout| %>
+          <% if terrout.datedue-Date.current<0 %>
+            <% dateClass="late" %>
+          <% elsif (terrout.datedue-1.months)-Date.current<0%>
+            <% dateClass="warn" %>
+          <% else %>
+            <% dateClass="normal" %>
+          <% end %>
+          <tr>
+            <td class="<%= dateClass %>" style="white-space:pre"><%= @terrs.find(terrout.terrid).name %><br><%= @terrs.find(terrout.terrid).region %></td>
+            <td><%= @terrs.find(terrout.terrid).datecomp %></td>
+            <td><%= terrout.publisher %></td>
+            <td><%= terrout.dateout %></td>
+            <td><%= terrout.datedue %></td>
+            <td></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- table to display terrins -->
+  <div id="terrIns">
+    <h2>Checked In Territories</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Territory</th>
+          <th>Last Complete</th>
+          <th>Date Out</th>
+          <th>Date Due</th>
+          <th>Publisher</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @terrins.sort_by{|terrin| @terrs.find(terrin.terrid).datecomp}.each do |terrin| %>
+          <tr>
+            <td style="white-space:pre-wrap"><%= @terrs.find(terrin.terrid).name %><br><%= @terrs.find(terrin.terrid).region %></td>
+            <td><%= @terrs.find(terrin.terrid).datecomp %></td>
+            <td></td>
+            <td></td>
+            <td style="width:291px;height:35px"></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<br>

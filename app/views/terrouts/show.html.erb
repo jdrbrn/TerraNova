@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-
+<%= @terrout.terrid.class %>
 <% terr=Terr.all.find(@terrout.terrid) %>
 <h1><%= terr.region %> - <%= terr.name %></h1>
 <h3>Last Completed: <%= terr.datecomp %></h3>
@@ -42,7 +42,7 @@
   			<th>Publisher</th>
   			<th>Date</th>
   			<th>Notes</th>
-        <td><a href>New DNC</a></td>
+        <td><%= link_to 'New DNC', {:controller => "dncs", :action => "new", :terrid => terr.id, :terrtype => "terrouts", :redirid => @terrout.id} %></td>
   		</tr>
   	</thead>
 
@@ -57,31 +57,6 @@
   				<td><%= dnc.notes %></td>
   			</tr>
   		<% end %>
-      <!-- add blank rows -->
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
   	</tbody>
   </table>
 </p>

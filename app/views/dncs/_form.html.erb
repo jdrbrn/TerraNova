@@ -13,7 +13,13 @@
 
   <div class="field">
     <%= form.label :terrid %>
-    <%= form.number_field :terrid, id: :dnc_terrid %>
+    <% if params[:terrid] %>
+      <%= form.select :terrid, options_for_select(Terr.all.map{|t|[t.name, t.id]}, selected=params[:terrid]), id: :dnc_terrid %>
+    <% elsif @dnc.terrid %>
+      <%= form.select :terrid, options_for_select(Terr.all.map{|t|[t.name, t.id]}, selected=@dnc.terrid), id: :dnc_terrid %>
+    <% else %>
+      <%= form.select :terrid, options_for_select(Terr.all.map{|t|[t.name, t.id]}), id: :dnc_terrid %>
+    <% end %>
   </div>
 
   <div class="field">
@@ -45,6 +51,11 @@
     <%= form.label :notes %>
     <%= form.text_field :notes, id: :dnc_notes %>
   </div>
+
+  <% if params[:terrtype] %>
+    <%= form.hidden_field :terrtype, :value=> params[:terrtype] %>
+    <%= form.hidden_field :redirid, :value=> params[:redirid] %>
+  <% end %>
 
   <div class="actions">
     <%= form.submit %>

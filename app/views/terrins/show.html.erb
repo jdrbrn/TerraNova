@@ -25,7 +25,7 @@
   			<th>Publisher</th>
   			<th>Date</th>
   			<th>Notes</th>
-        <td><a href>New DNC</a></td>
+        <td><%= link_to 'New DNC', {:controller => "dncs", :action => "new", :terrid => terr.id, :terrtype => "terrins", :redirid => @terrin.id} %></td>
   		</tr>
   	</thead>
 
@@ -40,31 +40,6 @@
   				<td><%= dnc.notes %></td>
   			</tr>
   		<% end %>
-      <!-- add blank rows -->
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
   	</tbody>
   </table>
 </p>

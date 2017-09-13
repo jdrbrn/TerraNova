@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'dncs/print'
   get 'report/print'
   resources :report
 
