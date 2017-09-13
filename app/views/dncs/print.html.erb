@@ -1,8 +1,16 @@
+<style>
+	body{background-color:white;}
+	th{background-color:white;}
+	td,td.ok{background-color:white;}
+</style>
+
 <div id="dncList" >
-	<h2>Do Not Calls </h2>
-	<%= params["terrid"] %>
-	<% @dncs=Dnc.all.select{|dnc| dnc.terrid==params["terrid"]} %>
-	<table style"width=100%">
+	<div id="header">
+		<div align="left" style="display:inline-block;font-size:20px;font-weight:bold">Do Not Calls</div>
+		<table align="right" style="border:0px"><tr><td style="border:0px">Printed <%= Time.now.month %>/<%= Time.now.day %>/<%= Time.now.year %></td></tr></table>
+	</div>
+	<% @dncs=Dnc.all.select{|dnc| dnc.terrid==params[:terr].to_i} %>
+	<table style="width:96vw;position:fixed;left:2vw">
 		<thead>
   		<tr>
   			<th>Number</th>
@@ -31,7 +39,7 @@
 				<td width=400px, height=45px></td>
 				<td width=400px, height=45px></td>
 				<td width=50px, height=45px></td>
-				<td width=400px, height=45px></td>
+				<td height=45px></td>
 			</tr>
 			<tr>
 				<td width=400px, height=45px></td>
@@ -39,7 +47,7 @@
 				<td width=400px, height=45px></td>
 				<td width=400px, height=45px></td>
 				<td width=50px, height=45px></td>
-				<td width=400px, height=45px></td>
+				<td height=45px></td>
 			</tr>
 			<tr>
 				<td width=400px, height=45px></td>
@@ -47,7 +55,7 @@
 				<td width=400px, height=45px></td>
 				<td width=400px, height=45px></td>
 				<td width=50px, height=45px></td>
-				<td width=400px, height=45px></td>
+				<td height=45px></td>
 			</tr>
 		</tbody>
 	</table>

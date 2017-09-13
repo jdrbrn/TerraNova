@@ -25,6 +25,7 @@
   			<th>Date</th>
   			<th>Notes</th>
         <td><%= link_to 'New DNC', {:controller => "dncs", :action => "new", :terrid => @terr.id, :terrtype => "terrs", :redirid => @terr.id} %></td>
+        <td><a href='/dncs/print?terr=<%= @terr.id %>' target='_blank'>Print DNC List</a></td>
   		</tr>
   	</thead>
 
