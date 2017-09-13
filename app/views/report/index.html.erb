@@ -77,7 +77,7 @@
   <div id="terrOuts">
     <h2>Checked Out Territories</h2>
 
-    <table style="width:48vw">
+    <table>
       <thead>
         <tr>
           <th>Territory</th>
@@ -91,8 +91,15 @@
       <tbody>
         <% @terrouts.sort_by{|terrout| terrout.datedue}.each do |terrout| %>
           <% categorizedTerrs<<terrout.terrid %>
+          <% if terrout.datedue-Date.current<0 %>
+            <% dateClass="late" %>
+          <% elsif (terrout.datedue-1.months)-Date.current<0%>
+            <% dateClass="warn" %>
+          <% else %>
+            <% dateClass="normal" %>
+          <% end %>
           <tr>
-            <td style="white-space:pre"><%= @terrs.find(terrout.terrid).name %><br><%= @terrs.find(terrout.terrid).region %></td>
+            <td class="<%= dateClass %>" style="white-space:pre"><%= @terrs.find(terrout.terrid).name %><br><%= @terrs.find(terrout.terrid).region %></td>
             <td><%= @terrs.find(terrout.terrid).datecomp %></td>
             <td><%= terrout.publisher %></td>
             <td><%= terrout.dateout %></td>
