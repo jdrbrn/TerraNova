@@ -9,4 +9,7 @@ class ReportController < ApplicationController
     @terrouts=Terrout.all
     @terrs=Terr.all
   end
+  def history
+    @terrs=Terr.all
+  end
 end

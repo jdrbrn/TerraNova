@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'dncs/print'
   get 'report/print'
+  get 'report/history'
   resources :report
 
   resources :dncs

@@ -1,0 +1,17 @@
+<% allHistory = [] %>
+<% @terrs.each do |terr| %>
+  <% terr.history.each do |entry| %>
+    <% entry.insert(1,terr.name) %>
+    <% allHistory<<entry %>
+  <% end %>
+<% end %>
+<h2>List of History</h2>
+<table>
+  <% allHistory.sort_by{|entry| entry[0] }.reverse.each do |entry| %>
+    <tr>
+      <% entry.each do |detail| %>
+        <td><%= detail %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
