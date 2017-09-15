@@ -55,6 +55,18 @@ class TerrsController < ApplicationController
   # DELETE /terrs/1
   # DELETE /terrs/1.json
   def destroy
+    dncs=Dnc.all.select{|dnc| dnc.terrid==@terr.id}
+    dncs.each do |dnc|
+      dnc.destroy
+    end
+    terrouts=Terrout.all.select{|terrout| terrout.terrid=@terr.id}
+    terrouts.each do |terrout|
+      terrout.destroy
+    end
+    terrins=Terrin.all.select{|terrin| terrin.terrid=@terr.id}
+    terrins.each do |terrin|
+      terrin.destroy
+    end
     @terr.destroy
     respond_to do |format|
       format.html { redirect_to terrs_url, notice: 'Terr was successfully destroyed.' }
