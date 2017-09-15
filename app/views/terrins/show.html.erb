@@ -19,11 +19,11 @@
   <table>
   	<thead>
   		<tr>
+        <th>Date</th>
+        <th>Name</th>
   			<th>Number</th>
   			<th>Street</th>
-  			<th>Name</th>
   			<th>Publisher</th>
-  			<th>Date</th>
   			<th>Notes</th>
         <td><%= link_to 'New DNC', {:controller => "dncs", :action => "new", :terrid => terr.id, :terrtype => "terrins", :redirid => @terrin.id} %></td>
         <td><a href='/dncs/print?terr=<%= @terrin.terrid %>' target='_blank'>Print DNC List</a></td>
@@ -32,12 +32,16 @@
 
   	<tbody>
   		<% @dncs.each do |dnc| %>
-  			<tr>
+  			<% if dnc.notes.include?("Territory") %>
+          <tr style="color: blue">
+        <% else %>
+          <tr>
+        <% end %>
+          <td><%= "#{dnc.date.month}/#{dnc.date.day}/#{dnc.date.year}" %></td>
+          <td><%= dnc.name %></td>
   				<td><%= dnc.number %></td>
   				<td><%= dnc.street %></td>
-  				<td><%= dnc.name %></td>
   				<td><%= dnc.publisher %></td>
-  				<td><%= dnc.date %></td>
   				<td><%= dnc.notes %></td>
   			</tr>
   		<% end %>
