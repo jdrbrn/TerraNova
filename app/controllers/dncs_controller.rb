@@ -4,7 +4,7 @@ class DncsController < ApplicationController
   # GET /dncs
   # GET /dncs.json
   def index
-    @dncs = Dnc.all
+    @dncs = Dnc.all.sort_by { |dnc| [Terr.find(dnc.terrid).region, dnc.street, dnc.number] }
   end
 
   # GET /dncs/1

@@ -1,11 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Dncs</h1>
-
+<h1>Do Not Call Database</h1>
+<h3>Sorted by Region, Street, Number</h3>
 <table>
   <thead>
     <tr>
-      <th>Terrid</th>
+      <th>Region</th>
+      <th>Territory</th>
       <th>Number</th>
       <th>Street</th>
       <th>Name</th>
@@ -19,7 +20,8 @@
   <tbody>
     <% @dncs.each do |dnc| %>
       <tr>
-        <td><%= dnc.terrid %></td>
+        <td><%= Terr.all.find(dnc.terrid).region %>
+        <td><%= Terr.all.find(dnc.terrid).name %></td>
         <td><%= dnc.number %></td>
         <td><%= dnc.street %></td>
         <td><%= dnc.name %></td>
