@@ -44,6 +44,8 @@
     				<td><%= dnc.street %></td>
     				<td><%= dnc.publisher %></td>
     				<td><%= dnc.notes %></td>
+            <td><%= link_to 'Edit', {:controller => "dncs", :action => "edit", :id => dnc.id, :terrtype => "terrins",:redirid => @terrin.id} %></td>
+            <td><%= link_to 'Delete', [dnc,terrtype: "terrins",redirid: @terrin.id], method: :delete, data: { confirm: "Are you sure you want to delete?" } %></td>
     			</tr>
     		<% end %>
     	</tbody>

@@ -43,9 +43,13 @@ class DncsController < ApplicationController
   # PATCH/PUT /dncs/1
   # PATCH/PUT /dncs/1.json
   def update
+    dnc_contents=dnc_params
+    dnc_contents.delete("terrtype")
+    dnc_contents.delete("redirid")
+
     respond_to do |format|
-      if @dnc.update(dnc_params)
-        format.html { redirect_to @dnc, notice: 'Dnc was successfully updated.' }
+      if @dnc.update(dnc_contents)
+        format.html { redirect_to "/#{dnc_params["terrtype"]}/#{dnc_params["redirid"]}", notice: 'Dnc was successfully updated.' }
         format.json { render :show, status: :ok, location: @dnc }
       else
         format.html { render :edit }
@@ -59,8 +63,13 @@ class DncsController < ApplicationController
   def destroy
     @dnc.destroy
     respond_to do |format|
-      format.html { redirect_to dncs_url, notice: 'Dnc was successfully destroyed.' }
-      format.json { head :no_content }
+      if params["terrtype"]
+        format.html { redirect_to "/#{params["terrtype"]}/#{params["redirid"]}", notice: 'Dnc was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to dncs_url, notice: 'Dnc was successfully destroyed.' }
+        format.json { head :no_content }
+      end
     end
   end
 
