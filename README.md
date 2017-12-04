@@ -2,6 +2,8 @@
 
 TerraNova is a Ruby on Rails webapp designed to manage territories. It can be linked to multiple versions of itself to manage multiple territory types with only one end user interface.
 
+TerraNova is developed using Ruby 2.3.3, and has not been tested under any other version
+
 TerraNova is configured to be deployed using Passenger.
 
 TerraNova require yarn to be installed to make rails happy. Please follow this guide: https://yarnpkg.com/en/docs/install
