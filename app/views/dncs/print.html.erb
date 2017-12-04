@@ -16,52 +16,54 @@
 <% end %>
 
 <% terrs.each do |terr| %>
-	<div id="dncList" style="width:7in;margin:0;padding:0;outline:1px solid black;outline-offset: 9px;display:table;page-break-inside: avoid;page-break-before: avoid">
-		<div id="header">
-			<div align="left" style="display:inline-block;font-size:20px;font-weight:bold">Do Not Calls for <%= Terr.find(terr).name %></div>
-			<table align="right" style="border:0px"><tr><td style="border:0px">Printed <%= Time.now.month %>/<%= Time.now.day %>/<%= Time.now.year %></td></tr></table>
-		</div>
-		<% @dncs=Dnc.all.select{|dnc| dnc.terrid==terr.to_i}.sort_by{|dnc| [dnc.street, dnc.number.to_i]} %>
-		<table style="width:7in;font-size:10px">
-			<thead>
-	  		<tr>
-					<th>Date</th>
-					<th>Name</th>
-	  			<th>Number</th>
-	  			<th>Street</th>
-	  			<th>Publisher</th>
-	  			<th>Notes</th>
-	  		</tr>
-	  	</thead>
+	<div id="listcontainer" style="padding-top:10px;page-break-inside: avoid">
+		<div id="dncList" style="width:6.75in;margin:0;padding:0px;outline:1px solid black;outline-offset: 9px;display:table;page-break-inside: avoid">
+			<div id="header">
+				<div align="left" style="display:inline-block;font-size:20px;font-weight:bold">Do Not Calls for <%= Terr.find(terr).name %></div>
+				<table align="right" style="border:0px;padding:0px"><tr style="padding:0"><td style="border:0px;padding:0">Printed <%= Time.now.month %>/<%= Time.now.day %>/<%= Time.now.year %></td></tr></table>
+			</div>
+			<% @dncs=Dnc.all.select{|dnc| dnc.terrid==terr.to_i}.sort_by{|dnc| [dnc.street, dnc.number.to_i]} %>
+			<table style="width:6.75in;font-size:10px">
+				<thead>
+		  		<tr>
+						<th>Date</th>
+						<th>Name</th>
+		  			<th>Number</th>
+		  			<th>Street</th>
+		  			<th>Publisher</th>
+		  			<th>Notes</th>
+		  		</tr>
+		  	</thead>
 
-	  	<tbody>
-	  		<% @dncs.each do |dnc| %>
-					<% if dnc.notes.include?("Territory") %>
-						<tr style="color: blue">
-					<% else %>
+		  	<tbody>
+		  		<% @dncs.each do |dnc| %>
+						<% if dnc.notes.include?("Territory") %>
+							<tr style="color: blue">
+						<% else %>
+							<tr>
+						<% end %>
+							<td style="font-size:10px"><%= "#{dnc.date.month}/#{dnc.date.day}/#{dnc.date.year.to_s[2..3]}" %></td>
+							<td style="font-size:10px"><%= dnc.name %></td>
+		  				<td style="font-size:10px"><%= dnc.number %></td>
+		  				<td style="font-size:10px"><%= dnc.street %></td>
+		  				<td style="font-size:10px"><%= dnc.publisher %></td>
+		  				<td style="font-size:10px"><%= dnc.notes %></td>
+		  			</tr>
+		  		<% end %>
+					<% (1..3).each do %>
 						<tr>
+							<td width=7%></td>
+							<td width=14%></td>
+							<td width=7%></td>
+							<td width=14%></td>
+							<td width=14%></td>
+							<td height=45px></td>
+						</tr>
 					<% end %>
-						<td style="font-size:10px"><%= "#{dnc.date.month}/#{dnc.date.day}/#{dnc.date.year.to_s[2..3]}" %></td>
-						<td style="font-size:10px"><%= dnc.name %></td>
-	  				<td style="font-size:10px"><%= dnc.number %></td>
-	  				<td style="font-size:10px"><%= dnc.street %></td>
-	  				<td style="font-size:10px"><%= dnc.publisher %></td>
-	  				<td style="font-size:10px"><%= dnc.notes %></td>
-	  			</tr>
-	  		<% end %>
-				<% (1..3).each do %>
-					<tr>
-						<td width=7%></td>
-						<td width=14%></td>
-						<td width=7%></td>
-						<td width=14%></td>
-						<td width=14%></td>
-						<td height=45px></td>
-					</tr>
-				<% end %>
-			</tbody>
-		</table>
+				</tbody>
+			</table>
+		</div>
+		<br>
+		<br>
 	</div>
-	<br>
-	<br>
 <% end %>
