@@ -31,8 +31,13 @@ class DncsController < ApplicationController
 
     respond_to do |format|
       if @dnc.save
-        format.html { redirect_to "/#{dnc_params["terrtype"]}/#{dnc_params["redirid"]}", notice: 'Dnc was successfully created.' }
-        format.json { render :show, status: :created, location: @dnc }
+        if dnc_params["terrtype"]
+          format.html { redirect_to "/#{dnc_params["terrtype"]}/#{dnc_params["redirid"]}", notice: 'Dnc was successfully created.' }
+          format.json { render :show, status: :ok, location: @dnc }
+        else
+          format.html { redirect_to @dnc, notice: 'Dnc was successfully created.' }
+          format.json { render :show, status: :ok, location: @dnc }
+        end
       else
         format.html { render :new }
         format.json { render json: @dnc.errors, status: :unprocessable_entity }
@@ -49,8 +54,13 @@ class DncsController < ApplicationController
 
     respond_to do |format|
       if @dnc.update(dnc_contents)
-        format.html { redirect_to "/#{dnc_params["terrtype"]}/#{dnc_params["redirid"]}", notice: 'Dnc was successfully updated.' }
-        format.json { render :show, status: :ok, location: @dnc }
+        if dnc_params["terrtype"]
+          format.html { redirect_to "/#{dnc_params["terrtype"]}/#{dnc_params["redirid"]}", notice: 'Dnc was successfully updated.' }
+          format.json { render :show, status: :ok, location: @dnc }
+        else
+          format.html { redirect_to @dnc, notice: 'Dnc was successfully updated.' }
+          format.json { render :show, status: :ok, location: @dnc }
+        end
       else
         format.html { render :edit }
         format.json { render json: @dnc.errors, status: :unprocessable_entity }
