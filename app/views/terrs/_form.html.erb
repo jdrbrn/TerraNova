@@ -30,7 +30,13 @@
     <%= form.label :notes %>
     <%= form.text_field :notes, id: :terr_notes %>
   </div>
-
+  <!-- History Editor Conditional that is set to fail as feature is not implemented  -->
+  <% if params[:action]=="edit"&&2==4 %>
+    <div class="field">
+      <%= form.label :history %>
+      <%= form.text_field :history, id: :terr_history, :value => @terr.history.to_s %>
+    </div>
+  <% end %>
   <div class="actions">
     <%= form.submit %>
   </div>

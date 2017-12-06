@@ -41,7 +41,13 @@ class TerrsController < ApplicationController
   # PATCH/PUT /terrs/1
   # PATCH/PUT /terrs/1.json
   def update
-    respond_to do |format|
+    # terr_contents=terr_params
+    # if terr_contents[history].class=="String"
+    #   terr_contents[history][-1]=""
+    #   terr_contents[history][0]=""
+    #   terr_contents.
+    # respond_to do |format|
+    #^^Commented out History Edit related code
       if @terr.update(terr_params)
         format.html { redirect_to @terr, notice: 'Terr was successfully updated.' }
         format.json { render :show, status: :ok, location: @terr }
