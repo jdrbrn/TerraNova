@@ -46,8 +46,8 @@ class TerrsController < ApplicationController
     #   terr_contents[history][-1]=""
     #   terr_contents[history][0]=""
     #   terr_contents.
-    # respond_to do |format|
     #^^Commented out History Edit related code
+    respond_to do |format|
       if @terr.update(terr_params)
         format.html { redirect_to @terr, notice: 'Terr was successfully updated.' }
         format.json { render :show, status: :ok, location: @terr }
