@@ -2,6 +2,12 @@ html, body {
 	background-color: #ecfbff;
 }
 
+#toolbar {
+		background: #ecfbff;
+		opacity: 1;
+		visibility: visible;
+}
+
 table, th, td
 {
 border:1px solid #000000;
