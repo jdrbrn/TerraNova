@@ -30,7 +30,7 @@ class TerrinsController < ApplicationController
       if @terrin.save
         Terr.all.find(terrin_params["terrid"]).update(datecomp: datecomp)
         Terr.all.find(@terrin.terrid).update(history: Terr.all.find(@terrin.terrid).history<<[Time.now,"Checked In",datecomp])
-        format.html { redirect_to :controller => "report", :action => "index"}
+        format.html { redirect_to '/'}
         format.json { render :show, status: :created, location: @terrin }
       else
         format.html { render :new }
