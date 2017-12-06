@@ -1,7 +1,7 @@
 <%= form_with(model: terrout, local: true) do |form| %>
   <% if terrout.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(terrout.errors.count, "error") %> prohibited this terrout from being saved:</h2>
+      <h2><%= pluralize(terrout.errors.count, "error") %> prohibited this Check Out from being saved:</h2>
 
       <ul>
       <% terrout.errors.full_messages.each do |message| %>

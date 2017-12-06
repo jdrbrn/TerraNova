@@ -1,7 +1,7 @@
 <%= form_with(model: dnc, local: true) do |form| %>
   <% if dnc.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(dnc.errors.count, "error") %> prohibited this dnc from being saved:</h2>
+      <h2><%= pluralize(dnc.errors.count, "error") %> prohibited this DNC from being saved:</h2>
 
       <ul>
       <% dnc.errors.full_messages.each do |message| %>

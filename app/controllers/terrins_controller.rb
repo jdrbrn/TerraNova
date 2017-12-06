@@ -44,7 +44,7 @@ class TerrinsController < ApplicationController
   def update
     respond_to do |format|
       if @terrin.update(terrin_params)
-        format.html { redirect_to @terrin, notice: 'Terrin was successfully updated.' }
+        format.html { redirect_to @terrin, notice: 'Check In was successfully updated.' }
         format.json { render :show, status: :ok, location: @terrin }
       else
         format.html { render :edit }
@@ -61,7 +61,7 @@ class TerrinsController < ApplicationController
       redirect_to :controller => 'terrouts', :action => 'new', :terrid => params[:checkout]
     else
       respond_to do |format|
-        format.html { redirect_to terrins_url, notice: 'Terrin was successfully destroyed.' }
+        format.html { redirect_to terrins_url, notice: 'Check In was successfully destroyed.' }
         format.json { head :no_content }
       end
     end

@@ -31,7 +31,7 @@
         <td><%= dnc.notes %></td>
         <td><%= link_to 'Show', dnc %></td>
         <td><%= link_to 'Edit', edit_dnc_path(dnc) %></td>
-        <td><%= link_to 'Destroy', dnc, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', dnc, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -39,4 +39,4 @@
 
 <br>
 
-<%= link_to 'New Dnc', new_dnc_path %>
+<%= link_to 'New DNC', new_dnc_path %>

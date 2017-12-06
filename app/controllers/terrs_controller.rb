@@ -29,7 +29,7 @@ class TerrsController < ApplicationController
 
     respond_to do |format|
       if @terr.save
-        format.html { redirect_to @terr, notice: 'Terr was successfully created.' }
+        format.html { redirect_to @terr, notice: 'Territory was successfully created.' }
         format.json { render :show, status: :created, location: @terr }
       else
         format.html { render :new }
@@ -49,7 +49,7 @@ class TerrsController < ApplicationController
     #^^Commented out History Edit related code
     respond_to do |format|
       if @terr.update(terr_params)
-        format.html { redirect_to @terr, notice: 'Terr was successfully updated.' }
+        format.html { redirect_to @terr, notice: 'Territory was successfully updated.' }
         format.json { render :show, status: :ok, location: @terr }
       else
         format.html { render :edit }
@@ -75,7 +75,7 @@ class TerrsController < ApplicationController
     end
     @terr.destroy
     respond_to do |format|
-      format.html { redirect_to terrs_url, notice: 'Terr was successfully destroyed.' }
+      format.html { redirect_to terrs_url, notice: 'Territory was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

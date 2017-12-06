@@ -32,10 +32,10 @@ class DncsController < ApplicationController
     respond_to do |format|
       if @dnc.save
         if dnc_params["terrtype"]
-          format.html { redirect_to "/#{dnc_params["terrtype"]}/#{dnc_params["redirid"]}", notice: 'Dnc was successfully created.' }
+          format.html { redirect_to "/#{dnc_params["terrtype"]}/#{dnc_params["redirid"]}", notice: 'DNC was successfully created.' }
           format.json { render :show, status: :ok, location: @dnc }
         else
-          format.html { redirect_to @dnc, notice: 'Dnc was successfully created.' }
+          format.html { redirect_to @dnc, notice: 'DNC was successfully created.' }
           format.json { render :show, status: :ok, location: @dnc }
         end
       else
@@ -55,10 +55,10 @@ class DncsController < ApplicationController
     respond_to do |format|
       if @dnc.update(dnc_contents)
         if dnc_params["terrtype"]
-          format.html { redirect_to "/#{dnc_params["terrtype"]}/#{dnc_params["redirid"]}", notice: 'Dnc was successfully updated.' }
+          format.html { redirect_to "/#{dnc_params["terrtype"]}/#{dnc_params["redirid"]}", notice: 'DNC was successfully updated.' }
           format.json { render :show, status: :ok, location: @dnc }
         else
-          format.html { redirect_to @dnc, notice: 'Dnc was successfully updated.' }
+          format.html { redirect_to @dnc, notice: 'DNC was successfully updated.' }
           format.json { render :show, status: :ok, location: @dnc }
         end
       else

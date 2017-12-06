@@ -45,7 +45,7 @@ class TerroutsController < ApplicationController
   def update
     respond_to do |format|
       if @terrout.update(terrout_params)
-        format.html { redirect_to @terrout, notice: 'Terrout was successfully updated.' }
+        format.html { redirect_to @terrout, notice: 'Check Out was successfully updated.' }
         format.json { render :show, status: :ok, location: @terrout }
       else
         format.html { render :edit }
@@ -62,7 +62,7 @@ class TerroutsController < ApplicationController
       redirect_to :controller => 'terrins', :action => 'new', :terrid => params[:checkin]
     else
       respond_to do |format|
-        format.html { redirect_to terrouts_url, notice: 'Terrout was successfully destroyed.' }
+        format.html { redirect_to terrouts_url, notice: 'Check Out was successfully destroyed.' }
         format.json { head :no_content }
       end
     end

@@ -1,7 +1,7 @@
 <%= form_with(model: terr, local: true) do |form| %>
   <% if terr.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(terr.errors.count, "error") %> prohibited this terr from being saved:</h2>
+      <h2><%= pluralize(terr.errors.count, "error") %> prohibited this Territory from being saved:</h2>
 
       <ul>
       <% terr.errors.full_messages.each do |message| %>
