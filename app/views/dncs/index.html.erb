@@ -3,7 +3,8 @@
 <h1>Do Not Call Database</h1>
 <h3>Sorted by Region, Street, Number</h3>
 <a href='/dncs/print?terr=all' target='_blank'>Print All DNC Cards</a>
-<table>
+<a id="csvdownload"></a>
+<table id="dnctable">
   <thead>
     <tr>
       <th>Region</th>
@@ -40,3 +41,30 @@
 <br>
 
 <%= link_to 'New DNC', new_dnc_path %>
+
+<script>
+  csvdata=["Region,Territory,Number,Street,Name,Publisher,Date,Notes"]
+  dnctable=document.getElementById("dnctable").tBodies[0].rows
+  i=0
+  while (i<dnctable.length) {
+    row=dnctable[i].cells
+    temp=[]
+    temp.push("\""+row[0].innerText+"\"")
+    temp.push("\""+row[1].innerText+"\"")
+    temp.push("\""+row[2].innerText+"\"")
+    temp.push("\""+row[3].innerText+"\"")
+    temp.push("\""+row[4].innerText+"\"")
+    temp.push("\""+row[5].innerText+"\"")
+    temp.push("\""+row[6].innerText+"\"")
+    temp.push("\""+row[7].innerText+"\"")
+    csvdata.push(temp.join(","))
+    i+=1
+  }
+  csvstring=csvdata.join("\n")
+  csv= new Blob([csvstring], {type: 'text/csv; header=present'})
+  downloadlink=URL.createObjectURL(csv)
+  linkloc=document.getElementById("csvdownload")
+  linkloc.download = 'dncs.csv'
+  linkloc.href = downloadlink
+  linkloc.textContent='Download CSV'
+</script>
