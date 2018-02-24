@@ -19,7 +19,7 @@
       <tr>
         <td><%= terr.name %></td>
         <td><%= terr.region %></td>
-        <td><%= terr.datecomp %></td>
+        <td><%= terr.datecomp.strftime("%m/%d/%y") %></td>
         <td><%= terr.notes %></td>
         <td><%= terr.history %></td>
         <td><%= link_to 'Show', terr %></td>

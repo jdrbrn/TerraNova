@@ -140,10 +140,10 @@ multiServers.push(["Residential3","10.0.20.2"])
           <% end %>
           <tr>
             <td class="<%= dateClass %>" style="white-space:pre"><%= @terrs.find(terrout.terrid).name %><br><%= @terrs.find(terrout.terrid).region %></td>
-            <td><%= @terrs.find(terrout.terrid).datecomp %></td>
+            <td><%= @terrs.find(terrout.terrid).datecomp.strftime("%m/%d/%y") %></td>
             <td><%= terrout.publisher %></td>
-            <td><%= terrout.dateout %></td>
-            <td><%= terrout.datedue %></td>
+            <td><%= terrout.dateout.strftime("%m/%d/%y") %></td>
+            <td><%= terrout.datedue.strftime("%m/%d/%y") %></td>
             <td><a href="#" onclick="terroutsViewDetails('<%= terrout.id %>');return false;">View Details</a></td>
             <td><%= link_to 'Check In', [terrout,checkin: terrout.terrid], method: :delete, data: { confirm: "Are you sure you want to check in #{@terrs.find(terrout.terrid).name}?" } %></td>
           </tr>
@@ -169,7 +169,7 @@ multiServers.push(["Residential3","10.0.20.2"])
         <% categorizedTerrs<<terrin.terrid %>
           <tr>
             <td style="white-space:pre-wrap"><%= @terrs.find(terrin.terrid).name %><br><%= @terrs.find(terrin.terrid).region %></td>
-            <td><%= @terrs.find(terrin.terrid).datecomp %></td>
+            <td><%= @terrs.find(terrin.terrid).datecomp.strftime("%m/%d/%y") %></td>
             <td><a href="#" onclick="terrinsViewDetails('<%= terrin.id %>');return false;">View Details</a></td>
             <td><%= link_to 'Check Out', [terrin,checkout: terrin.terrid], method: :delete, data: { confirm: "Are you sure you want to check out #{@terrs.find(terrin.terrid).name}?" } %></td>
           </tr>
@@ -196,7 +196,7 @@ multiServers.push(["Residential3","10.0.20.2"])
           <% else %>
             <tr>
               <td style="white-space:pre-wrap"><%= terr.name %><br><%=terr.region %></td>
-              <td><%= terr.datecomp %></td>
+              <td><%= terr.datecomp.strftime("%m/%d/%y") %></td>
               <td><a href='#' onclick="terrsViewDetails('<%= terr.id %>');return false;">View Details</a></td>
               <td><%= link_to 'Check Out', {:controller => "terrouts", :action => "new", :terrid => terr.id} %></td>
             </tr>

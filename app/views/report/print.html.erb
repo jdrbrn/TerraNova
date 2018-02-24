@@ -34,10 +34,10 @@
           <% end %>
           <tr>
             <td class="<%= dateClass %>" style="white-space:pre"><%= @terrs.find(terrout.terrid).name %><br><%= @terrs.find(terrout.terrid).region %></td>
-            <td><%= @terrs.find(terrout.terrid).datecomp %></td>
+            <td><%= @terrs.find(terrout.terrid).datecomp.strftime("%m/%d/%y") %></td>
             <td><%= terrout.publisher %></td>
-            <td><%= terrout.dateout %></td>
-            <td><%= terrout.datedue %></td>
+            <td><%= terrout.dateout.strftime("%m/%d/%y") %></td>
+            <td><%= terrout.datedue.strftime("%m/%d/%y") %></td>
             <td></td>
           </tr>
         <% end %>
@@ -64,7 +64,7 @@
         <% @terrins.sort_by{|terrin| @terrs.find(terrin.terrid).datecomp}.each do |terrin| %>
           <tr>
             <td style="white-space:pre-wrap"><%= @terrs.find(terrin.terrid).name %><br><%= @terrs.find(terrin.terrid).region %></td>
-            <td><%= @terrs.find(terrin.terrid).datecomp %></td>
+            <td><%= @terrs.find(terrin.terrid).datecomp.strftime("%m/%d/%y") %></td>
             <td></td>
             <td></td>
             <td style="width:291px;height:35px"></td>
