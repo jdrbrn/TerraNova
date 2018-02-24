@@ -3,7 +3,7 @@
 
   <% terr=Terr.all.find(@terrin.terrid) %>
   <h1><%= terr.region %> - <%= terr.name %></h1>
-  <h3>Last Completed: <%= terr.datecomp %></h3>
+  <h3>Last Completed: <%= terr.datecomp.strftime("%m/%d/%y") %></h3>
 
   <p>
     <strong>Status:</strong> Checked In
