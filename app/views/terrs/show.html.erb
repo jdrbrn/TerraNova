@@ -1,7 +1,7 @@
 <div style="position:relative;left:-28px;top:-10px">
   <p id="notice"><%= notice %></p>
   <h1><%= @terr.region %> - <%= @terr.name %></h1>
-  <h3>Last Completed: <%= @terr.datecomp %></h3>
+  <h3>Last Completed: <%= @terr.datecomp.strftime("%m/%d/%y") %></h3>
 
   <p>
     <strong>Status:</strong> Unknown
