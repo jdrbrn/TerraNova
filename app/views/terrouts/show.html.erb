@@ -2,7 +2,7 @@
   <p id="notice"><%= notice %></p>
   <% terr=Terr.all.find(@terrout.terrid) %>
   <h1><%= terr.region %> - <%= terr.name %></h1>
-  <h3>Last Completed: <%= terr.datecomp %></h3>
+  <h3>Last Completed: <%= terr.datecomp.strftime("%m/%d/%y") %></h3>
 
   <p>
     <strong>Status:</strong> Checked Out
@@ -18,8 +18,8 @@
       <tbody>
         <tr>
           <td><%= @terrout.publisher %></td>
-          <td><%= @terrout.dateout %></td>
-          <td><%= @terrout.datedue %></td>
+          <td><%= @terrout.dateout.strftime("%m/%d/%y") %></td>
+          <td><%= @terrout.datedue.strftime("%m/%d/%y") %></td>
         </tr>
       </tbody>
     </table>
