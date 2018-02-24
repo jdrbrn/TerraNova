@@ -36,7 +36,7 @@
           <% else %>
             <tr>
           <% end %>
-            <td><%= "#{dnc.date.month}/#{dnc.date.day}/#{dnc.date.year}" %></td>
+            <td><%= dnc.date.strftime("%m/%d/%y") %></td>
             <td><%= dnc.name %></td>
     				<td><%= dnc.number %></td>
     				<td><%= dnc.street %></td>
