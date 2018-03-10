@@ -28,7 +28,13 @@
         <td><%= dnc.street %></td>
         <td><%= dnc.name %></td>
         <td><%= dnc.publisher %></td>
-        <td><%= dnc.date.strftime("%m/%d/%y") %></td>
+        <td>
+          <% if dnc.date == nil %>
+            <%= dnc.date %>
+          <% else %>
+            <%= dnc.date.strftime("%m/%d/%y") %>
+          <% end %>
+        </td>
         <td><%= dnc.notes %></td>
         <td><%= link_to 'Show', dnc %></td>
         <td><%= link_to 'Edit', edit_dnc_path(dnc) %></td>

@@ -36,7 +36,13 @@
           <% else %>
             <tr>
           <% end %>
-            <td><%= dnc.date.strftime("%m/%d/%y") %></td>
+            <td>
+              <% if dnc.date == nil %>
+                <%= dnc.date %>
+              <% else %>
+                <%= dnc.date.strftime("%m/%d/%y") %>
+              <% end %>
+            </td>
             <td><%= dnc.name %></td>
     				<td><%= dnc.number %></td>
     				<td><%= dnc.street %></td>
