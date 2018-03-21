@@ -73,23 +73,20 @@ function sortTable(tablename, colnum, coltype) {
 }
 
 // Variable to keep track of what is sorted and by how
-// Yes, -0 is used (and somehow exists in JS)
+// Negative values means the data was reversed after sorting
+// Thus the value is +/-(colnum+1) as 0==-0 (Even though -0 exists in JS)
 sortedTables={}
-sortedTables["dnctable"]=0
+sortedTables["dnctable"]=1
 
 // Wrapper to write the table out and reverse the data if already sorted via that
 // column
 function tableSortWrapper(tablename, colnum, coltype){
   data = sortTable(tablename, colnum, coltype)
-  if (sortedTables[tablename]==colnum){
+  if (colnum==sortedTables[tablename]-1){
     data.reverse()
-    if (colnum==0){
-      sortedTables[tablename]=-0
-    } else {
-      sortedTables[tablename]=(0-colnum)
-    }
+    sortedTables[tablename]=(0-(colnum+1))
   } else {
-    sortedTables[tablename]=colnum
+    sortedTables[tablename]=colnum=1
   }
   table=document.getElementById(tablename).tBodies[0].rows
   i=0
