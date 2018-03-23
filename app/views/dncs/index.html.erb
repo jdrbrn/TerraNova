@@ -86,7 +86,7 @@ function tableSortWrapper(tablename, colnum, coltype){
     data.reverse()
     sortedTables[tablename]=(0-(colnum+1))
   } else {
-    sortedTables[tablename]=colnum=1
+    sortedTables[tablename]=colnum+1
   }
   table=document.getElementById(tablename).tBodies[0].rows
   i=0
