@@ -59,6 +59,12 @@ multiServers.push(["Residential3","10.0.20.2"])
 <% @terrs.each do |terr| %>
   <% if terr.datecomp > svcYearStart then compCurYear+=1 end %>
 <% end %>
+<%# Do same for last 12 months %>
+<% compLast12=0 %>
+<% yrAgo = Time.new(Time.now.year-1, Time.now.month, Time.now.day) %>
+<% @terrs.each do |terr| %>
+  <% if terr.datecomp > yrAgo then compLast12+=1 end %>
+<% end %>
 <%# If current month is Sep do the same for last service year for record keeping %>
 <% lastSvcYear=false %>
 <% if Time.now.month==9 %>
@@ -88,7 +94,7 @@ multiServers.push(["Residential3","10.0.20.2"])
     <table>
       <thead>
         <tr>
-          <th>Year</th>
+          <th>Time Frame</th>
           <th>Completed</th>
           <th>Total</th>
           <th>Percent</th>
@@ -96,14 +102,20 @@ multiServers.push(["Residential3","10.0.20.2"])
       </thead>
       <tbody>
         <tr>
-          <td><%= svcYearStart.year %></td>
+          <td><%= svcYearStart.year %> Service Year</td>
           <td><%= compCurYear %></td>
           <td><%= @terrs.length %></td>
           <td><%= (compCurYear.to_f/@terrs.length*100).round(2) %></td>
         </tr>
+	<tr>
+          <td>Since <%= yrAgo.strftime("%m/%d/%y") %></td>
+          <td><%= compLast12 %></td>
+          <td><%= @terrs.length %></td>
+          <td><%= (compLast12.to_f/@terrs.length*100).round(2) %></td>
+        </tr>
         <% if lastSvcYear %>
           <tr>
-            <td><%= lastSvcYear.year %></td>
+            <td><%= lastSvcYear.year %> Service Year</td>
             <td><%= compLastYear %></td>
             <td><%= @terrs.length %></td>
             <td><%= (compLastYear.to_f/@terrs.length*100).round(2) %></td>

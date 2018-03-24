@@ -27,7 +27,11 @@
 
 <p>
   <strong>Date:</strong>
-  <%= @dnc.date.strftime("%m/%d/%y") %>
+  <% if @dnc.date == nil %>
+    <%= @dnc.date %>
+  <% else %>
+    <%= @dnc.date.strftime("%m/%d/%y") %>
+  <% end %>
 </p>
 
 <p>

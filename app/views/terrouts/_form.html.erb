@@ -29,12 +29,12 @@
 
   <div class="field">
     <%= form.label :dateout %>
-    <%= form.date_select :dateout, id: :terrout_dateout %>
+    <%= form.date_select :dateout, id: :terrout_dateout, order: [:month, :day, :year] %>
   </div>
 
   <div class="field">
     <%= form.label :datedue %>
-    <%= form.date_select :datedue, id: :terrout_datedue, default: Date.current+4.months %>
+    <%= form.date_select :datedue, id: :terrout_datedue, default: Date.current+4.months, order: [:month, :day, :year] %>
   </div>
 
   <% if params[:terrid] %>
