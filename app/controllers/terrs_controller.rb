@@ -41,14 +41,15 @@ class TerrsController < ApplicationController
   # PATCH/PUT /terrs/1
   # PATCH/PUT /terrs/1.json
   def update
-    # terr_contents=terr_params
-    # if terr_contents[history].class=="String"
-    #   terr_contents[history][-1]=""
-    #   terr_contents[history][0]=""
-    #   terr_contents.
-    #^^Commented out History Edit related code
+    tempParams=terr_params
+    tempParams["history"]=@terr.history
+    params[:historyDelete].each do |historyIndex|
+      if params[:historyDelete][historyIndex]=="1"
+        tempParams["history"].delete(@terr.history[historyIndex.to_i])
+      end
+    end
     respond_to do |format|
-      if @terr.update(terr_params)
+      if @terr.update(tempParams)
         format.html { redirect_to @terr, notice: 'Territory was successfully updated.' }
         format.json { render :show, status: :ok, location: @terr }
       else
@@ -88,6 +89,6 @@ class TerrsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def terr_params
-      params.require(:terr).permit(:name, :region, :datecomp, :notes, :history)
+      params.require(:terr).permit(:name, :region, :datecomp, :notes, :history, :historyDelete)
     end
 end
