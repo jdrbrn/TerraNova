@@ -30,11 +30,10 @@
     <%= form.label :notes %>
     <%= form.text_field :notes, id: :terr_notes %>
   </div>
-  <!-- History Editor Conditional that is set to fail as feature is not implemented  -->
   <% if params[:action]=="edit"%>
+  <%# Creates a table for the terrs history with an option to delete entries %>
     <div class="field">
       <%= form.label :history %>
-      <%# form.text_field :history, id: :terr_history, :value => @terr.history.to_s %>
       <table>
         <% history_entry_index = 0 %>
         <% @terr.history.each do |historyEntry| %>
@@ -43,6 +42,8 @@
                 <td><%= detail %></td>
               <% end %>
               <td>
+                <%# Stores if an entry should be deleted or not in an hash historyDelete which is passed as a param to the controller %>
+                <%# For each history entry the index is added to the hash as a key with a value of 0(keep) or 1(delete) %>
                 Delete: <%= form.check_box :history, :name => "historyDelete[#{history_entry_index.to_s}]", id: :history %>
               </td>
             </tr>

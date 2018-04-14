@@ -41,11 +41,17 @@ class TerrsController < ApplicationController
   # PATCH/PUT /terrs/1
   # PATCH/PUT /terrs/1.json
   def update
+    # makes a copy of the params so that we can edit them
     tempParams=terr_params
+    # creates a copy of the terr's history that may be edited and then resaved
     tempParams["history"]=@terr.history
-    params[:historyDelete].each do |historyIndex|
-      if params[:historyDelete][historyIndex]=="1"
-        tempParams["history"].delete(@terr.history[historyIndex.to_i])
+    if params[:historyDelete]
+      params[:historyDelete].each do |historyIndex|
+        if params[:historyDelete][historyIndex]=="1"
+          # Deletes history records by getting the original record from the saved history
+          # Doesn't delete by index, but by contents because the index of the mutable record will change with deletes
+          tempParams["history"].delete(@terr.history[historyIndex.to_i])
+        end
       end
     end
     respond_to do |format|
