@@ -24,7 +24,10 @@ class DncsController < ApplicationController
   # POST /dncs
   # POST /dncs.json
   def create
+    #Create a mutable copy of the params
     dnc_contents=dnc_params
+    #Delete params that are only passed as flags
+    #A DNC will not save correctly if these params are passed to the DNC itself
     dnc_contents.delete("terrtype")
     dnc_contents.delete("redirid")
     @dnc = Dnc.new(dnc_contents)
@@ -32,6 +35,8 @@ class DncsController < ApplicationController
     respond_to do |format|
       if @dnc.save
         if dnc_params["terrtype"]
+          #Terrtype is passed when creating from a territory listing
+          #This section is to redirect back to that listing instead of to the DNC
           format.html { redirect_to "/#{dnc_params["terrtype"]}/#{dnc_params["redirid"]}", notice: 'DNC was successfully created.' }
           format.json { render :show, status: :ok, location: @dnc }
         else
@@ -49,12 +54,16 @@ class DncsController < ApplicationController
   # PATCH/PUT /dncs/1.json
   def update
     dnc_contents=dnc_params
+    #Delete params that are only passed as flags
+    #A DNC will not save correctly if these params are passed to the DNC itself
     dnc_contents.delete("terrtype")
     dnc_contents.delete("redirid")
 
     respond_to do |format|
       if @dnc.update(dnc_contents)
         if dnc_params["terrtype"]
+          #Terrtype is passed when creating from a territory listing
+          #This section is to redirect back to that listing instead of to the DNC
           format.html { redirect_to "/#{dnc_params["terrtype"]}/#{dnc_params["redirid"]}", notice: 'DNC was successfully updated.' }
           format.json { render :show, status: :ok, location: @dnc }
         else
@@ -74,6 +83,9 @@ class DncsController < ApplicationController
     @dnc.destroy
     respond_to do |format|
       if params["terrtype"]
+        #Terrtype is passed when creating from a territory listing
+        #This section is to redirect back to that listing instead of to the DNC
+        #There's no need to seperate the params as they are never passed to the DNC
         format.html { redirect_to "/#{params["terrtype"]}/#{params["redirid"]}", notice: 'Dnc was successfully updated.' }
         format.json { head :no_content }
       else

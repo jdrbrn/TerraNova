@@ -4,15 +4,50 @@
 	td,td.ok{background-color:white;}
 </style>
 
-<% if params[:terr].include?(',') %>
-	<% terrs=params[:terr].split(',') %>
-<% elsif params[:terr]=="all" %>
-	<% terrs=[] %>
+<%# Check to see if the terr param is passed, if not then gracefully fail %>
+<% if params[:terr] %>
+	<%# Check to see what DNC cards are requested %>
+	<%# The terrids to generate cards for will be stored in the terrs array %>
+	<%# Grab all valid terrids so that we can validate them later %>
+	<% validIDs=[] %>
 	<% Terr.all.each do |terr| %>
-		<% terrs<<terr.id %>
+		<% validIDs<<terr.id %>
+	<% end %>
+	<% if params[:terr].include?(',') %>
+		<%# Check for multiple terrids being passed (Never used by any premade links, but can be done via URL) %>
+		<% terrs=params[:terr].split(',') %>
+	<% elsif params[:terr]=="all" %>
+		<%# Checks for wanting to generate all the DNC cards %>
+		<%# If so all the we can set terr to be all the valid ids we grabbed earlier %>
+		<% terrs=validIDs %>
+	<% else %>
+		<%# Default to assuming the terr param is simply a terrid and store that in terrs %>
+		<% terrs=[params[:terr]] %>
 	<% end %>
 <% else %>
-	<% terrs=[params[:terr]] %>
+	<% terrs=[] %>
+<% end %>
+
+<%# Validate that terrs only includes valid terrids and delete any invalid ones %>
+<%# Uses a weird loop because when using an each if a terrid needs to be %>
+<%# deleted the index shifts so validation of the next id is skipped %>
+<% currindex = 0 %>
+<% while currindex < terrs.length %>
+	<%# Have to convert to int as validIDs is an arry of ints, but terrs is of strings %>
+	<% if validIDs.include?(terrs[currindex].to_i) %>
+		<%# Only moves on if current index is valid %>
+		<% currindex +=1 %>
+	<% else %>
+		<% terrs.delete(terrs[currindex]) %>
+		<%# Doesn't change the index as everything will shift down when deleted %>
+		<%# Ex: [1,3,a,b,5].delete(a) -> [1,3,b,5] where index 2 is then shared between a and b %>
+		<%# If the index was incremented then validation of b would be skipped %>
+	<% end %>
+<% end %>
+
+<%# Present an error if terrs is empty (Either because no id was passed, or all ids were deemed not valid and deleted) %>
+<% if terrs==[] %>
+	Error: No valid territory ids provided to generate cards for
 <% end %>
 
 <% terrs.each do |terr| %>

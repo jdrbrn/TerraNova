@@ -154,6 +154,8 @@ function tableSortWrapper(tablename, colnum, coltype){
 <%= link_to 'New DNC', new_dnc_path %>
 
 <script>
+  //This script section creates a downloadable CSV of all the DNCs
+  //and updates the page to have a link in a predefined spot
   csvdata=["Region,Territory,Number,Street,Name,Publisher,Date,Notes"]
   dnctable=document.getElementById("dnctable").tBodies[0].rows
   i=0

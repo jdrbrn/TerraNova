@@ -68,6 +68,10 @@ class TerrsController < ApplicationController
   # DELETE /terrs/1
   # DELETE /terrs/1.json
   def destroy
+    #Since multiple records can be linked to a territory those also need to be destroyed
+    #Each step follows the same process
+    # 1) Get all entries of a certain type that link to the Territory
+    # 2) Delete those entries one by one
     dncs=Dnc.all.select{|dnc| dnc.terrid==@terr.id}
     dncs.each do |dnc|
       dnc.destroy
