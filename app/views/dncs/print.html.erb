@@ -77,19 +77,19 @@
 						<% else %>
 							<tr>
 						<% end %>
-						<td style="font-size:10px">
-                                                  <% if dnc.date == nil %>
-                                                    <%= dnc.date %>
-                                                  <% else %>
-                                                    <%= dnc.date.strftime("%m/%d/%y") %>
-                                                  <% end %>
-                                                </td>
-						<td style="font-size:10px"><%= dnc.name %></td>
-		  				<td style="font-size:10px"><%= dnc.number %></td>
-		  				<td style="font-size:10px"><%= dnc.street %></td>
-		  				<td style="font-size:10px"><%= dnc.publisher %></td>
-		  				<td style="font-size:10px"><%= dnc.notes %></td>
-		  			</tr>
+								<td style="font-size:10px">
+                  <% if dnc.date == nil %>
+                    <%= dnc.date %>
+                  <% else %>
+                    <%= dnc.date.strftime("%m/%d/%y") %>
+                  <% end %>
+                </td>
+								<td style="font-size:10px"><%= dnc.name %></td>
+		  					<td style="font-size:10px"><%= dnc.number %></td>
+		  					<td style="font-size:10px"><%= dnc.street %></td>
+		  					<td style="font-size:10px"><%= dnc.publisher %></td>
+		  					<td style="font-size:10px"><%= dnc.notes %></td>
+		  				</tr>
 		  		<% end %>
 					<% (1..3).each do %>
 						<tr>

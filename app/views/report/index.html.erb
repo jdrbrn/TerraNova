@@ -190,7 +190,7 @@ multiServers.push(["Residential3","10.0.20.2"])
     </table>
   </div>
 
-  <!-- table to display terrs that aren't our or in -->
+  <!-- table to display terrs that aren't out or in -->
   <div id="otherTerrs">
     <h2>Other Territories</h2>
 
@@ -226,6 +226,8 @@ multiServers.push(["Residential3","10.0.20.2"])
 
 <script>  window.onload = setToolbar(); </script>
 <script>
+//This script section creates a downloadable CSV of all the territory listings
+//and updates the page to have a link in a predefined spot
   csvdata=["Territory,Last Complete,Publisher,Date Out,Date Due"]
   terrouttable=document.getElementById("terrouttable").tBodies[0].rows
   terrintable=document.getElementById("terrintable").tBodies[0].rows
