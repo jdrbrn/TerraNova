@@ -13,6 +13,7 @@
 
   <div class="field">
     <%= form.label "Territory" %>
+    <%# Presents the territory ids in a user friendly format of names %>
     <% if params[:terrid] %>
       <%= form.select :terrid, options_for_select(Terr.all.map{|t|[t.name, t.id]}, selected=params[:terrid]), id: :terrout_terrid %>
     <% elsif @terrout.terrid %>
@@ -38,6 +39,7 @@
   </div>
 
   <% if params[:terrid] %>
+    <%# Checks for flags and passes them to the controller %>
     <%= form.hidden_field :checkout, :value=> true %>
   <% end %>
 

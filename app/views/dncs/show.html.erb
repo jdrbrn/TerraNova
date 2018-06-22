@@ -27,6 +27,7 @@
 
 <p>
   <strong>Date:</strong>
+  <%# Checks for nil date because trying to format nil will error %>
   <% if @dnc.date == nil %>
     <%= @dnc.date %>
   <% else %>

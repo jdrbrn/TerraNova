@@ -1,12 +1,15 @@
 <% allHistory = [] %>
+<%# Iterates over all territory entries and gets all the history entries stored within %>
 <% @terrs.each do |terr| %>
   <% terr.history.each do |entry| %>
+    <%# Adds in the territory name as it isn't stored %>
     <% entry.insert(1,terr.name) %>
     <% allHistory<<entry %>
   <% end %>
 <% end %>
 <h2>List of History</h2>
 <table>
+  <%# Sorts in decending date order %>
   <% allHistory.sort_by{|entry| entry[0] }.reverse.each do |entry| %>
     <tr>
       <% entry.each do |detail| %>

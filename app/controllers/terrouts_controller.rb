@@ -24,12 +24,15 @@ class TerroutsController < ApplicationController
   # POST /terrouts
   # POST /terrouts.json
   def create
+    #Create a mutable copy of the params
     terrout_contents=terrout_params
+    #Delete params that are passed as a flag
+    #A terrout will not save correctly if these params are passed to the terrout itself
     terrout_contents.delete("checkout")
     @terrout = Terrout.new(terrout_contents)
-
     respond_to do |format|
       if @terrout.save
+        #Updates the Territory's history adding a checked out listing
         Terr.all.find(@terrout.terrid).update(history: Terr.all.find(@terrout.terrid).history<<[Time.now, "Checked Out", @terrout.dateout, @terrout.publisher])
         format.html { redirect_to '/'}
         format.json { render :show, status: :created, location: @terrout }
@@ -58,6 +61,8 @@ class TerroutsController < ApplicationController
   # DELETE /terrouts/1.json
   def destroy
     @terrout.destroy
+    #If the checkout flag is passed, we need to redirect to the terrin controller
+    #So that the terrin entry can be created, and the territory can be tracked as checked in
     if params[:checkin]
       redirect_to :controller => 'terrins', :action => 'new', :terrid => params[:checkin]
     else

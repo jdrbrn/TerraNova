@@ -24,11 +24,16 @@ class TerrinsController < ApplicationController
   # POST /terrins
   # POST /terrins.json
   def create
+    #Manually passes the only param required
+    #Rest of the paramaters are either flags or not used in creation of the terrin entry itself
     @terrin = Terrin.new({"terrid"=>terrin_params["terrid"]})
+    #Constructs a date from passed in strings
     datecomp=Date.new(terrin_params["datecomp(1i)"].to_i,terrin_params["datecomp(2i)"].to_i,terrin_params["datecomp(3i)"].to_i)
     respond_to do |format|
       if @terrin.save
+        #Updates the Territory's completion date
         Terr.all.find(terrin_params["terrid"]).update(datecomp: datecomp)
+        #Updates the Territory's history adding a checked in listing
         Terr.all.find(@terrin.terrid).update(history: Terr.all.find(@terrin.terrid).history<<[Time.now,"Checked In",datecomp])
         format.html { redirect_to '/'}
         format.json { render :show, status: :created, location: @terrin }
@@ -57,6 +62,8 @@ class TerrinsController < ApplicationController
   # DELETE /terrins/1.json
   def destroy
     @terrin.destroy
+    #If the checkout flag is passed, we need to redirect to the terrout controller
+    #So that the terrout entry can be created, and the territory can be tracked as checked out
     if params[:checkout]
       redirect_to :controller => 'terrouts', :action => 'new', :terrid => params[:checkout]
     else

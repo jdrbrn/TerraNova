@@ -14,6 +14,7 @@
   <div class="field">
     <%= form.label :terrid %>
     <% if params[:terrid] %>
+      <%# Presents the territory ids in a user friendly format of names %>
       <%= form.select :terrid, options_for_select(Terr.all.map{|t|[t.name, t.id]}, selected=params[:terrid]), id: :dnc_terrid %>
     <% elsif @dnc.terrid %>
       <%= form.select :terrid, options_for_select(Terr.all.map{|t|[t.name, t.id]}, selected=@dnc.terrid), id: :dnc_terrid %>
@@ -53,6 +54,7 @@
   </div>
 
   <% if params[:terrtype] %>
+    <%# Checks for flags and passes them to the controller %>
     <%= form.hidden_field :terrtype, :value=> params[:terrtype] %>
     <%= form.hidden_field :redirid, :value=> params[:redirid] %>
   <% end %>
