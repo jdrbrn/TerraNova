@@ -30,12 +30,12 @@ function sortTable(tablename, colnum, coltype) {
     }
   }
 
-  function sortString(a, b){
-    foo=[a[colnum],b[colnum]]
-    foo=foo.sort()
-    if (a[colnum]==b[colnum]){
+function sortString(a, b){
+    strA=a[colnum].toLowerCase()
+    strB=b[colnum].toLowerCase()
+    if (strA==strB){
       return 0;
-    } else if(foo[0] == a[colnum]){
+    } else if([strA,strB].sort()[0] == strA){
       return -1;
     } else{
       return 1;
@@ -63,7 +63,6 @@ function sortTable(tablename, colnum, coltype) {
     rawdata.sort(sortDate)
   } else if (coltype=="Num") {
     rawdata.sort(sortNum)
-
   } else {
     rawdata.sort(sortString)
   }
