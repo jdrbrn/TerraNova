@@ -1,4 +1,5 @@
 require 'json'
+
 #Sets what keys should be found for prefs and default values
 config={"multi"=>"false",
         "cong_name"=>"Name",
@@ -26,3 +27,6 @@ end
 configFile=File.new("config.json","w")
 configFile.puts(config.to_json)
 configFile.close
+
+#Set constant config
+TerraNovaConfig=config.freeze
