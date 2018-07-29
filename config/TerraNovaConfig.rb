@@ -2,7 +2,7 @@ require 'json'
 
 #Sets what keys should be found for prefs and default values
 config={"multi"=>"false",
-        "cong_name"=>"Name",
+        "congs"=>["Name","Name2"],
         "color"=>"Blue"}
 #Checks to see if config file exists and creates if not
 if File.file?("config.json")==false
@@ -18,9 +18,12 @@ rescue JSON::ParserError
 end
 #For each config value read from the file it loads the value into our config var
 #This way if there is supposed to be a config value but isn't, the default is used
-#This block could also contain migration logic if needed(Ex: If a key is renamed later)
+#Removes arbitary data stored in config.json that isn't called for
+#This block could also contain migration logic if needed(Ex: If a key is renamed)
 loadedConfig.each do |key|
-  config[key[0]]=loadedConfig[key[0]]
+  if config[key[0]]
+    config[key[0]]=loadedConfig[key[0]]
+  end
 end
 #Deletes the existing config and then saves the loaded config
 #This makes sure to easily add any keys that were missing or changed
