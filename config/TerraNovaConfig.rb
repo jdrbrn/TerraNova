@@ -2,17 +2,19 @@ require 'json'
 
 #Sets what keys should be found for prefs and default values
 config={"multi"=>"false",
-        "congs"=>["Name","Name2"],
+        "congs"=>["Name","Multi1"],
         "color"=>"Blue"}
+
+configFileName="TerraNovaConfig.json"
 #Checks to see if config file exists and creates if not
-if File.file?("config.json")==false
-  File.new("config.json","a+").close
+if File.file?(configFileName)==false
+  File.new(configFileName,"a+").close
 end
 #Loads the JSON File
 #Error handling for if there is an issue with the JSON data(ex: doesn't exist)
 #Which resets to a blank/default config
 begin
-  loadedConfig=JSON.parse(File.read("config.json"))
+  loadedConfig=JSON.parse(File.read(configFileName))
 rescue JSON::ParserError
   loadedConfig={}
 end
@@ -27,7 +29,7 @@ loadedConfig.each do |key|
 end
 #Deletes the existing config and then saves the loaded config
 #This makes sure to easily add any keys that were missing or changed
-configFile=File.new("config.json","w")
+configFile=File.new(configFileName,"w")
 configFile.puts(config.to_json)
 configFile.close
 
