@@ -27,3 +27,6 @@
 config/secrets.yml.key
 config/secrets.yml.enc
 config/secrets.yml
+
+# Ignore config.json
+config.json

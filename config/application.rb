@@ -1,3 +1,5 @@
+require_relative 'TerraNovaConfig'
+
 require_relative 'boot'
 
 require 'rails/all'
