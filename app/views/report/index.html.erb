@@ -1,17 +1,48 @@
-<!-- User Settings -->
-<script>
-var congName = "Name"
-//enable true if multiple servers are used.
-//If true will add links to server in toolbar
-var multiLinksEnabled = false
-var multiServers=[]
-//multiServers.push(["Type of Territory","IP of TerraNova Server for type"])
-multiServers.push(["Residential","10.0.20.2:3000"])
-multiServers.push(["Residential2","10.0.20.2:3001"])
-multiServers.push(["Residential3","10.0.20.2"])
-</script>
+<%# Ruby pre-render functions %>
+<%# will store terrid of all territories checked in or out %>
+<% categorizedTerrs =[] %>
+<%# calculate when start of service year was %>
+<% if Time.now.month>=9 %>
+  <% svcYearStart=Time.new(Time.now.year,9,1) %>
+<% else %>
+  <% svcYearStart=Time.new(Time.now.year-1,9,1) %>
+<% end %>
+<%# calculate how many territories completed during service year %>
+<% compCurYear=0 %>
+<% @terrs.each do |terr| %>
+  <% if terr.datecomp > svcYearStart then compCurYear+=1 end %>
+<% end %>
+<%# Do same for last 12 months %>
+<% compLast12=0 %>
+<% yrAgo = Time.new(Time.now.year-1, Time.now.month, Time.now.day) %>
+<% @terrs.each do |terr| %>
+  <% if terr.datecomp > yrAgo then compLast12+=1 end %>
+<% end %>
+<%# If current month is Sep do the same for last service year for record keeping %>
+<% lastSvcYear=false %>
+<% if Time.now.month==9 %>
+  <% lastSvcYear=Time.new(svcYearStart.year-1,9,1) %>
+  <% compLastYear=0 %>
+  <% @terrs.each do |terr| %>
+    <% if terr.datecomp>lastSvcYear && terr.datecomp<svcYearStart then compLastYear+=1 end %>
+  <% end %>
+<% end %>
 
-<link rel="stylesheet" type="text/css" href="index.css">
+<!-- User Settings Set in TerraNovaConfig.json-->
+<script>
+var congName = "<%= TerraNovaConfig["name"] %>"
+//If enabled links to other servers will be in the toolbar
+var multiLinksEnabled = <%=TerraNovaConfig["multi"] %>
+
+<%# Only load multiServer data if needed %>
+<% if TerraNovaConfig["multi"] %>
+  var multiServers=[]
+  //multiServers.push(["Type of Territory","IP of TerraNova Server for type"])
+  <% TerraNovaConfig["serverList"].each do |server| %>
+    multiServers.push(["<%= server[0] %>", "<%= server[1] %>"])
+  <% end %>
+<% end %>
+</script>
 
 <!-- Javascript Functions -->
 <script>
@@ -44,36 +75,6 @@ multiServers.push(["Residential3","10.0.20.2"])
     }
   }
 </script>
-
-<%# Ruby pre-render functions %>
-<%# will store terrid of all territories check in or out %>
-<% categorizedTerrs =[] %>
-<%# calculate when start of service year was %>
-<% if Time.now.month>=9 %>
-  <% svcYearStart=Time.new(Time.now.year,9,1) %>
-<% else %>
-  <% svcYearStart=Time.new(Time.now.year-1,9,1) %>
-<% end %>
-<%# calculate how many territories completed during service year %>
-<% compCurYear=0 %>
-<% @terrs.each do |terr| %>
-  <% if terr.datecomp > svcYearStart then compCurYear+=1 end %>
-<% end %>
-<%# Do same for last 12 months %>
-<% compLast12=0 %>
-<% yrAgo = Time.new(Time.now.year-1, Time.now.month, Time.now.day) %>
-<% @terrs.each do |terr| %>
-  <% if terr.datecomp > yrAgo then compLast12+=1 end %>
-<% end %>
-<%# If current month is Sep do the same for last service year for record keeping %>
-<% lastSvcYear=false %>
-<% if Time.now.month==9 %>
-  <% lastSvcYear=Time.new(svcYearStart.year-1,9,1) %>
-  <% compLastYear=0 %>
-  <% @terrs.each do |terr| %>
-    <% if terr.datecomp>lastSvcYear && terr.datecomp<svcYearStart then compLastYear+=1 end %>
-  <% end %>
-<% end %>
 
 <div id="toolbar" style="position:fixed;width:100%;top:0px;left:0px;right:0px;border-bottom:1px solid #000;z-index:1">
     <div id="toolHead" align="left" style="left:5px;display:inline-block;font-size:20px;font-weight:bold">Congregation Territory</div>

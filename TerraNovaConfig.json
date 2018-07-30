@@ -1,0 +1,18 @@
+{
+  "name": "Development",
+  "multi": "true",
+  "serverList": [
+    [
+      "Mutli1",
+      "IP1"
+    ],
+    [
+      "Multi2",
+      "IP2"
+    ],
+    [
+      "Multi3",
+      "IP3"
+    ]
+  ]
+}

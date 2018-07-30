@@ -1,10 +1,11 @@
 require 'json'
 
 #Sets what keys should be found for prefs and default values
-config={"multi"=>"false",
-        "congs"=>["Name","Multi1"],
-        "color"=>"Blue"}
+config={"name"=>"Name",
+        "multi"=>"false",
+        "serverList"=>[["Mutli1","IP1"],["Multi2","IP2"],["Multi3","IP3"]]}
 
+#File name to use for the configFile
 configFileName="TerraNovaConfig.json"
 #Checks to see if config file exists and creates if not
 if File.file?(configFileName)==false
@@ -30,7 +31,7 @@ end
 #Deletes the existing config and then saves the loaded config
 #This makes sure to easily add any keys that were missing or changed
 configFile=File.new(configFileName,"w")
-configFile.puts(config.to_json)
+configFile.puts(JSON.pretty_generate(config))
 configFile.close
 
 #Set constant config
