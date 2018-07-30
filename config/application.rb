@@ -1,4 +1,5 @@
 require_relative 'TerraNovaConfig'
+TerraNovaConfig=loadConfig
 
 require_relative 'boot'
 
