@@ -1,9 +1,3 @@
-<style>
-	body{background-color:white;}
-	th{background-color:white;}
-	td,td.ok{background-color:white;}
-</style>
-
 <%# Check to see if the terr param is passed, if not then gracefully fail %>
 <% if params[:terr] %>
 	<%# Check to see what DNC cards are requested %>
@@ -51,14 +45,14 @@
 <% end %>
 
 <% terrs.each do |terr| %>
-	<div id="listcontainer" style="padding-top:10px;page-break-inside: avoid">
-		<div id="dncList" style="width:6.75in;margin:0;padding:0px;outline:1px solid black;outline-offset: 9px;display:table;page-break-inside: avoid">
-			<div id="header">
-				<div align="left" style="display:inline-block;font-size:20px;font-weight:bold">Do Not Calls for <%= Terr.find(terr).name %></div>
-				<table align="right" style="border:0px;padding:0px"><tr style="padding:0"><td style="border:0px;padding:0">Printed <%= Time.now.month %>/<%= Time.now.day %>/<%= Time.now.year %></td></tr></table>
+	<div class="cardContainer">
+		<div class="dncCard">
+			<div class="cardHeader">
+				<div class="cardTitle" align="left">Do Not Calls for <%= Terr.find(terr).name %></div>
+				<table class="dateTable" align="right" ><tr><td>Printed <%= Time.now.month %>/<%= Time.now.day %>/<%= Time.now.year %></td></tr></table>
 			</div>
 			<% @dncs=Dnc.all.select{|dnc| dnc.terrid==terr.to_i}.sort_by{|dnc| [dnc.street, dnc.number.to_i]} %>
-			<table style="width:6.75in;font-size:10px">
+			<table class="dncTable">
 				<thead>
 		  		<tr>
 					<th>Date</th>
@@ -73,22 +67,22 @@
 		  	<tbody>
 		  		<% @dncs.each do |dnc| %>
 						<% if dnc.notes.include?("Territory") %>
-							<tr style="color: blue">
+							<tr class="special">
 						<% else %>
 							<tr>
 						<% end %>
-								<td style="font-size:10px">
+								<td>
                   <% if dnc.date == nil %>
                     <%= dnc.date %>
                   <% else %>
                     <%= dnc.date.strftime("%m/%d/%y") %>
                   <% end %>
                 </td>
-								<td style="font-size:10px"><%= dnc.name %></td>
-		  					<td style="font-size:10px"><%= dnc.number %></td>
-		  					<td style="font-size:10px"><%= dnc.street %></td>
-		  					<td style="font-size:10px"><%= dnc.publisher %></td>
-		  					<td style="font-size:10px"><%= dnc.notes %></td>
+								<td><%= dnc.name %></td>
+		  					<td><%= dnc.number %></td>
+		  					<td><%= dnc.street %></td>
+		  					<td><%= dnc.publisher %></td>
+		  					<td><%= dnc.notes %></td>
 		  				</tr>
 		  		<% end %>
 					<% (1..3).each do %>

@@ -1,0 +1,56 @@
+<% content_for :stylesheets do %>
+  body {
+    background-color:white
+  }
+
+  th {
+    background-color:white
+  }
+
+  td {
+    background-color:white
+  }
+
+  div.cardContainer{
+    padding-top:10px;
+    page-break-inside: avoid
+  }
+
+  div.dncCard{
+    width:6.75in;
+    margin:0;
+    padding:0px;
+    outline:1px solid black;
+    outline-offset: 9px;
+    display:table;
+    page-break-inside: avoid
+  }
+
+  div.cardTitle{
+    display:inline-block;
+    font-size:20px;
+    font-weight:bold
+  }
+
+  table.dateTable,
+  table.dateTable tr,
+  table.dateTable td{
+      border:0px;
+      padding:0px
+  }
+
+  table.dncTable{
+     width:6.75in;
+  }
+
+  table.dncTable,
+  table.dncTable td{
+     font-size:10px
+  }
+
+  tr.special {
+    color: blue
+  }
+<% end %>
+
+<%= render template: "layouts/application" %>

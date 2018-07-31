@@ -6,11 +6,40 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  
-    <style type="text/CSS">
+
+    <style>
       body {
        background-color: <%= TerraNovaConfig["bodyBG"] %>
       }
+
+      th{
+       background-color: #e5efff
+      }
+
+      td,td.ok{
+       background-color: #efefff
+      }
+
+      td.warn{
+       background-color: yellow
+      }
+
+      td.late{
+       background-color: #ff4a2b
+      }
+
+      table, th, td
+      {
+        border:1px solid #000000;
+        border-collapse:collapse;
+        vertical-align:top;
+        text-align:center;
+        word-wrap:break-word;
+        white-space:normal;
+      }
+    </style>
+    <style>
+      <%= yield :stylesheets %>
     </style>
   </head>
 
