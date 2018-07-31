@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  # To enable username/password authentication uncomment the bellow and set the username and password
-  # http_basic_authenticate_with name: "", password: "password"
+  #Enables basic httpAuth for all pages
+  if TerraNovaConfig["enableHTTPAuth"] == "true"
+    http_basic_authenticate_with name: TerraNovaConfig["HTTPAuth"][0], password: TerraNovaConfig["HTTPAuth"][1]
+  end
 end

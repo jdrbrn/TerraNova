@@ -1,7 +1,7 @@
 {
   "name": "Development",
-  "multi": "true",
-  "serverList": [
+  "enableMultiserver": "false",
+  "multiserverList": [
     [
       "Mutli1",
       "IP1"
@@ -14,6 +14,11 @@
       "Multi3",
       "IP3"
     ]
+  ],
+  "enableHTTPAuth": "false",
+  "HTTPAuth": [
+    "username",
+    "password"
   ],
   "bodyBG": "#ecfbff"
 }

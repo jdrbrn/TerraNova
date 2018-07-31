@@ -32,13 +32,13 @@
 <script>
 var congName = "<%= TerraNovaConfig["name"] %>"
 //If enabled links to other servers will be in the toolbar
-var multiLinksEnabled = <%=TerraNovaConfig["multi"] %>
+var multiLinksEnabled = <%=TerraNovaConfig["enableMultiserver"] %>
 
 <%# Only load multiServer data if needed %>
-<% if TerraNovaConfig["multi"] %>
+<% if TerraNovaConfig["enableMultiserver"] %>
   var multiServers=[]
   //multiServers.push(["Type of Territory","IP of TerraNova Server for type"])
-  <% TerraNovaConfig["serverList"].each do |server| %>
+  <% TerraNovaConfig["multiserverList"].each do |server| %>
     multiServers.push(["<%= server[0] %>", "<%= server[1] %>"])
   <% end %>
 <% end %>

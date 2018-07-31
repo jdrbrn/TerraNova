@@ -2,9 +2,11 @@ require 'json'
 
 def loadConfig
   #Sets what keys should be found for prefs and default values
-  config={"name"=>"Name",
-          "multi"=>"false",
-          "serverList"=>[["Mutli1","IP1"],["Multi2","IP2"],["Multi3","IP3"]],
+  config={"name"=>"EDIT CONFIG FILE TO FINISH SETUP",
+          "enableMultiserver"=>"false",
+          "multiserverList"=>[["Mutli1","IP1"],["Multi2","IP2"],["Multi3","IP3"]],
+          "enableHTTPAuth"=>"false",
+          "HTTPAuth"=>["username","password"],
           "bodyBG"=>"#ecfbff"}
 
   #File name to use for the configFile
@@ -37,5 +39,6 @@ def loadConfig
   configFile.close
 
   #Set constant config
+  puts "Retreived Configuration: #{config}"
   config
 end
