@@ -7,7 +7,10 @@ def loadConfig
           "multiserverList"=>[["Mutli1","IP1"],["Multi2","IP2"],["Multi3","IP3"]],
           "enableHTTPAuth"=>"false",
           "HTTPAuth"=>["username","password"],
-          "bodyBG"=>"#ecfbff"}
+          "bodyBG"=>"#ecfbff",
+          "terrWarn"=>"yellow",
+          "terrLate"=>"#ff4a2b",
+          "dncCardWidth"=>"6.75in"}
 
   #File name to use for the configFile
   configFileName="TerraNovaConfig.json"
