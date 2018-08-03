@@ -2,15 +2,16 @@ require 'json'
 
 def loadConfig
   #Sets what keys should be found for prefs and default values
-  config={"name"=>"EDIT CONFIG FILE TO FINISH SETUP",
+  config={"TerraNovaVersion"=>"2.0.0dev"
+          "name"=>"EDIT CONFIG FILE TO FINISH SETUP",
           "enableMultiserver"=>"false",
           "multiserverList"=>[["Mutli1","IP1"],["Multi2","IP2"],["Multi3","IP3"]],
           "enableHTTPAuth"=>"false",
-          "HTTPAuth"=>["username","password"],
-          "bodyBG"=>"#ecfbff",
-          "terrWarn"=>"yellow",
-          "terrLate"=>"#ff4a2b",
-          "dncCardWidth"=>"6.75in"}
+          "HTTPAuth"=>{"username"=>"user","password"=>"secret"},
+          "systemCSS"=>{"bodyBG"=>"#ecfbff",
+            "terrWarn"=>"yellow",
+            "terrLate"=>"#ff4a2b"},
+          "dncCSS"=>{"dncCardWidth"=>"6.75in"}}
 
   #File name to use for the configFile
   configFileName="TerraNovaConfig.json"
@@ -26,13 +27,29 @@ def loadConfig
   rescue JSON::ParserError
     loadedConfig={}
   end
+  #Checks for the version of TerraNova used to save the config file
+  #This is then removed so that the current version can be written out
+  #This block could also contain migration logic based on version if needed(Ex: If a key is renamed)
+  if loadedConfig["TerraNovaVersion"]
+    loadedConfig.delete("TerraNovaVersion")
+  end
   #For each config value read from the file it loads the value into our config var
   #This way if there is supposed to be a config value but isn't, the default is used
   #Removes arbitary data stored in config.json that isn't called for
-  #This block could also contain migration logic if needed(Ex: If a key is renamed)
   loadedConfig.each do |key|
-    if config[key[0]]
-      config[key[0]]=loadedConfig[key[0]]
+    # Check to see if the key should exist and loadedConfig contains the type of value it should
+    if config[key[0]] && config[key[0]].class == loadedConfig[key[0]].class
+      # If hash or array merge the two so new keys get added to the config file
+      if config[key[0]].class == Hash
+        loadedConfig[key[0]].each do |hashKey|
+          # Check to see if the hashKey should exist and loadedConfig contains the type of value it should
+          if config[key[0]][hashKey[0]] && config[key[0]][hashKey[0]].class == loadedConfig[key[0]][hashKey[0]].class
+            config[key[0]][hashKey[0]]=loadedConfig[key[0]][hashKey[0]]
+          end
+        end
+      else
+        config[key[0]]=loadedConfig[key[0]]
+      end
     end
   end
   #Deletes the existing config and then saves the loaded config
