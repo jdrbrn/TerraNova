@@ -15,6 +15,13 @@ def loadConfig
 
   #File name to use for the configFile
   configFileName="TerraNovaConfig.json"
+  # If in development mode load a dev config file and save a default config with the latest defaults
+  if Rails.env.development?
+    configFile=File.new(configFileName,"w")
+    configFile.puts(JSON.pretty_generate(config))
+    configFile.close
+    configFileName="Dev#{configFileName}"
+  end
   #Checks to see if config file exists and creates if not
   if File.file?(configFileName)==false
     File.new(configFileName,"a+").close
@@ -59,6 +66,6 @@ def loadConfig
   configFile.close
 
   #Set constant config
-  puts "Retreived Configuration: #{config}"
+  puts "Retreived Configuration #{configFileName}: #{config}"
   config
 end
