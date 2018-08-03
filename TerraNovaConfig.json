@@ -1,5 +1,6 @@
 {
-  "name": "Development",
+  "TerraNovaVersion": "2.0.0dev",
+  "name": "EDIT CONFIG FILE TO FINISH SETUP",
   "enableMultiserver": "false",
   "multiserverList": [
     [
