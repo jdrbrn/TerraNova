@@ -76,21 +76,23 @@ var multiLinksEnabled = <%=TerraNovaConfig["enableMultiserver"] %>
   }
 </script>
 
-<div id="toolbar" style="position:fixed;width:100%;top:0px;left:0px;right:0px;border-bottom:1px solid #000;z-index:1">
-    <div id="toolHead" align="left" style="left:5px;display:inline-block;font-size:20px;font-weight:bold">Congregation Territory</div>
+<div id="toolbar">
+    <div id="toolHead" align="left">Congregation Territory</div>
     <table align="right">
       <tr id="toolLinks"> </tr>
     </table>
 </div>
 
 <!-- Left side report view -->
-<div id="reportWindow" style="width:49vw;position:absolute;left:1px;top:45px">
+<div id="reportWindow">
   <!-- table to display service year completion stats -->
-  <a href='/report/print' target='_blank' style="position:absolute;right:5px">Print Worksheet</a>
-  <a id="exportdownload" style="position:absolute;right:5px;top:15px"></a>
-  <a href='/report/history' target='_blank' style="position:absolute;right:5px;top:30px">History of Check-In/Out</a>
-  <a href='/dncs' target='_blank' style="position:absolute;right:5px;top:45px">DNC Database</a>
-  <a href='/terrs' target='_blank' style="position:absolute;right:5px;top:60px">Territory Database</a>
+  <div id="links">
+    <a href='/report/print' target='_blank'>Print Worksheet</a>
+    <a id="exportdownload" style="top:15px"></a>
+    <a href='/report/history' target='_blank' style="top:30px">History of Check-In/Out</a>
+    <a href='/dncs' target='_blank' style="top:45px">DNC Database</a>
+    <a href='/terrs' target='_blank' style="top:60px">Territory Database</a>
+  </div>
   <div id="svcYearStats">
     <table>
       <thead>
@@ -152,7 +154,7 @@ var multiLinksEnabled = <%=TerraNovaConfig["enableMultiserver"] %>
             <% dateClass="normal" %>
           <% end %>
           <tr>
-            <td class="<%= dateClass %>" style="white-space:pre"><%= @terrs.find(terrout.terrid).name %><br><%= @terrs.find(terrout.terrid).region %></td>
+            <td class="<%= dateClass %>"><%= @terrs.find(terrout.terrid).name %><br><%= @terrs.find(terrout.terrid).region %></td>
             <td><%= @terrs.find(terrout.terrid).datecomp.strftime("%m/%d/%y") %></td>
             <td><%= terrout.publisher %></td>
             <td><%= terrout.dateout.strftime("%m/%d/%y") %></td>
@@ -181,7 +183,7 @@ var multiLinksEnabled = <%=TerraNovaConfig["enableMultiserver"] %>
         <% @terrins.sort_by{|terrin| @terrs.find(terrin.terrid).datecomp}.each do |terrin| %>
         <% categorizedTerrs<<terrin.terrid %>
           <tr>
-            <td style="white-space:pre-wrap"><%= @terrs.find(terrin.terrid).name %><br><%= @terrs.find(terrin.terrid).region %></td>
+            <td class="normal"><%= @terrs.find(terrin.terrid).name %><br><%= @terrs.find(terrin.terrid).region %></td>
             <td><%= @terrs.find(terrin.terrid).datecomp.strftime("%m/%d/%y") %></td>
             <td><a href="#" onclick="terrinsViewDetails('<%= terrin.id %>');return false;">View Details</a></td>
             <td><%= link_to 'Check Out', [terrin,checkout: terrin.terrid], method: :delete, data: { confirm: "Are you sure you want to check out #{@terrs.find(terrin.terrid).name}?" } %></td>
@@ -208,7 +210,7 @@ var multiLinksEnabled = <%=TerraNovaConfig["enableMultiserver"] %>
           <% if categorizedTerrs.find_index(terr.id) %>
           <% else %>
             <tr>
-              <td style="white-space:pre-wrap"><%= terr.name %><br><%=terr.region %></td>
+              <td class="normal"><%= terr.name %><br><%=terr.region %></td>
               <td><%= terr.datecomp.strftime("%m/%d/%y") %></td>
               <td><a href='#' onclick="terrsViewDetails('<%= terr.id %>');return false;">View Details</a></td>
               <td><%= link_to 'Check Out', {:controller => "terrouts", :action => "new", :terrid => terr.id} %></td>
@@ -221,11 +223,12 @@ var multiLinksEnabled = <%=TerraNovaConfig["enableMultiserver"] %>
 </div>
 
 <!--Detail display window off to right side-->
-<div id="detailWindow" style="position:fixed;width:49vw;height:90vh;right:2px;top:43px;border:0px solid #ff4a2b;overflow-x:hidden;overflow-y:scroll; -webkit-overflow-scrolling: touch">
-  <iframe id="detailFrame" style='width:99%;height:99%'> </iframe>
+<div id="detailWindow">
+  <iframe id="detailFrame"> </iframe>
 </div>
 
 <script>  window.onload = setToolbar(); </script>
+
 <script>
 //This script section creates a downloadable CSV of all the territory listings
 //and updates the page to have a link in a predefined spot

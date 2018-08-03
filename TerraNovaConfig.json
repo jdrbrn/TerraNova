@@ -20,5 +20,8 @@
     "username",
     "password"
   ],
-  "bodyBG": "#ecfbff"
+  "bodyBG": "#ecfbff",
+  "terrWarn": "yellow",
+  "terrLate": "#ff4a2b",
+  "dncCardWidth": "6.75in"
 }

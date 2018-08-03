@@ -16,8 +16,12 @@
        background-color: #e5efff
       }
 
-      td,td.ok{
+      td{
        background-color: #efefff
+      }
+
+      td.normal, td.late td.warn {
+        white-space:pre
       }
 
       td.warn{
@@ -36,6 +40,16 @@
         text-align:center;
         word-wrap:break-word;
         white-space:normal;
+      }
+
+      tr.special {
+        color: blue
+      }
+
+      div.show{
+        position:relative;
+        left:-28px;
+        top:-10px
       }
     </style>
     <style>

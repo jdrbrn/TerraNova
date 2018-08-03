@@ -9,11 +9,13 @@ class ReportController < ApplicationController
     @terrins=Terrin.all
     @terrouts=Terrout.all
     @terrs=Terr.all
+    render layout: "layouts/reportIndex"
   end
   def print
     @terrins=Terrin.all
     @terrouts=Terrout.all
     @terrs=Terr.all
+    render layout: "layouts/reportPrint"
   end
   def history
     @terrs=Terr.all

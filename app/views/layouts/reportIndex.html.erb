@@ -1,0 +1,48 @@
+<% content_for :stylesheets do %>
+  #toolbar{
+     position:fixed;
+     width:100%;
+     top:0px;
+     left:0px;
+     right:0px;
+     border-bottom:1px solid #000;
+     z-index:1
+  }
+
+  #toolHead{
+     left:5px;
+     display:inline-block;
+     font-size:20px;
+     font-weight:bold
+  }
+
+  #reportWindow{
+    width:49vw;
+    position:absolute;
+    left:1px;
+    top:45px
+  }
+
+  #links a{
+    position:absolute;right:5px;
+  }
+
+  #detailWindow {
+    position:fixed;
+    width:49vw;
+    height:90vh;
+    right:2px;
+    top:43px;
+    border:0px solid #ff4a2b;
+    overflow-x:hidden;
+    overflow-y:scroll;
+    -webkit-overflow-scrolling: touch
+  }
+
+  #detailFrame {
+    width:99%;
+    height:99%
+  }
+<% end %>
+
+<%= render template: "layouts/application" %>
