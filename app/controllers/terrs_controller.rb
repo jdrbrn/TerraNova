@@ -76,11 +76,11 @@ class TerrsController < ApplicationController
     dncs.each do |dnc|
       dnc.destroy
     end
-    terrouts=Terrout.all.select{|terrout| terrout.terrid=@terr.id}
+    terrouts=Terrout.all.select{|terrout| terrout.terrid==@terr.id}
     terrouts.each do |terrout|
       terrout.destroy
     end
-    terrins=Terrin.all.select{|terrin| terrin.terrid=@terr.id}
+    terrins=Terrin.all.select{|terrin| terrin.terrid==@terr.id}
     terrins.each do |terrin|
       terrin.destroy
     end
