@@ -4,7 +4,7 @@ class TerrsController < ApplicationController
   # GET /terrs
   # GET /terrs.json
   def index
-    @terrs = Terr.all
+    @terrs = Terr.all.order(:region)
   end
 
   # GET /terrs/1
