@@ -5,15 +5,20 @@
 <table>
   <thead>
     <tr>
-      <th>Terrid</th>
+      <th>Name</th>
+      <th>Region</th>
+      <th>Last Complete</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @terrins.each do |terrin| %>
+      <% terr=Terr.all.find(terrin.terrid) %>
       <tr>
-        <td><%= terrin.terrid %></td>
+        <td><%= terr.name %></td>
+        <td><%= terr.region %></td>
+        <td><%= terr.datecomp.strftime("%m/%d/%y") %></td>
         <td><%= link_to 'Show', terrin %></td>
         <td><%= link_to 'Edit', edit_terrin_path(terrin) %></td>
         <td><%= link_to 'Destroy', terrin, method: :delete, data: { confirm: 'Are you sure?' } %></td>

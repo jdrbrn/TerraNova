@@ -5,7 +5,9 @@
 <table>
   <thead>
     <tr>
-      <th>Terrid</th>
+      <th>Name</th>
+      <th>Region</th>
+      <th>Last Complete</th>
       <th>Publisher</th>
       <th>Dateout</th>
       <th>Datedue</th>
@@ -15,8 +17,11 @@
 
   <tbody>
     <% @terrouts.each do |terrout| %>
+      <% terr=Terr.all.find(terrout.terrid) %>
       <tr>
-        <td><%= terrout.terrid %></td>
+        <td><%= terr.name %></td>
+        <td><%= terr.region %></td>
+        <td><%= terr.datecomp.strftime("%m/%d/%y") %></td>
         <td><%= terrout.publisher %></td>
         <td><%= terrout.dateout %></td>
         <td><%= terrout.datedue %></td>
