@@ -3,6 +3,7 @@ require 'json'
 def loadConfig
   #Sets what keys should be found for prefs and default values
   config={"TerraNovaVersion"=>"2.0.0dev",
+          "timezone"=>"Eastern Time (US & Canada)",
           "name"=>"EDIT CONFIG FILE TO FINISH SETUP",
           "enableMultiserver"=>"false",
           "multiserverList"=>[["Mutli1","IP1"],["Multi2","IP2"],["Multi3","IP3"]],
