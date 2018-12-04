@@ -1,5 +1,4 @@
 require_relative 'TerraNovaConfig'
-TerraNovaConfig=loadConfig
 
 require_relative 'boot'
 
@@ -19,3 +18,5 @@ module TerraNova
     # -- all .rb files in that directory are automatically loaded.
   end
 end
+
+TerraNovaConfig=loadConfig
