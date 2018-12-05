@@ -1,4 +1,4 @@
-<div style="position:relative;left:-28px;top:-10px">
+<div class="show">
   <p id="notice"><%= notice %></p>
 
   <% terr=Terr.all.find(@terrin.terrid) %>
@@ -34,7 +34,7 @@
     	<tbody>
     		<% @dncs.each do |dnc| %>
     			<% if dnc.notes.include?("Territory") %>
-            <tr style="color: blue">
+            <tr class="special">
           <% else %>
             <tr>
           <% end %>

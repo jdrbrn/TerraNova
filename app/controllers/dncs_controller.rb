@@ -96,6 +96,7 @@ class DncsController < ApplicationController
   end
 
   def print
+    render layout: "layouts/dncsPrint"
   end
 
   private

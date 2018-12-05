@@ -1,17 +1,48 @@
-<!-- User Settings -->
-<script>
-var congName = "Name"
-//enable true if multiple servers are used.
-//If true will add links to server in toolbar
-var multiLinksEnabled = false
-var multiServers=[]
-//multiServers.push(["Type of Territory","IP of TerraNova Server for type"])
-multiServers.push(["Residential","10.0.20.2:3000"])
-multiServers.push(["Residential2","10.0.20.2:3001"])
-multiServers.push(["Residential3","10.0.20.2"])
-</script>
+<%# Ruby pre-render functions %>
+<%# will store terrid of all territories checked in or out %>
+<% categorizedTerrs =[] %>
+<%# calculate when start of service year was %>
+<% if Time.now.month>=9 %>
+  <% svcYearStart=Time.new(Time.now.year,9,1) %>
+<% else %>
+  <% svcYearStart=Time.new(Time.now.year-1,9,1) %>
+<% end %>
+<%# calculate how many territories completed during service year %>
+<% compCurYear=0 %>
+<% @terrs.each do |terr| %>
+  <% if terr.datecomp > svcYearStart then compCurYear+=1 end %>
+<% end %>
+<%# Do same for last 12 months %>
+<% compLast12=0 %>
+<% yrAgo = Time.new(Time.now.year-1, Time.now.month, Time.now.day) %>
+<% @terrs.each do |terr| %>
+  <% if terr.datecomp > yrAgo then compLast12+=1 end %>
+<% end %>
+<%# If current month is Sep do the same for last service year for record keeping %>
+<% lastSvcYear=false %>
+<% if Time.now.month==9 %>
+  <% lastSvcYear=Time.new(svcYearStart.year-1,9,1) %>
+  <% compLastYear=0 %>
+  <% @terrs.each do |terr| %>
+    <% if terr.datecomp>lastSvcYear && terr.datecomp<svcYearStart then compLastYear+=1 end %>
+  <% end %>
+<% end %>
 
-<link rel="stylesheet" type="text/css" href="index.css">
+<!-- User Settings Set in TerraNovaConfig.json-->
+<script>
+var congName = "<%= TerraNovaConfig["name"] %>"
+//If enabled links to other servers will be in the toolbar
+var multiLinksEnabled = <%=TerraNovaConfig["enableMultiserver"] %>
+
+<%# Only load multiServer data if needed %>
+<% if TerraNovaConfig["enableMultiserver"] %>
+  var multiServers=[]
+  //multiServers.push(["Type of Territory","IP of TerraNova Server for type"])
+  <% TerraNovaConfig["multiserverList"].each do |server| %>
+    multiServers.push(["<%= server[0] %>", "<%= server[1] %>"])
+  <% end %>
+<% end %>
+</script>
 
 <!-- Javascript Functions -->
 <script>
@@ -45,51 +76,26 @@ multiServers.push(["Residential3","10.0.20.2"])
   }
 </script>
 
-<%# Ruby pre-render functions %>
-<%# will store terrid of all territories check in or out %>
-<% categorizedTerrs =[] %>
-<%# calculate when start of service year was %>
-<% if Time.now.month>=9 %>
-  <% svcYearStart=Time.new(Time.now.year,9,1) %>
-<% else %>
-  <% svcYearStart=Time.new(Time.now.year-1,9,1) %>
-<% end %>
-<%# calculate how many territories completed during service year %>
-<% compCurYear=0 %>
-<% @terrs.each do |terr| %>
-  <% if terr.datecomp > svcYearStart then compCurYear+=1 end %>
-<% end %>
-<%# Do same for last 12 months %>
-<% compLast12=0 %>
-<% yrAgo = Time.new(Time.now.year-1, Time.now.month, Time.now.day) %>
-<% @terrs.each do |terr| %>
-  <% if terr.datecomp > yrAgo then compLast12+=1 end %>
-<% end %>
-<%# If current month is Sep do the same for last service year for record keeping %>
-<% lastSvcYear=false %>
-<% if Time.now.month==9 %>
-  <% lastSvcYear=Time.new(svcYearStart.year-1,9,1) %>
-  <% compLastYear=0 %>
-  <% @terrs.each do |terr| %>
-    <% if terr.datecomp>lastSvcYear && terr.datecomp<svcYearStart then compLastYear+=1 end %>
-  <% end %>
-<% end %>
-
-<div id="toolbar" style="position:fixed;width:100%;top:0px;left:0px;right:0px;border-bottom:1px solid #000;z-index:1">
-    <div id="toolHead" align="left" style="left:5px;display:inline-block;font-size:20px;font-weight:bold">Congregation Territory</div>
+<div id="toolbar">
+    <div id="toolHead" align="left">Congregation Territory</div>
     <table align="right">
       <tr id="toolLinks"> </tr>
     </table>
 </div>
 
 <!-- Left side report view -->
-<div id="reportWindow" style="width:49vw;position:absolute;left:1px;top:45px">
+<div id="reportWindow">
+  <!-- table of useful links -->
+  <div id="links">
+    <table>
+      <tr><td><a href='/report/print' target='_blank'>Print Worksheet</a></td></tr>
+      <tr><td><a id="exportdownload"></a></td></tr>
+      <tr><td><a href='/report/history' target='_blank'>History of Check-In/Out</a></td></tr>
+      <tr><td><a href='/dncs' target='_blank'>DNC Database</a></td></tr>
+      <tr><td><a href='/terrs' target='_blank'>Territory Database</a></td></tr>
+    </table>
+  </div>
   <!-- table to display service year completion stats -->
-  <a href='/report/print' target='_blank' style="position:absolute;right:5px">Print Worksheet</a>
-  <a id="exportdownload" style="position:absolute;right:5px;top:15px"></a>
-  <a href='/report/history' target='_blank' style="position:absolute;right:5px;top:30px">History of Check-In/Out</a>
-  <a href='/dncs' target='_blank' style="position:absolute;right:5px;top:45px">DNC Database</a>
-  <a href='/terrs' target='_blank' style="position:absolute;right:5px;top:60px">Territory Database</a>
   <div id="svcYearStats">
     <table>
       <thead>
@@ -151,7 +157,7 @@ multiServers.push(["Residential3","10.0.20.2"])
             <% dateClass="normal" %>
           <% end %>
           <tr>
-            <td class="<%= dateClass %>" style="white-space:pre"><%= @terrs.find(terrout.terrid).name %><br><%= @terrs.find(terrout.terrid).region %></td>
+            <td class="<%= dateClass %>"><%= @terrs.find(terrout.terrid).name %><br><%= @terrs.find(terrout.terrid).region %></td>
             <td><%= @terrs.find(terrout.terrid).datecomp.strftime("%m/%d/%y") %></td>
             <td><%= terrout.publisher %></td>
             <td><%= terrout.dateout.strftime("%m/%d/%y") %></td>
@@ -180,7 +186,7 @@ multiServers.push(["Residential3","10.0.20.2"])
         <% @terrins.sort_by{|terrin| @terrs.find(terrin.terrid).datecomp}.each do |terrin| %>
         <% categorizedTerrs<<terrin.terrid %>
           <tr>
-            <td style="white-space:pre-wrap"><%= @terrs.find(terrin.terrid).name %><br><%= @terrs.find(terrin.terrid).region %></td>
+            <td class="normal"><%= @terrs.find(terrin.terrid).name %><br><%= @terrs.find(terrin.terrid).region %></td>
             <td><%= @terrs.find(terrin.terrid).datecomp.strftime("%m/%d/%y") %></td>
             <td><a href="#" onclick="terrinsViewDetails('<%= terrin.id %>');return false;">View Details</a></td>
             <td><%= link_to 'Check Out', [terrin,checkout: terrin.terrid], method: :delete, data: { confirm: "Are you sure you want to check out #{@terrs.find(terrin.terrid).name}?" } %></td>
@@ -207,7 +213,7 @@ multiServers.push(["Residential3","10.0.20.2"])
           <% if categorizedTerrs.find_index(terr.id) %>
           <% else %>
             <tr>
-              <td style="white-space:pre-wrap"><%= terr.name %><br><%=terr.region %></td>
+              <td class="normal"><%= terr.name %><br><%=terr.region %></td>
               <td><%= terr.datecomp.strftime("%m/%d/%y") %></td>
               <td><a href='#' onclick="terrsViewDetails('<%= terr.id %>');return false;">View Details</a></td>
               <td><%= link_to 'Check Out', {:controller => "terrouts", :action => "new", :terrid => terr.id} %></td>
@@ -220,11 +226,12 @@ multiServers.push(["Residential3","10.0.20.2"])
 </div>
 
 <!--Detail display window off to right side-->
-<div id="detailWindow" style="position:fixed;width:49vw;height:90vh;right:2px;top:43px;border:0px solid #ff4a2b;overflow-x:hidden;overflow-y:scroll; -webkit-overflow-scrolling: touch">
-  <iframe id="detailFrame" style='width:99%;height:99%'> </iframe>
+<div id="detailWindow">
+  <iframe id="detailFrame"> </iframe>
 </div>
 
 <script>  window.onload = setToolbar(); </script>
+
 <script>
 //This script section creates a downloadable CSV of all the territory listings
 //and updates the page to have a link in a predefined spot

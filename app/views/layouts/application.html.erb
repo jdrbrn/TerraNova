@@ -6,6 +6,55 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <style>
+      body {
+       background-color: <%= TerraNovaConfig["systemCSS"]["bodyBG"] %>
+      }
+
+      th{
+       background-color: #e5efff
+      }
+
+      td{
+       background-color: #efefff
+      }
+
+      td.normal, td.late td.warn {
+        white-space:pre
+      }
+
+      td.warn{
+       background-color: <%= TerraNovaConfig["systemCSS"]["terrWarn"] %>
+      }
+
+      td.late{
+       background-color: <%= TerraNovaConfig["systemCSS"]["terrLate"] %>
+      }
+
+      table, th, td
+      {
+        border:1px solid #000000;
+        border-collapse:collapse;
+        vertical-align:top;
+        text-align:center;
+        word-wrap:break-word;
+        white-space:normal;
+      }
+
+      tr.special {
+        color: blue
+      }
+
+      div.show{
+        position:relative;
+        left:-28px;
+        top:-10px
+      }
+    </style>
+    <style>
+      <%= yield :stylesheets %>
+    </style>
   </head>
 
   <body>
