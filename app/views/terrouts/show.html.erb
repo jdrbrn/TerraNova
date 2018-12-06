@@ -86,7 +86,7 @@
       </thead>
       <% terr.history.reverse.each do |entry| %>
         <tr>
-          <td><%= entry[2] %></td>
+          <td><%= entry[2].strftime("%m/%d/%y") %></td>
           <td><%= entry[1] %></td>
           <td><%= entry[3] %></td>
         </tr>
