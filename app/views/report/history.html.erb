@@ -9,12 +9,21 @@
 <% end %>
 <h2>List of History</h2>
 <table>
-  <%# Sorts in decending date order %>
+  <%# Sorts in decending edit date order %>
+  <thead>
+    <tr>
+      <th>Entry Date</th>
+      <th>Territory</th>
+      <th>Action</th>
+      <th>Date</th>
+      <th>Publisher</th>
   <% allHistory.sort_by{|entry| entry[0] }.reverse.each do |entry| %>
     <tr>
-      <% entry.each do |detail| %>
-        <td><%= detail %></td>
-      <% end %>
+      <td><%= entry[0] %></td>
+      <td><%= entry[1] %></td>
+      <td><%= entry[2] %></td>
+      <td><%= entry[3] %></td>
+      <td><%= entry[4] %></td>
     </tr>
   <% end %>
 </table>
