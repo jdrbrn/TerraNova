@@ -217,6 +217,7 @@ var multiLinksEnabled = <%=TerraNovaConfig["enableMultiserver"] %>
               <td><%= terr.datecomp.strftime("%m/%d/%y") %></td>
               <td><a href='#' onclick="terrsViewDetails('<%= terr.id %>');return false;">View Details</a></td>
               <td><%= link_to 'Check Out', {:controller => "terrouts", :action => "new", :terrid => terr.id} %></td>
+              <td><%= link_to 'Check In', {:controller => "terrins", :action => "new", :terrid => terr.id} %></td>
             </tr>
           <% end %>
         <% end %>
