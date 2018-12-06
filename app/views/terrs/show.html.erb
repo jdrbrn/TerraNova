@@ -59,11 +59,18 @@
   <p>
     <strong>History:</strong>
     <table>
-      <% @terr.history.reverse.each do |entry| %>
+      <thead>
         <tr>
-          <% entry.each do |detail| %>
-            <td><%= detail %></td>
-          <% end %>
+          <th>Date</th>
+          <th>Action</th>
+          <th>Publisher</th>
+        </tr>
+      </thead>
+      <% terr.history.reverse.each do |entry| %>
+        <tr>
+          <td><%= entry[2] %></td>
+          <td><%= entry[1] %></td>
+          <td><%= entry[3] %></td>
         </tr>
       <% end %>
     </table>
