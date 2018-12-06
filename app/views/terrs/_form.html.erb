@@ -35,7 +35,6 @@
     <div class="field">
       <%= form.label :history %>
       <table>
-        <% history_entry_index = 0 %>
         <thead>
           <tr>
             <th>Date</th>
@@ -44,18 +43,17 @@
             <th>Delete</th>
           </tr>
         </thead>
-        <% @terr.history.each do |historyEntry| %>
+        <% @terr.history.each_index do |indexNum| %>
             <tr>
-              <td><%= historyEntry[2] %></td>
-              <td><%= historyEntry[1] %></td>
-              <td><%= historyEntry[3] %></td>
+              <td><%= @terr.history[indexNum][2] %></td>
+              <td><%= @terr.history[indexNum][1] %></td>
+              <td><%= @terr.history[indexNum][3] %></td>
               <td>
                 <%# Stores if an entry should be deleted or not in an hash historyDelete which is passed as a param to the controller %>
                 <%# For each history entry the index is added to the hash as a key with a value of 0(keep) or 1(delete) %>
-                <%= form.check_box :history, :name => "historyDelete[#{history_entry_index.to_s}]", id: :history %>
+                <%= form.check_box :history, :name => "historyDelete[#{indexNum.to_s}]", id: :history %>
               </td>
             </tr>
-          <% history_entry_index += 1 %>
         <% end %>
       </table>
     </div>
