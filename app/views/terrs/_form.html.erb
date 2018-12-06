@@ -44,7 +44,7 @@
             <th>Delete</th>
           </tr>
         </thead>
-        <% @terr.history.reverse.each do |historyEntry| %>
+        <% @terr.history.each do |historyEntry| %>
             <tr>
               <td><%= historyEntry[2] %></td>
               <td><%= historyEntry[1] %></td>
