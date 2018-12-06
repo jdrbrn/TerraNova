@@ -1,5 +1,7 @@
 <!-- Edited from report/index -->
-<!-- Doesn't display other territory section; Edited to be a worksheet -->
+
+<%# will store terrid of all territories checked in or out %>
+<% categorizedTerrs =[] %>
 
 <!-- table to display terrouts -->
 <div id="terrOuts">
@@ -19,6 +21,7 @@
 
     <tbody>
       <% @terrouts.sort_by{|terrout| terrout.datedue}.each do |terrout| %>
+        <% categorizedTerrs<<terrout.terrid %>
         <% if terrout.datedue-Date.current<0 %>
           <% dateClass="late" %>
         <% elsif (terrout.datedue-1.months)-Date.current<0%>
@@ -56,6 +59,7 @@
 
     <tbody>
       <% @terrins.sort_by{|terrin| @terrs.find(terrin.terrid).datecomp}.each do |terrin| %>
+        <% categorizedTerrs<<terrin.terrid %>
         <tr>
           <td class="normal"><%= @terrs.find(terrin.terrid).name %><br><%= @terrs.find(terrin.terrid).region %></td>
           <td><%= @terrs.find(terrin.terrid).datecomp.strftime("%m/%d/%y") %></td>
@@ -68,3 +72,37 @@
   </table>
 </div>
 <br>
+
+<% if categorizedTerrs.count != @terrs.count %>
+  <!-- table to display terrs that aren't out or in -->
+    <div id="otherTerrs">
+      <h2>Other Territories</h2>
+
+      <table id="terrtable">
+        <thead>
+          <tr>
+            <th>Territory</th>
+            <th>Last Complete</th>
+            <th>Date Out</th>
+            <th>Date Due</th>
+            <th>Publisher</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @terrs.sort_by{|terr| terr.datecomp}.each do |terr| %>
+            <% if categorizedTerrs.find_index(terr.id) %>
+            <% else %>
+              <tr>
+                <td class="normal"><%= terr.name %><br><%=terr.region %></td>
+                <td><%= terr.datecomp.strftime("%m/%d/%y") %></td>
+                <td></td>
+                <td></td>
+                <td class="pubEntry"></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+<% end %>
