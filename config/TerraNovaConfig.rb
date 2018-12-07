@@ -11,7 +11,8 @@ def loadConfig
           "HTTPAuth"=>{"username"=>"user","password"=>"secret"},
           "systemCSS"=>{"bodyBG"=>"#ecfbff",
             "terrWarn"=>"yellow",
-            "terrLate"=>"#ff4a2b"},
+            "terrLate"=>"#ff4a2b",
+            "toolbarBG"=>"#ecfbff"},
           "dncCSS"=>{"dncCardWidth"=>"6.75in"}}
 
   #File name to use for the configFile
