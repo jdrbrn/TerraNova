@@ -12,7 +12,7 @@ def loadConfig
           "systemCSS"=>{"bodyBG"=>"#ecfbff",
             "terrWarn"=>"yellow",
             "terrLate"=>"#ff4a2b",
-            "toolbarBG"=>"#ecfbff"},
+            "toolbarBG"=>"#e5eeff"},
           "dncCSS"=>{"dncCardWidth"=>"6.75in"}}
 
   #File name to use for the configFile
