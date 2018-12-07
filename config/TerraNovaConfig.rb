@@ -12,8 +12,12 @@ def loadConfig
           "systemCSS"=>{"bodyBG"=>"#ecfbff",
             "terrWarn"=>"yellow",
             "terrLate"=>"#ff4a2b",
-            "toolbarBG"=>"#e5eeff"},
-          "dncCSS"=>{"dncCardWidth"=>"6.75in"}}
+            "toolbarBG"=>"#e5eeff",
+            "thBG"=>"#e5efff",
+            "tdBG"=>"#efefff"},
+          "dncCSS"=>{"dncCardWidth"=>"6.75in",
+            "specialDNC" => "blue"}
+          }
 
   #File name to use for the configFile
   configFileName="TerraNovaConfig.json"

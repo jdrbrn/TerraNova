@@ -13,11 +13,11 @@
       }
 
       th{
-       background-color: #e5efff
+       background-color: <%= TerraNovaConfig["systemCSS"]["thBG"] %>
       }
 
       td{
-       background-color: #efefff
+       background-color: <%= TerraNovaConfig["systemCSS"]["tdBG"] %>
       }
 
       td.normal, td.late td.warn {
@@ -43,7 +43,7 @@
       }
 
       tr.special {
-        color: blue
+        color: <%= TerraNovaConfig["dncCSS"]["specialDNC"] %>
       }
 
       div.show{
