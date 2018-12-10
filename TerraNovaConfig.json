@@ -1,5 +1,5 @@
 {
-  "TerraNovaVersion": "2.0.0",
+  "TerraNovaVersion": "2.1.0",
   "timezone": "Eastern Time (US & Canada)",
   "name": "EDIT CONFIG FILE TO FINISH SETUP",
   "enableMultiserver": "false",
@@ -25,9 +25,13 @@
   "systemCSS": {
     "bodyBG": "#ecfbff",
     "terrWarn": "yellow",
-    "terrLate": "#ff4a2b"
+    "terrLate": "#ff4a2b",
+    "toolbarBG": "#e5eeff",
+    "thBG": "#e5efff",
+    "tdBG": "#efefff"
   },
   "dncCSS": {
-    "dncCardWidth": "6.75in"
+    "dncCardWidth": "6.75in",
+    "specialDNC": "blue"
   }
 }

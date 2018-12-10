@@ -184,7 +184,7 @@ var multiLinksEnabled = <%=TerraNovaConfig["enableMultiserver"] %>
 
       <tbody>
         <% @terrins.sort_by{|terrin| @terrs.find(terrin.terrid).datecomp}.each do |terrin| %>
-        <% categorizedTerrs<<terrin.terrid %>
+          <% categorizedTerrs<<terrin.terrid %>
           <tr>
             <td class="normal"><%= @terrs.find(terrin.terrid).name %><br><%= @terrs.find(terrin.terrid).region %></td>
             <td><%= @terrs.find(terrin.terrid).datecomp.strftime("%m/%d/%y") %></td>
@@ -217,6 +217,7 @@ var multiLinksEnabled = <%=TerraNovaConfig["enableMultiserver"] %>
               <td><%= terr.datecomp.strftime("%m/%d/%y") %></td>
               <td><a href='#' onclick="terrsViewDetails('<%= terr.id %>');return false;">View Details</a></td>
               <td><%= link_to 'Check Out', {:controller => "terrouts", :action => "new", :terrid => terr.id} %></td>
+              <td><%= link_to 'Check In', {:controller => "terrins", :action => "new", :terrid => terr.id} %></td>
             </tr>
           <% end %>
         <% end %>

@@ -2,7 +2,7 @@ require 'json'
 
 def loadConfig
   #Sets what keys should be found for prefs and default values
-  config={"TerraNovaVersion"=>"2.0.0",
+  config={"TerraNovaVersion"=>"2.1.0",
           "timezone"=>"Eastern Time (US & Canada)",
           "name"=>"EDIT CONFIG FILE TO FINISH SETUP",
           "enableMultiserver"=>"false",
@@ -11,8 +11,13 @@ def loadConfig
           "HTTPAuth"=>{"username"=>"user","password"=>"secret"},
           "systemCSS"=>{"bodyBG"=>"#ecfbff",
             "terrWarn"=>"yellow",
-            "terrLate"=>"#ff4a2b"},
-          "dncCSS"=>{"dncCardWidth"=>"6.75in"}}
+            "terrLate"=>"#ff4a2b",
+            "toolbarBG"=>"#e5eeff",
+            "thBG"=>"#e5efff",
+            "tdBG"=>"#efefff"},
+          "dncCSS"=>{"dncCardWidth"=>"6.75in",
+            "specialDNC" => "blue"}
+          }
 
   #File name to use for the configFile
   configFileName="TerraNovaConfig.json"

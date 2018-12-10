@@ -3,6 +3,8 @@ class ReportController < ApplicationController
   def index
     # If in development reload TerraNovaConfig when loading report/index
     if Rails.env.development?
+      puts "Reloading TerraNovaConfig.rb"
+      load "#{Dir.pwd}/config/TerraNovaConfig.rb"
       Object.const_set("TerraNovaConfig", loadConfig)
       puts "Set TerraNovaConfig to #{TerraNovaConfig}"
     end
