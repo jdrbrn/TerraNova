@@ -15,7 +15,7 @@ def loadConfig
             "toolbarBG"=>"#e5eeff",
             "thBG"=>"#e5efff",
             "tdBG"=>"#efefff"},
-          "dncCSS"=>{"dncCardWidth"=>"6.75in",
+          "dncCSS"=>{"dncCardWidth"=>"5in",
             "specialDNC" => "blue"}
           }
 
