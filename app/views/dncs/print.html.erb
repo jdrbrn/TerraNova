@@ -57,8 +57,7 @@
 					<tr>
 						<th>Date</th>
 						<th>Name</th>
-						<th>Number</th>
-						<th>Street</th>
+						<th>Address</th>
 						<th>Publisher</th>
 						<th>Notes</th>
 					</tr>
@@ -79,20 +78,18 @@
 						</td>
 						<%# <br> and &nbsp; allow for an extra "line" so that cards can easily be updated IRL %>
 						<td><%= dnc.name %><br>&nbsp;</td>
-						<td><%= dnc.number %></td>
-						<td><%= dnc.street %></td>
+						<td><%= dnc.number %> <%= dnc.street %></td>
 						<td><%= dnc.publisher %></td>
 						<td><%= dnc.notes %></td>
 					</tr>
 					<% end %>
 					<% (1..3).each do %>
 						<tr>
-							<td width=7%></td>
+							<td width=9.2%></td>
 							<td width=14%></td>
-							<td width=7%></td>
+							<td width=21%></td>
 							<td width=14%></td>
-							<td width=14%></td>
-							<td height=45px></td>
+							<td height=36px></td>
 						</tr>
 					<% end %>
 				</tbody>
