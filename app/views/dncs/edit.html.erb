@@ -2,5 +2,9 @@
 
 <%= render 'form', dnc: @dnc %>
 
-<%= link_to 'Show', @dnc %> |
-<%= link_to 'Back', dncs_path %>
+<% if params[:terrtype] %>
+    <a href="/<%=params[:terrtype]%>/<%=params[:redirid]%>">Back</a>
+<% else %>
+    <%= link_to 'Show', @dnc %> |
+    <%= link_to 'Back', dncs_path %>
+<% end %>
