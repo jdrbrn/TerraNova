@@ -14,11 +14,11 @@ sortedTables["dnctable"]=1
     <tr>
       <th onclick=tableSortWrapper("dnctable",0,"String")>Region</th>
       <th onclick=tableSortWrapper("dnctable",1,"String")>Territory</th>
-      <th onclick=tableSortWrapper("dnctable",2,"String")>Number</th>
-      <th onclick=tableSortWrapper("dnctable",3,"String")>Street</th>
-      <th onclick=tableSortWrapper("dnctable",4,"String")>Name</th>
-      <th onclick=tableSortWrapper("dnctable",5,"String")>Publisher</th>
-      <th onclick=tableSortWrapper("dnctable",6,"Date")>Date</th>
+      <th onclick=tableSortWrapper("dnctable",2,"Date")>Date</th>
+      <th onclick=tableSortWrapper("dnctable",3,"String")>Name</th>
+      <th onclick=tableSortWrapper("dnctable",4,"String")>Number</th>
+      <th onclick=tableSortWrapper("dnctable",5,"String")>Street</th>
+      <th onclick=tableSortWrapper("dnctable",6,"String")>Publisher</th>
       <th onclick=tableSortWrapper("dnctable",7,"String")>Notes</th>
       <th colspan="3"></th>
     </tr>
@@ -29,10 +29,6 @@ sortedTables["dnctable"]=1
       <tr>
         <td><%= Terr.all.find(dnc.terrid).region %>
         <td><%= Terr.all.find(dnc.terrid).name %></td>
-        <td><%= dnc.number %></td>
-        <td><%= dnc.street %></td>
-        <td><%= dnc.name %></td>
-        <td><%= dnc.publisher %></td>
         <td>
           <% if dnc.date == nil %>
             <%= dnc.date %>
@@ -40,6 +36,10 @@ sortedTables["dnctable"]=1
             <%= dnc.date.strftime("%m/%d/%y") %>
           <% end %>
         </td>
+        <td><%= dnc.name %></td>
+        <td><%= dnc.number %></td>
+        <td><%= dnc.street %></td>
+        <td><%= dnc.publisher %></td>
         <td><%= dnc.notes %></td>
         <td><%= link_to 'Show', dnc %></td>
         <td><%= link_to 'Edit', edit_dnc_path(dnc) %></td>
