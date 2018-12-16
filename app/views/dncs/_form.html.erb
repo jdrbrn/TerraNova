@@ -25,7 +25,12 @@
 
   <div class="field">
     <%= form.label :date %>
-    <%= form.date_select :date, id: :dnc_date, include_blank: true, start_year: 1990, order: [:month, :day, :year], selected: Date.today %>
+    <%# if the dnc exists (proved by terrid existing), then use the provided date, otherwise default to today %>
+    <% if @dnc.terrid == nil %>
+      <%= form.date_select :date, id: :dnc_date, include_blank: true, start_year: 1990, order: [:month, :day, :year], selected: Date.today %>
+    <% else %>
+      <%= form.date_select :date, id: :dnc_date, include_blank: true, start_year: 1990, order: [:month, :day, :year]%>
+    <% end %>
   </div>
   
   <div class="field">
