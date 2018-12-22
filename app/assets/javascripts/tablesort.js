@@ -78,15 +78,15 @@ function sortIndicatorHandler(tablename, colnum){
   //Reset the header if previously sorted
   if (sortedTables[tablename]){
     sortedHeader=document.getElementById(tablename).tHead.rows[0].cells[Math.abs(sortedTables[tablename])-1].innerHTML
-    fixedHeader=sortedHeader.split("<!-- sortIndicator -->")[0]
+    fixedHeader=sortedHeader.split("<!-- sortIndicator -->")[0]+"<!-- sortIndicator --> ▲▼"
     document.getElementById(tablename).tHead.rows[0].cells[Math.abs(sortedTables[tablename])-1].innerHTML=fixedHeader
   }
   //Set the header to mark the new sorted col
   colHeader=document.getElementById(tablename).tHead.rows[0].cells[colnum].innerHTML
   if (sortedTables[tablename]==colnum+1){
-    colHeader=colHeader+"<!-- sortIndicator --> v"
+    colHeader=colHeader.split("<!-- sortIndicator -->")[0]+"<!-- sortIndicator --> ▼"
   } else{
-    colHeader=colHeader+"<!-- sortIndicator --> ^"
+    colHeader=colHeader.split("<!-- sortIndicator -->")[0]+"<!-- sortIndicator --> ▲"
   }
   document.getElementById(tablename).tHead.rows[0].cells[colnum].innerHTML=colHeader
 }
@@ -114,5 +114,23 @@ function tableSortWrapper(tablename, colnum, coltype){
         n++
     }
     i+=1
+  }
+}
+
+// Initializes tablesort for a given table
+// colnum is for the default sorted column if applicable
+function tableSortInit(tablename, colnum){
+  tableHeader=document.getElementById(tablename).tHead.rows[0].cells
+  i=0
+  while (i<tableHeader.length){
+    headerText = tableHeader[i].innerHTML
+    if (headerText!=""){
+      tableHeader[i].innerHTML = tableHeader[i].innerHTML+"<!-- sortIndicator --> ▲▼"
+    }
+    i++
+  }
+  if (colnum != undefined){
+    sortIndicatorHandler(tablename,colnum)
+    sortedTables[tablename]=(colnum+1)
   }
 }
