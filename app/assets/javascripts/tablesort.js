@@ -30,7 +30,7 @@ function sortTable(tablename, colnum, coltype) {
     }
   }
 
-function sortString(a, b){
+  function sortString(a, b){
     strA=a[colnum].toLowerCase()
     strB=b[colnum].toLowerCase()
     if (strA==strB){
@@ -74,10 +74,30 @@ function sortString(a, b){
 // Thus the value is +/-(colnum+1) as 0==-0 (Even though -0 exists in JS)
 sortedTables={}
 
+function sortIndicatorHandler(tablename, colnum){
+  //Reset the header if previously sorted
+  if (sortedTables[tablename]){
+    sortedHeader=document.getElementById(tablename).tHead.rows[0].cells[Math.abs(sortedTables[tablename])-1].innerHTML
+    fixedHeader=sortedHeader.split("<!-- sortIndicator -->")[0]
+    document.getElementById(tablename).tHead.rows[0].cells[Math.abs(sortedTables[tablename])-1].innerHTML=fixedHeader
+  }
+  //Set the header to mark the new sorted col
+  colHeader=document.getElementById(tablename).tHead.rows[0].cells[colnum].innerHTML
+  if (sortedTables[tablename]==colnum+1){
+    colHeader=colHeader+"<!-- sortIndicator --> ^"
+  } else{
+    colHeader=colHeader+"<!-- sortIndicator --> v"
+  }
+  document.getElementById(tablename).tHead.rows[0].cells[colnum].innerHTML=colHeader
+}
+
 // Wrapper to write the table out and reverse the data if already sorted via that
 // column
 function tableSortWrapper(tablename, colnum, coltype){
   data = sortTable(tablename, colnum, coltype)
+  // Set the indicator before the data because we need to preserve the old sortedTables
+  // for a value check in sortIndicatorHandler
+  sortIndicatorHandler(tablename, colnum)
   if (colnum==sortedTables[tablename]-1){
     data.reverse()
     sortedTables[tablename]=(0-(colnum+1))
