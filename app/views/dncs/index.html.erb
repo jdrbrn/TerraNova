@@ -1,8 +1,3 @@
-<script>
-// Initialize table sort funcion
-sortedTables["dnctable"]=1
-</script>
-
 <p id="notice"><%= notice %></p>
 
 <h1>Do Not Call Database</h1>
@@ -80,4 +75,9 @@ sortedTables["dnctable"]=1
   linkloc.download = 'dncs.csv'
   linkloc.href = downloadlink
   linkloc.textContent='Download CSV'
+</script>
+
+<script>
+// Initialize table sort funcion
+tableSortInit("dnctable",0)
 </script>
