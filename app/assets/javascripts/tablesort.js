@@ -84,9 +84,9 @@ function sortIndicatorHandler(tablename, colnum){
   //Set the header to mark the new sorted col
   colHeader=document.getElementById(tablename).tHead.rows[0].cells[colnum].innerHTML
   if (sortedTables[tablename]==colnum+1){
-    colHeader=colHeader+"<!-- sortIndicator --> ^"
-  } else{
     colHeader=colHeader+"<!-- sortIndicator --> v"
+  } else{
+    colHeader=colHeader+"<!-- sortIndicator --> ^"
   }
   document.getElementById(tablename).tHead.rows[0].cells[colnum].innerHTML=colHeader
 }
