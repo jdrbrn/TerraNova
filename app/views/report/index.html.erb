@@ -108,7 +108,7 @@ var multiLinksEnabled = <%=TerraNovaConfig["enableMultiserver"] %>
       </thead>
       <tbody>
         <tr>
-          <td><%= svcYearStart.year %> Service Year</td>
+          <td><%= svcYearStart.year+1 %> Service Year</td>
           <td><%= compCurYear %></td>
           <td><%= @terrs.length %></td>
           <td><%= (compCurYear.to_f/@terrs.length*100).round(2) %></td>
