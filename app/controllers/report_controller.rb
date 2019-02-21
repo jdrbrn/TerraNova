@@ -23,15 +23,21 @@ class ReportController < ApplicationController
     @terrs=Terr.all
   end
   def download
-     require 'fileutils' 
-     if Rails.env.development? 
-       FileUtils.copy("db/development.sqlite3", "public/development.sqlite3") 
-     elsif Rails.env.test? 
-       FileUtils.copy("db/test.sqlite3", "public/test.sqlite3") 
-     else 
-       FileUtils.copy("db/production.sqlite3", "public/production.sqlite3") 
-     end 
+     require 'fileutils'
+    if params[:db]
+      if Rails.env.development? 
+        FileUtils.copy("db/development.sqlite3", "public/development.sqlite3") 
+      elsif Rails.env.test? 
+        FileUtils.copy("db/test.sqlite3", "public/test.sqlite3") 
+      else 
+        FileUtils.copy("db/production.sqlite3", "public/production.sqlite3") 
+      end
+    end
   end
   def admin
+  end
+
+  def report_params
+    params.permit(:db)
   end
 end

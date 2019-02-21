@@ -76,7 +76,7 @@ var multiLinksEnabled = <%=TerraNovaConfig["enableMultiserver"] %>
   }
   function downloadDB() {
     var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", "report/download", true);
+    xhttp.open("GET", "report/download?db=1", true);
     xhttp.send();
     <% if Rails.env.development? %>
       window.open("development.sqlite3");
