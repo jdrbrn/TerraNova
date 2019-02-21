@@ -28,7 +28,7 @@ class ReportController < ApplicationController
     @terrs=Terr.all
   end
   def download
-     require 'fileutils'
+    require 'fileutils'
     if params[:db]
       if Rails.env.development? 
         FileUtils.copy("db/development.sqlite3", "public/development.sqlite3") 

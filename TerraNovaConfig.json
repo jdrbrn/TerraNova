@@ -25,7 +25,7 @@
   "adminEnableHTTPAuth": "true",
   "adminHTTPAuth": {
     "username": "admin",
-    "passowrd": "supersecret"
+    "password": "supersecret"
   },
   "systemCSS": {
     "bodyBG": "#ecfbff",

@@ -1,0 +1,14 @@
+<!-- Backend Interface Functions -->
+<script>
+    function signalRestart() {
+        <% if Rails.env.development? %>
+            alert("Dev Environment: Manually Restart");
+        <% else %>
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", "admin?restart=1", true);
+            xhttp.send();
+        <% end %>
+    }
+</script>
+
+<button type="button" onclick="signalRestart()">Restart Server</button>

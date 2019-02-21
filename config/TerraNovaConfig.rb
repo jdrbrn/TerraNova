@@ -10,7 +10,7 @@ def loadConfig
           "enableHTTPAuth"=>"false",
           "HTTPAuth"=>{"username"=>"user","password"=>"secret"},
           "adminEnableHTTPAuth"=>"true",
-          "adminHTTPAuth"=>{"username"=>"admin","passowrd"=>"supersecret"},
+          "adminHTTPAuth"=>{"username"=>"admin","password"=>"supersecret"},
           "systemCSS"=>{"bodyBG"=>"#ecfbff",
             "terrWarn"=>"yellow",
             "terrLate"=>"#ff4a2b",
