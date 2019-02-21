@@ -1,4 +1,9 @@
 class TerrinsController < ApplicationController
+  #Enables basic httpAuth for all pages
+  if TerraNovaConfig["enableHTTPAuth"] == "true"
+    http_basic_authenticate_with name: TerraNovaConfig["HTTPAuth"]["username"], password: TerraNovaConfig["HTTPAuth"]["password"]
+  end
+
   before_action :set_terrin, only: [:show, :edit, :update, :destroy]
 
   # GET /terrins

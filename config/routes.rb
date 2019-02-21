@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'report/print'
   get 'report/history'
   get 'report/download'
-  get 'report/admin'
+  get 'admin/index'
   resources :report
   root 'report#index'
 
@@ -12,5 +12,6 @@ Rails.application.routes.draw do
   resources :terrouts
   resources :terrins
   resources :terrs
+  resources :admin
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
