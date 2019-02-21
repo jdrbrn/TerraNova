@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   get 'report/index'
   get 'report/print'
   get 'report/history'
+  get 'report/download'
+  get 'report/admin'
   resources :report
   root 'report#index'
 

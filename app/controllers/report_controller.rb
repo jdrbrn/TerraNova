@@ -22,4 +22,16 @@ class ReportController < ApplicationController
   def history
     @terrs=Terr.all
   end
+  def download
+     require 'fileutils' 
+     if Rails.env.development? 
+       FileUtils.copy("db/development.sqlite3", "public/development.sqlite3") 
+     elsif Rails.env.test? 
+       FileUtils.copy("db/test.sqlite3", "public/test.sqlite3") 
+     else 
+       FileUtils.copy("db/production.sqlite3", "public/production.sqlite3") 
+     end 
+  end
+  def admin
+  end
 end
