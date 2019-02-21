@@ -2,13 +2,15 @@ require 'json'
 
 def loadConfig
   #Sets what keys should be found for prefs and default values
-  config={"TerraNovaVersion"=>"2.1.0",
+  config={"TerraNovaVersion"=>"2.2.0",
           "timezone"=>"Eastern Time (US & Canada)",
           "name"=>"EDIT CONFIG FILE TO FINISH SETUP",
           "enableMultiserver"=>"false",
           "multiserverList"=>[["Mutli1","IP1"],["Multi2","IP2"],["Multi3","IP3"]],
           "enableHTTPAuth"=>"false",
           "HTTPAuth"=>{"username"=>"user","password"=>"secret"},
+          "adminEnableHTTPAuth"=>"true",
+          "adminHTTPAuth"=>{"username"=>"admin","passowrd"=>"supersecret"},
           "systemCSS"=>{"bodyBG"=>"#ecfbff",
             "terrWarn"=>"yellow",
             "terrLate"=>"#ff4a2b",
