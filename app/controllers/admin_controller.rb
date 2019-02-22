@@ -31,6 +31,11 @@ class AdminController < ApplicationController
             configFile.close
         end
 
+        if params[:configUp]
+            require 'fileutils'
+            FileUtils.move(params[:configUp].path,"tmp/UploadedConfig.json") 
+        end
+
         if params[:dbUp]
             require 'fileutils'
             FileUtils.move(params[:dbUp].path,"tmp/UploadedDB.sqlite3") 
