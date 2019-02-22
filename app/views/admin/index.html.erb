@@ -11,4 +11,98 @@
     }
 </script>
 
-<button type="button" onclick="signalRestart()">Restart Server</button>
+<button type="button" onclick="signalRestart()">Restart Server</button> <br><br>
+<%= form_tag("/admin", method: "get", remote: true) do %>
+    <table>
+        <tr>
+            <td>TerraNovaVersion</td>
+            <td><%= TerraNovaConfig["TerraNovaVersion"] %>
+                <%= hidden_field_tag "usrconf[TerraNovaVersion]", TerraNovaConfig["TerraNovaVersion"] %></td>
+        </tr>
+        <tr>
+            <td>Timezone</td>
+            <td><%= time_zone_select "usrconf", "timezone", nil, default: TerraNovaConfig["timezone"] %></td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td><%= text_field_tag "usrconf[Name]", TerraNovaConfig["name"] %></td>
+        </tr>
+        <tr>
+            <td>enableMultiserver</td>
+            <td><%= check_box_tag "usrconf[enableMultiserver]", TerraNovaConfig["enableMultiserver"] %></td>
+        </tr>
+        <tr>
+            <td>multiserverList</td>
+            <td><%= text_field_tag "usrconf[multiserverList]", TerraNovaConfig["multiserverList"].to_s %></td>
+        </tr>
+        <tr>
+            <td>enableHTTPAuth</td>
+            <td><%= check_box_tag "usrconf[enableHTTPAuth]", "true", TerraNovaConfig["enableHTTPAuth"]=="true" %></td>
+        </tr>
+        <tr>
+            <td>HTTPAuth</td>
+            <td>username</td>
+            <td><%= text_field_tag "usrconf[HTTPAuth][username]", TerraNovaConfig["HTTPAuth"]["username"] %></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>password</td>
+            <td><%= text_field_tag "usrconf[HTTPAuth][password]", TerraNovaConfig["HTTPAuth"]["password"] %></td>
+        </tr>
+        <tr>
+            <td>enableAdminHTTPAuth</td>
+            <td><%= check_box_tag "usrconf[enableAdminHTTPAuth]", "true", TerraNovaConfig["enableAdminHTTPAuth"]=="true" %></td>
+        </tr>
+        <tr>
+            <td>adminHTTPAuth</td>
+            <td>username</td>
+            <td><%= text_field_tag "usrconf[adminHTTPAuth][username]", TerraNovaConfig["adminHTTPAuth"]["username"] %></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>password</td>
+            <td><%= text_field_tag "usrconf[adminHTTPAuth][password]", TerraNovaConfig["adminHTTPAuth"]["password"] %></td>
+        </tr>
+        <tr>
+            <td>systemCSS</td>
+            <td>bodyBG</td>
+            <td><%= color_field_tag "usrconf[systemCSS][bodybg]", TerraNovaConfig["systemCSS"]["bodyBG"] %></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>terrWarn</td>
+            <td><%= color_field_tag "usrconf[systemCSS][terrWarn]", TerraNovaConfig["systemCSS"]["terrWarn"] %></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>terrLate</td>
+            <td><%= color_field_tag "usrconf[systemCSS][terrLate]", TerraNovaConfig["systemCSS"]["terrLate"] %></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>toolbarBG</td>
+            <td><%= color_field_tag "usrconf[systemCSS][toolbarBG]", TerraNovaConfig["systemCSS"]["toolbarBG"] %></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>thBG</td>
+            <td><%= color_field_tag "usrconf[systemCSS][thBG]", TerraNovaConfig["systemCSS"]["thBG"] %></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>tdBG</td>
+            <td><%= color_field_tag "usrconf[systemCSS][tdBG]", TerraNovaConfig["systemCSS"]["tdBG"] %></td>
+        </tr>
+        <tr>
+            <td>dncCSS</td>
+            <td>dncCardWidth</td>
+            <td><%= text_field_tag "usrconf[dncCSS][dncCardWidth]", TerraNovaConfig["dncCSS"]["dncCardWidth"] %></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>specialDNC</td>
+            <td><%= color_field_tag "usrconf[dncCSS][specialDNC]", TerraNovaConfig["dncCSS"]["specialDNC"] %></td>
+        </tr>
+    </table>
+    <%= submit_tag("Save") %>
+<% end %>

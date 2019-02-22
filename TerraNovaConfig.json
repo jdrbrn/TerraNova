@@ -22,14 +22,14 @@
     "username": "user",
     "password": "secret"
   },
-  "adminEnableHTTPAuth": "true",
+  "enableAdminHTTPAuth": "true",
   "adminHTTPAuth": {
     "username": "admin",
     "password": "supersecret"
   },
   "systemCSS": {
     "bodyBG": "#ecfbff",
-    "terrWarn": "yellow",
+    "terrWarn": "#ffff00",
     "terrLate": "#ff4a2b",
     "toolbarBG": "#e5eeff",
     "thBG": "#e5efff",
@@ -37,6 +37,6 @@
   },
   "dncCSS": {
     "dncCardWidth": "5in",
-    "specialDNC": "blue"
+    "specialDNC": "0000ff"
   }
 }

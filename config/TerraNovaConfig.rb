@@ -9,16 +9,16 @@ def loadConfig
           "multiserverList"=>[["Mutli1","IP1"],["Multi2","IP2"],["Multi3","IP3"]],
           "enableHTTPAuth"=>"false",
           "HTTPAuth"=>{"username"=>"user","password"=>"secret"},
-          "adminEnableHTTPAuth"=>"true",
+          "enableAdminHTTPAuth"=>"true",
           "adminHTTPAuth"=>{"username"=>"admin","password"=>"supersecret"},
           "systemCSS"=>{"bodyBG"=>"#ecfbff",
-            "terrWarn"=>"yellow",
+            "terrWarn"=>"#ffff00",
             "terrLate"=>"#ff4a2b",
             "toolbarBG"=>"#e5eeff",
             "thBG"=>"#e5efff",
             "tdBG"=>"#efefff"},
           "dncCSS"=>{"dncCardWidth"=>"5in",
-            "specialDNC" => "blue"}
+            "specialDNC" => "0000ff"}
           }
 
   #File name to use for the configFile
