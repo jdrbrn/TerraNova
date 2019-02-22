@@ -10,8 +10,7 @@
         <% end %>
     }
 </script>
-
-<button type="button" onclick="signalRestart()">Restart Server</button> <br><br>
+<b>Configuration</b>
 <%= form_tag("/admin", method: "get", remote: true) do %>
     <table>
         <tr>
@@ -104,5 +103,7 @@
             <td><%= color_field_tag "usrconf[dncCSS][specialDNC]", TerraNovaConfig["dncCSS"]["specialDNC"] %></td>
         </tr>
     </table>
-    <%= submit_tag("Save") %>
+    <%= submit_tag("Save Configuration") %>
 <% end %>
+<br>
+<button type="button" onclick="signalRestart()">Restart Server</button>
