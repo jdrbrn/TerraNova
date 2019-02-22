@@ -1,4 +1,16 @@
 require_relative 'TerraNovaConfig'
+require 'fileutils'
+
+#Moves any uploaded config/db files to proper locations at this time
+if File.file?("tmp/UploadedConfig.json")
+  if Rails.env.development? 
+    FileUtils.rm("DevTerraNovaConfig.json")
+    FileUtils.move("tmp/UploadedConfig.json", "DevTerraNovaConfig.json") 
+  else 
+    FileUtils.rm("DevTerraNovaConfig.json")
+    FileUtils.move("tmp/UploadedConfig.json", "DevTerraNovaConfig.json")  
+  end
+end
 
 require_relative 'boot'
 
