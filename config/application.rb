@@ -12,6 +12,16 @@ if File.file?("tmp/UploadedConfig.json")
   end
 end
 
+if File.file?("tmp/UploadedDB.sqlite3")
+  if Rails.env.development? 
+    FileUtils.rm("db/development.sqlite3")
+    FileUtils.move("tmp/UploadedDB.sqlite3", "db/development.sqlite3") 
+  else 
+    FileUtils.rm("db/production.sqlite3")
+    FileUtils.move("tmp/UploadedDB.sqlite3", "db/production.sqlite3")  
+  end
+end
+
 require_relative 'boot'
 
 require 'rails/all'

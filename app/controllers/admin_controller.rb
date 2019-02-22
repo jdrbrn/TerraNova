@@ -31,11 +31,21 @@ class AdminController < ApplicationController
             configFile.close
         end
 
+        if params[:dbUp]
+            require 'fileutils'
+            FileUtils.move(params[:dbUp].path,"tmp/UploadedDB.sqlite3") 
+        end
+
         #Keep this last so that server can be restarted after any other admin action
         if params[:restart]
             `touch tmp/restart.txt`
         end
     end
+
+    #Required for HTML Post for file upload
+    #  def create
+    #      self.index
+    #  end
 
     def admin_params
         params.permit(:restart, :usrconf, :dbUp)

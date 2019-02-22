@@ -106,10 +106,10 @@
     <%= submit_tag("Save Configuration") %>
 <% end %>
 <br>
-<%= form_tag("/admin", method: "get", multipart: true) do %>
-    <label for="dbUp">Upload Database</label> <%= file_field_tag "dbUp" %>
+<%= form_tag "/admin", multipart: true do %>
+    <label for="dbUp">Upload Database</label> <%= file_field_tag "dbUp", accept: ".sqlite3" %>
     <%= hidden_field_tag "restart", 1 %>
-    <%= submit_tag("Upload Database and Restart") %>
+    <%= submit_tag("Upload Database") %>
 <% end %>
 <br>
 <button type="button" onclick="signalRestart()">Restart Server</button>
