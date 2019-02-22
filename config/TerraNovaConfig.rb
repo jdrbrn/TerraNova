@@ -18,7 +18,7 @@ def loadConfig
             "thBG"=>"#e5efff",
             "tdBG"=>"#efefff"},
           "dncCSS"=>{"dncCardWidth"=>"5in",
-            "specialDNC" => "0000ff"}
+            "specialDNC" => "#0000ff"}
           }
 
   #File name to use for the configFile

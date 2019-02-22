@@ -37,6 +37,6 @@
   },
   "dncCSS": {
     "dncCardWidth": "5in",
-    "specialDNC": "0000ff"
+    "specialDNC": "#0000ff"
   }
 }
