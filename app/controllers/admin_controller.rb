@@ -6,8 +6,8 @@ class AdminController < ApplicationController
     def index
         if params[:usrconf]
             require 'fileutils'
-            #Create mutable copy of the submitted config
-            newConfig=params[:usrconf]
+            #Create mutable hash of the submitted config
+            newConfig=params[:usrconf].to_unsafe_hash
             #This section converts the submitted string of multiserverList into the wanted array
             #Gets rid of the [[ and ]] at each end of the string
             newConfig["multiserverList"][0..1]=""
@@ -27,7 +27,7 @@ class AdminController < ApplicationController
             #This file will be moved + loaded on next restart via config/application.rb
             #Invalid keys/values will silently fail and be replaced w/ default values at that time
             configFile=File.new("tmp/UploadedConfig.json","w")
-            configFile.puts(JSON.pretty_generate(config))
+            configFile.puts(JSON.pretty_generate(newConfig))
             configFile.close
         end
 
