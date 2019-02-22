@@ -35,10 +35,28 @@ class AdminController < ApplicationController
             require 'fileutils'
             FileUtils.move(params[:configUp].path,"tmp/UploadedConfig.json") 
         end
+        
+        if params[:configDown]
+            if Rails.env.development? 
+                send_file("DevTerraNovaConfig.json")
+            else 
+                send_file("TerraNovaConfig.json")
+            end
+        end
 
         if params[:dbUp]
             require 'fileutils'
             FileUtils.move(params[:dbUp].path,"tmp/UploadedDB.sqlite3") 
+        end
+
+        if params[:dbDown]
+            if Rails.env.development? 
+                send_file("db/development.sqlite3")
+            elsif Rails.env.test? 
+                send_file("db/test.sqlite3")
+            else 
+                send_file("db/production.sqlite3")
+            end
         end
 
         #Keep this last so that server can be restarted after any other admin action

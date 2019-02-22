@@ -11,6 +11,11 @@
     }
 </script>
 <b>Configuration</b>
+<button type="button" onclick="location.href='admin?configDown=1'">Download Configuration</button>
+<%= form_tag "/admin", multipart: true do %>
+    <label for="configUp">Upload Configuration</label> <%= file_field_tag "configUp", accept: ".json" %>
+    <%= submit_tag("Upload Config File") %>
+<% end %>
 <%= form_tag("/admin", method: "get", remote: true) do %>
     <table>
         <tr>
@@ -105,11 +110,9 @@
     </table>
     <%= submit_tag("Save Configuration") %>
 <% end %>
-<%= form_tag "/admin", multipart: true do %>
-    <label for="configUp">Upload Configuration</label> <%= file_field_tag "configUp", accept: ".json" %>
-    <%= submit_tag("Upload Config File") %>
-<% end %>
 <br>
+<b>Database</b>
+<button type="button" onclick="location.href='admin?dbDown=1'">Download Database</button>
 <%= form_tag "/admin", multipart: true do %>
     <label for="dbUp">Upload Database</label> <%= file_field_tag "dbUp", accept: ".sqlite3" %>
     <%= submit_tag("Upload Database") %>
