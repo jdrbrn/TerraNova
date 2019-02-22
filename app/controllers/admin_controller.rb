@@ -67,6 +67,6 @@ class AdminController < ApplicationController
     end
 
     def admin_params
-        params.permit(:restart, :usrconf)
+        params.permit(:restart, :usrconf, :dbUp)
     end
 end
