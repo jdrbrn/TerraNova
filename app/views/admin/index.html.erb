@@ -11,28 +11,42 @@
             <% end %>
         }
     }
-    function signalUpdate() {
-        if (window.confirm("Continue: Update on Restart? This may cause merge issues to manually fix")){
-            <% if Rails.env.development? %>
-                alert("Dev Environment: Will Not Update; Use Git");
-            <% else %>
-                var xhttp = new XMLHttpRequest();
-                xhttp.open("GET", "admin?update=1", true);
-                xhttp.send();
-            <% end %>
-        }
-    }
+
     function configReset() {
         var xhttp = new XMLHttpRequest();
         xhttp.open("GET", "admin?configReset=1", true);
         xhttp.send();
     }
 </script>
+
+<%#Gets latest version number from github %>
+<% require 'net/http' %>
+<% response = Net::HTTP.get(URI("https://api.github.com/repos/jdrbrn/TerraNova/releases/latest")) %>
+<% response=JSON.parse(response) %>
+<% latestVersion=response["tag_name"] %>
+<%#Checks if that version is newer, if so page includes update related stuff %>
+<% if latestVersion>TerraNovaConfig["TerraNovaVersion"] %>
+    <script>
+        function signalUpdate() {
+            if (window.confirm("Continue: Update on Restart? This may cause merge issues to manually fix")){
+                <% if Rails.env.development? %>
+                    alert("Dev Environment: Will Not Update; Use Git");
+                <% else %>
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.open("GET", "admin?update=1", true);
+                    xhttp.send();
+                <% end %>
+            }
+        }
+    </script>
+    <h2 style="color:red">
+        Update Available (<a href="<%= response["html_url"] %>" target="_blank"><%= latestVersion %></a>)
+        <button type="button" onclick="signalUpdate()"><b>Update TerraNova on Restart</button> 
+    </h2>
+<% end %>
 <h2>Admin Page</h2>
-<h4>All Changes Apply on Restart<h4>
-<h3>Configuration
-<button type="button" onclick="location.href='admin?configDown=1'">Download Configuration File</button>
-</h3>
+<b>All Changes Apply on Restart</b>
+<h3>Configuration <button type="button" onclick="location.href='admin?configDown=1'">Download Configuration File</button></h3>
 <%= form_tag("/admin", method: "get", remote: true) do %>
     <b>Configuration Information</b> <%= submit_tag("Save Configuration") %> 
     <table>
@@ -134,13 +148,10 @@
 <% end %>
 <button type="button" onclick="configReset()">Reset Configuration to Default</button>
 <br>
-<h3>Database
-<button type="button" onclick="location.href='admin?dbDown=1'">Download Database</button>
-</h3>
+<h3>Database <button type="button" onclick="location.href='admin?dbDown=1'">Download Database</button></h3>
 <%= form_tag "/admin", multipart: true do %>
     <b>Upload Database</b> <%= file_field_tag "dbUp", accept: ".sqlite3" %>
     <%= submit_tag("Upload Database") %>
 <% end %>
-<br><br>
-<button type="button" onclick="signalUpdate()"><b>Update TerraNova on Restart</button> <br><br>
+<h3>System</h3>
 <button type="button" onclick="signalRestart()"><b>Restart TerraNova</button>
