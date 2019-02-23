@@ -11,7 +11,7 @@
     }
 </script>
 <h3>Configuration
-<button type="button" onclick="location.href='admin?configDown=1'">Download Configuration</button>
+<button type="button" onclick="location.href='admin?configDown=1'">Download Configuration File</button>
 </h3>
 <%= form_tag("/admin", method: "get", remote: true) do %>
     <b>Configuration Information</b> <%= submit_tag("Save Configuration") %>
@@ -110,7 +110,7 @@
 <%= form_tag "/admin", multipart: true do %>
     <b>Upload Configuration</b>
     <%= file_field_tag "configUp", accept: ".json" %>
-    <%= submit_tag("Upload Config File") %>
+    <%= submit_tag("Upload Configuration File") %>
 <% end %>
 <br>
 <h3>Database
@@ -121,4 +121,4 @@
     <%= submit_tag("Upload Database") %>
 <% end %>
 <br><br>
-<button type="button" onclick="signalRestart()"><b>Restart Server</b></button>
+<button type="button" onclick="signalRestart()"><b>Restart TerraNova</button>
