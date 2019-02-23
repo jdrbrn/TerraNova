@@ -9,6 +9,11 @@
             xhttp.send();
         <% end %>
     }
+    function configReset() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", "admin?configReset=1", true);
+        xhttp.send();
+    }
 </script>
 <h2>Admin Page</h2>
 <h4>All Changes Apply on Restart<h4>
@@ -16,7 +21,7 @@
 <button type="button" onclick="location.href='admin?configDown=1'">Download Configuration File</button>
 </h3>
 <%= form_tag("/admin", method: "get", remote: true) do %>
-    <b>Configuration Information</b> <%= submit_tag("Save Configuration") %>
+    <b>Configuration Information</b> <%= submit_tag("Save Configuration") %> 
     <table>
         <tr>
             <td>TerraNovaVersion</td>
@@ -114,6 +119,7 @@
     <%= file_field_tag "configUp", accept: ".json" %>
     <%= submit_tag("Upload Configuration File") %>
 <% end %>
+<button type="button" onclick="configReset()">Reset Configuration to Default</button>
 <br>
 <h3>Database
 <button type="button" onclick="location.href='admin?dbDown=1'">Download Database</button>
