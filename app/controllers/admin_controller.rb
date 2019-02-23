@@ -68,6 +68,10 @@ class AdminController < ApplicationController
             end
         end
 
+        if params[:update]
+            `touch tmp/update.txt`
+        end
+
         #Keep this last so that server can be restarted after any other admin action
         if params[:restart]
             `touch tmp/restart.txt`
@@ -80,6 +84,6 @@ class AdminController < ApplicationController
     #  end
 
     def admin_params
-        params.permit(:restart, :usrconf, :dbUp)
+        params.permit(:restart, :update, :usrconf, :dbUp, :dbDown, :confUp, :confDown)
     end
 end

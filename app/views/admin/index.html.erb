@@ -11,6 +11,17 @@
             <% end %>
         }
     }
+    function signalUpdate() {
+        if (window.confirm("Continue: Update on Restart? This may cause merge issues to manually fix")){
+            <% if Rails.env.development? %>
+                alert("Dev Environment: Will Not Update; Use Git");
+            <% else %>
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("GET", "admin?update=1", true);
+                xhttp.send();
+            <% end %>
+        }
+    }
     function configReset() {
         var xhttp = new XMLHttpRequest();
         xhttp.open("GET", "admin?configReset=1", true);
@@ -131,4 +142,5 @@
     <%= submit_tag("Upload Database") %>
 <% end %>
 <br><br>
+<button type="button" onclick="signalUpdate()"><b>Update TerraNova on Restart</button>
 <button type="button" onclick="signalRestart()"><b>Restart TerraNova</button>

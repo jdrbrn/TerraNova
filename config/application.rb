@@ -22,6 +22,13 @@ if File.file?("tmp/UploadedDB.sqlite3")
   end
 end
 
+#Checks if an update is requested
+if File.file?("tmp/update.txt")
+  puts "Update Requested"
+  FileUtils.rm("tmp/update.txt")
+  exec("UpdateLocal.sh")
+end
+
 require_relative 'boot'
 
 require 'rails/all'
