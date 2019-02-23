@@ -1,13 +1,15 @@
 <!-- Backend Interface Functions -->
 <script>
     function signalRestart() {
-        <% if Rails.env.development? %>
-            alert("Dev Environment: Manually Restart");
-        <% else %>
-            var xhttp = new XMLHttpRequest();
-            xhttp.open("GET", "admin?restart=1", true);
-            xhttp.send();
-        <% end %>
+        if (window.confirm("Continue: Restart TerraNova?")){
+            <% if Rails.env.development? %>
+                alert("Dev Environment: Manually Restart");
+            <% else %>
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("GET", "admin?restart=1", true);
+                xhttp.send();
+            <% end %>
+        }
     }
     function configReset() {
         var xhttp = new XMLHttpRequest();
