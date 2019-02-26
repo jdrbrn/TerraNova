@@ -30,3 +30,6 @@ config/secrets.yml
 
 # Ignore development config file
 DevTerraNovaConfig.json
+
+# Ignore config file so that it isn't overwritten
+TerraNovaConfig.json

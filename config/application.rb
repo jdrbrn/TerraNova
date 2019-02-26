@@ -1,14 +1,18 @@
 require_relative 'TerraNovaConfig'
 require 'fileutils'
 
+require_relative 'boot'
+
+require 'rails/all'
+
 #Moves any uploaded config/db files to proper locations at this time
 if File.file?("tmp/UploadedConfig.json")
   if Rails.env.development? 
     FileUtils.rm("DevTerraNovaConfig.json")
     FileUtils.move("tmp/UploadedConfig.json", "DevTerraNovaConfig.json") 
   else 
-    FileUtils.rm("DevTerraNovaConfig.json")
-    FileUtils.move("tmp/UploadedConfig.json", "DevTerraNovaConfig.json")  
+    FileUtils.rm("TerraNovaConfig.json")
+    FileUtils.move("tmp/UploadedConfig.json", "TerraNovaConfig.json")  
   end
 end
 
@@ -28,10 +32,6 @@ if File.file?("tmp/update.txt")
   FileUtils.rm("tmp/update.txt")
   exec("UpdateLocal.sh")
 end
-
-require_relative 'boot'
-
-require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
