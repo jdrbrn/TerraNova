@@ -13,9 +13,11 @@
     }
 
     function configReset() {
-        var xhttp = new XMLHttpRequest();
-        xhttp.open("GET", "admin?configReset=1", true);
-        xhttp.send();
+        if (window.confirm("Reset Configuration to Default?")){
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", "admin?configReset=1", true);
+            xhttp.send();
+        }
     }
 </script>
 
@@ -144,14 +146,14 @@
 <%= form_tag "/admin", multipart: true do %>
     <b>Upload Configuration</b>
     <%= file_field_tag "configUp", accept: ".json" %>
-    <%= submit_tag("Upload Configuration File") %>
+    <%= submit_tag "Upload Configuration File", data: {confirm: "Overwrite current configuration with uploaded?"} %>
 <% end %>
 <button type="button" onclick="configReset()">Reset Configuration to Default</button>
 <br>
 <h3>Database <button type="button" onclick="location.href='admin?dbDown=1'">Download Database</button></h3>
 <%= form_tag "/admin", multipart: true do %>
     <b>Upload Database</b> <%= file_field_tag "dbUp", accept: ".sqlite3" %>
-    <%= submit_tag("Upload Database") %>
+    <%= submit_tag "Upload Database", data: {confirm: "Overwrite database with uploaded?"} %>
 <% end %>
 <h3>System</h3>
 <button type="button" onclick="signalRestart()"><b>Restart TerraNova</button>
