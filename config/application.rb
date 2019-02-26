@@ -7,8 +7,8 @@ if File.file?("tmp/UploadedConfig.json")
     FileUtils.rm("DevTerraNovaConfig.json")
     FileUtils.move("tmp/UploadedConfig.json", "DevTerraNovaConfig.json") 
   else 
-    FileUtils.rm("DevTerraNovaConfig.json")
-    FileUtils.move("tmp/UploadedConfig.json", "DevTerraNovaConfig.json")  
+    FileUtils.rm("TerraNovaConfig.json")
+    FileUtils.move("tmp/UploadedConfig.json", "TerraNovaConfig.json")  
   end
 end
 
