@@ -1,8 +1,3 @@
-<script>
-// Initialize table sort funcion
-sortedTables["terrtable"]=2
-</script>
-
 <p id="notice"><%= notice %></p>
 
 <h1>Territories</h1>
@@ -33,7 +28,7 @@ sortedTables["terrtable"]=2
           <td><!-- Blank Date Out Collumn --></td>
           <td><!-- Blank Date Due Collumn --></td>
           <td><%= terr.notes %></td>
-          <td><%= link_to 'Show', terr %></td>
+          <td><%= link_to 'View', terr %></td>
           <td><%= link_to 'Edit', edit_terr_path(terr) %></td>
           <td><%= link_to 'Destroy', terr, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <!-- <td><%= link_to 'Check Out', [terrin,checkout: terrin.terrid], method: :delete, data: { confirm: "Are you sure you want to check out #{@terrs.find(terrin.terrid).name}?" } %></td> -->
@@ -47,7 +42,7 @@ sortedTables["terrtable"]=2
           <td><%= terrout.dateout.strftime("%m/%d/%y") %></td>
           <td><%= terrout.datedue.strftime("%m/%d/%y") %></td>
           <td><%= terr.notes %></td>
-          <td><%= link_to 'Show', terr %></td>
+          <td><%= link_to 'View', terr %></td>
           <td><%= link_to 'Edit', edit_terr_path(terr) %></td>
           <td><%= link_to 'Destroy', terr, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <!-- <td><%= link_to 'Check In', [terrout,checkin: terrout.terrid], method: :delete, data: { confirm: "Are you sure you want to check in #{@terrs.find(terrout.terrid).name}?" } %></td> -->
@@ -61,7 +56,7 @@ sortedTables["terrtable"]=2
           <td><!-- Blank Date Out Collumn --></td>
           <td><!-- Blank Date Due Collumn --></td>
           <td><%= terr.notes %></td>
-          <td><%= link_to 'Show', terr %></td>
+          <td><%= link_to 'View', terr %></td>
           <td><%= link_to 'Edit', edit_terr_path(terr) %></td>
           <td><%= link_to 'Destroy', terr, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <!-- <td><%= link_to 'Check Out', {:controller => "terrouts", :action => "new", :terrid => terr.id} %></td> -->
@@ -74,3 +69,8 @@ sortedTables["terrtable"]=2
 <br>
 
 <%= link_to 'New Territory', new_terr_path %>
+
+<script>
+// Initialize table sort funcion
+tableSortInit("terrtable",1)
+</script>

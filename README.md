@@ -1,6 +1,6 @@
 # README
 
-TerraNova is a Ruby on Rails webapp designed to manage territories. It can be linked to multiple versions of itself to manage multiple territory types with only one end user interface.
+TerraNova is a Ruby on Rails webapp designed to manage territories. It can be linked to multiple versions of itself to easily manage multiple databases in what is seemingly one user interface.
 
 TerraNova is developed using Ruby 2.3.3, and has not been tested under any other version
 
@@ -14,13 +14,8 @@ To get started I recommend following this guide: https://www.phusionpassenger.co
 After following that guide to get the base install the following steps will create allow you to have a local install and be able to simply update:
 
 Edit the following files:
-app/views/report/index.html.erb to have the right user settings
+TerraNovaConfig.json to configure the server as desired. Please see the wiki page for more information on the config file.
 
-public/index.css and assets/stylesheets/application.css to modify colors if needed
+To update run UpdateLocal.sh when logged in as the application user which will pull the latest released code. If you have made any substantial changes you may need to manually merge the update and the local codebases.
 
-app/views/dncs/print.html.erb to have the correct sizing. The default settings generate a card that is 6.75in wide. The relevant lines are 20,26 and for more detailed size modifications 55-60.
-
-To update run UpdateLocal.sh when logged in as the application userwhich will pull the latest released code. If you have made any substantial changes you may need to manually merge the update and the local codebases.
-
-
-Once deployed you will need to add territories by going to the territory database(linked from the main page), and individually adding them. Once added please check them out (and in if applicable) to get them added to the proper category and to print on the generated worksheet.
+Once deployed you will need to add territories by going to the territory database(linked from the main page), and individually adding them. Once added please check them out/in to get them added to the proper category.

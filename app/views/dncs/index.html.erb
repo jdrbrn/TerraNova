@@ -1,8 +1,3 @@
-<script>
-// Initialize table sort funcion
-sortedTables["dnctable"]=1
-</script>
-
 <p id="notice"><%= notice %></p>
 
 <h1>Do Not Call Database</h1>
@@ -41,7 +36,7 @@ sortedTables["dnctable"]=1
         <td><%= dnc.street %></td>
         <td><%= dnc.publisher %></td>
         <td><%= dnc.notes %></td>
-        <td><%= link_to 'Show', dnc %></td>
+        <td><%= link_to 'View', dnc %></td>
         <td><%= link_to 'Edit', edit_dnc_path(dnc) %></td>
         <td><%= link_to 'Delete', dnc, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -80,4 +75,9 @@ sortedTables["dnctable"]=1
   linkloc.download = 'dncs.csv'
   linkloc.href = downloadlink
   linkloc.textContent='Download CSV'
+</script>
+
+<script>
+// Initialize table sort funcion
+tableSortInit("dnctable",0)
 </script>
