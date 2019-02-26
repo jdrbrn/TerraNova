@@ -13,9 +13,9 @@ To get started I recommend following this guide: https://www.phusionpassenger.co
 
 After following that guide to get the base install the following steps will create allow you to have a local install and be able to simply update:
 
-Edit the following files:
-TerraNovaConfig.json to configure the server as desired. Please see the wiki page for more information on the config file.
-
-To update run UpdateLocal.sh when logged in as the application user which will pull the latest released code. If you have made any substantial changes you may need to manually merge the update and the local codebases.
+Edit the configuration:
+Login to the admin page(default login: admin password: supersecret) and make configuration changes
 
 Once deployed you will need to add territories by going to the territory database(linked from the main page), and individually adding them. Once added please check them out/in to get them added to the proper category.
+
+Updates will be detected and a notification shown on the admin page. When there is an update there will be an option for TerraNova to update on restart. To update manually run UpdateLocal.sh when logged in as the application user which will pull the latest released code. In either case, if you have made any substantial changes you may need to manually merge the update and the local codebases.
