@@ -2,7 +2,8 @@
 
 TerraNova is a Ruby on Rails webapp designed to manage territories. It can be linked to multiple versions of itself to easily manage multiple databases in what is seemingly one user interface.
 
-TerraNova is developed using Ruby 2.3.3, and has not been tested under any other version
+TerraNova was developed using Ruby 2.3.3 and Rails 5.1.4.
+It's now running under Rails 6 and Ruby 2.5 with minimal testing done. 
 
 TerraNova is configured to be deployed using Passenger.
 
