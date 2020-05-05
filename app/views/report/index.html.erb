@@ -163,11 +163,11 @@ var multiLinksEnabled = <%=TerraNovaConfig["enableMultiserver"] %>
         <% @terrouts.sort_by{|terrout| terrout.datedue}.each do |terrout| %>
           <% categorizedTerrs<<terrout.terrid %>
           <tr>
-            <%= name(terrout) %>
-            <%= datecomp(terrout) %>
-            <%= publisher(terrout) %>
-            <%= dateout(terrout) %>
-            <%= datedue(terrout) %>
+            <td class="<%= deadlineCSS(terrout) %>%"><%= fullname(terrout) %></td>
+            <td><%= datecomp(terrout) %></td>
+            <td><%= publisher(terrout) %></td>
+            <td><%= dateout(terrout) %></td>
+            <td><%= datedue(terrout) %></td>
             <td><a href="#" onclick="terroutsViewDetails('<%= terrout.id %>');return false;">View Details</a></td>
             <td><%= link_to 'Check In', [terrout,checkin: terrout.terrid], method: :delete, data: { confirm: "Are you sure you want to check in #{@terrs.find(terrout.terrid).name}?" } %></td>
           </tr>
@@ -192,8 +192,8 @@ var multiLinksEnabled = <%=TerraNovaConfig["enableMultiserver"] %>
         <% @terrins.sort_by{|terrin| @terrs.find(terrin.terrid).datecomp}.each do |terrin| %>
           <% categorizedTerrs<<terrin.terrid %>
           <tr>
-            <%= name(terrin) %>
-            <%= datecomp(terrin) %>
+            <td><%= fullname(terrin) %></td>
+            <td><%= datecomp(terrin) %></td>
             <td><a href="#" onclick="terrinsViewDetails('<%= terrin.id %>');return false;">View Details</a></td>
             <td><%= link_to 'Check Out', [terrin,checkout: terrin.terrid], method: :delete, data: { confirm: "Are you sure you want to check out #{@terrs.find(terrin.terrid).name}?" } %></td>
           </tr>
@@ -219,8 +219,8 @@ var multiLinksEnabled = <%=TerraNovaConfig["enableMultiserver"] %>
           <% if categorizedTerrs.find_index(terr.id) %>
           <% else %>
             <tr>
-              <%= name(terr) %>
-              <%= datecomp(terr) %>
+              <td><%= fullname(terr) %></td>
+              <td><%= datecomp(terr) %></td>
               <td><a href='#' onclick="terrsViewDetails('<%= terr.id %>');return false;">View Details</a></td>
               <td><%= link_to 'Check Out', {:controller => "terrouts", :action => "new", :terrid => terr.id} %></td>
               <td><%= link_to 'Check In', {:controller => "terrins", :action => "new", :terrid => terr.id} %></td>
