@@ -1,4 +1,7 @@
 <!-- Edited from report/index -->
+<% def test %>
+  Test
+<% end %>
 
 <%# will store terrid of all territories checked in or out %>
 <% categorizedTerrs =[] %>
@@ -6,7 +9,6 @@
 <!-- table to display terrouts -->
 <div id="terrOuts">
   <h2>Territories to Check-In</h2>
-
   <table>
     <thead>
       <tr>
@@ -22,19 +24,12 @@
     <tbody>
       <% @terrouts.sort_by{|terrout| terrout.datedue}.each do |terrout| %>
         <% categorizedTerrs<<terrout.terrid %>
-        <% if terrout.datedue-Date.current<0 %>
-          <% dateClass="late" %>
-        <% elsif (terrout.datedue-1.months)-Date.current<0%>
-          <% dateClass="warn" %>
-        <% else %>
-          <% dateClass="normal" %>
-        <% end %>
         <tr>
-          <td class="<%= dateClass %>"><%= @terrs.find(terrout.terrid).name %><br><%= @terrs.find(terrout.terrid).region %></td>
-          <td><%= @terrs.find(terrout.terrid).datecomp.strftime("%m/%d/%y") %></td>
-          <td><%= terrout.publisher %></td>
-          <td><%= terrout.dateout.strftime("%m/%d/%y") %></td>
-          <td><%= terrout.datedue.strftime("%m/%d/%y") %></td>
+          <%= name(terrout) %>
+          <%= datecomp(terrout) %>
+          <%= publisher(terrout) %>
+          <%= dateout(terrout) %>
+          <%= datedue(terrout) %>
           <td></td>
         </tr>
       <% end %>
@@ -61,8 +56,8 @@
       <% @terrins.sort_by{|terrin| @terrs.find(terrin.terrid).datecomp}.each do |terrin| %>
         <% categorizedTerrs<<terrin.terrid %>
         <tr>
-          <td class="normal"><%= @terrs.find(terrin.terrid).name %><br><%= @terrs.find(terrin.terrid).region %></td>
-          <td><%= @terrs.find(terrin.terrid).datecomp.strftime("%m/%d/%y") %></td>
+          <%= name(terrin) %>
+          <%= datecomp(terrin) %>
           <td></td>
           <td></td>
           <td class="pubEntry"></td>
@@ -95,8 +90,8 @@
             <% if categorizedTerrs.find_index(terr.id) %>
             <% else %>
               <tr>
-                <td class="normal"><%= terr.name %><br><%=terr.region %></td>
-                <td><%= terr.datecomp.strftime("%m/%d/%y") %></td>
+                <%= name(terr) %>
+                <%= datecomp(terr) %>
                 <td></td>
                 <td></td>
                 <td class="pubEntry"></td>
