@@ -6,16 +6,13 @@
 <!-- table to display terrouts -->
 <div id="terrOuts">
   <h2>Territories to Check-In</h2>
-  <%= terroutConfig = TerraNovaConfig["reportPrintLayout"]["terrout"] %>
+  <% terroutConfig = TerraNovaConfig["reportPrintLayout"]["terrout"] %>
   <table>
     <thead>
       <tr>
-        <th>Territory</th>
-        <th>Last Complete</th>
-        <th>Publisher</th>
-        <th>Date Out</th>
-        <th>Date Due</th>
-        <th>Date Turned In</th>
+        <% terroutConfig["headers"].each do |h| %>
+          <%= generateTH(h) %>
+        <% end %>
       </tr>
     </thead>
 
@@ -23,12 +20,9 @@
       <% @terrouts.sort_by{|terrout| terrout.datedue}.each do |terrout| %>
         <% categorizedTerrs<<terrout.terrid %>
         <tr>
-          <%= fullname(terrout) %>
-          <%= datecomp(terrout) %>
-          <%= publisher(terrout) %>
-          <%= dateout(terrout) %>
-          <%= datedue(terrout) %>
-          <td></td>
+          <% terroutConfig["cells"].each do |c| %>
+            <%= generateTD(c, terrout) %>
+          <% end %>
         </tr>
       <% end %>
     </tbody>
