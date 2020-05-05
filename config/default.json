@@ -40,57 +40,27 @@
     "specialDNC": "#0000ff"
   },
   "reportPrintLayout": {
-    "terrout": [
-      {
-        "th": {
-          "html": "Territory"
-        },
-        "td": {
-          "class": "deadlineCSS",
+    "terrout": {
+      "headers":[
+        {"html": "Territory"},
+        {"html": "Last Complete"},
+        {"html": "Publisher"},
+        {"html": "Date Out"},
+        {"html": "Date Due"},
+        {"html": "Date Turned In"}
+      ],
+      "cells": [
+        {
+          "class": {"function": "deadlineCSS"},
           "function": "fullname"
-        }
-      },
-      {
-        "th": {
-          "html": "Last Complete"
         },
-        "td": {
-          "function": "datecomp"
-        }
-      },
-      {
-        "th": {
-          "html": "Publisher"
-        },
-        "td": {
-          "function": "publisher"
-        }
-      },
-      {
-        "th": {
-          "html": "Date Out"
-        },
-        "td": {
-          "function": "dateout"
-        }
-      },
-      {
-        "th": {
-          "html": "Date Due"
-        },
-        "td": {
-          "function": "datedue"
-        }
-      },
-      {
-        "th": {
-          "html": "Date Turned In"
-        },
-        "td": {
-          "html": ""
-        }
-      }
-    ],
+        {"function": "datecomp"},
+        {"function": "publisher"},
+        {"function": "dateout"},
+        {"function": "datedue"},
+        {"html": ""}
+      ]
+    },
     "terrin": {
     },
     "terr": {
