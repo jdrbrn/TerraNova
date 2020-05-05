@@ -8,21 +8,12 @@ class AdminController < ApplicationController
             require 'fileutils'
             #Create mutable hash of the submitted config
             newConfig=params[:usrconf].to_unsafe_hash
-            #This section converts the submitted string of multiserverList into the wanted array
-            #Gets rid of the [[ and ]] at each end of the string
-            newConfig["multiserverList"][0..1]=""
-            newConfig["multiserverList"][-2..-1]=""
-            #Splits the internal arrays into seperate entries
-            newConfig["multiserverList"]=newConfig["multiserverList"].split("], [")
-            #Fixes each internal array string into an array
-            i=0
-            while i < newConfig["multiserverList"].length
-                #This uses the same process as above but applied to the internal arrays
-                newConfig["multiserverList"][i][0]=""
-                newConfig["multiserverList"][i][-1]=""
-                newConfig["multiserverList"][i]=newConfig["multiserverList"][i].split("\", \"")
-                i+=1
-            end
+
+            # config is converted to JSON for editing then passed as a param
+            # this changes the json back to an object so it can be saved properly at
+            # the end
+            newConfig["multiserverList"] = JSON.parse(newConfig["multiserverList"])
+
             #Saves new config to a temp file
             #This file will be moved + loaded on next restart via config/application.rb
             #Invalid keys/values will silently fail and be replaced w/ default values at that time

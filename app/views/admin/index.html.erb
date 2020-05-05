@@ -71,7 +71,7 @@
         </tr>
         <tr>
             <td>multiserverList</td>
-            <td><%= text_field_tag "usrconf[multiserverList]", TerraNovaConfig["multiserverList"].to_s %></td>
+            <td><%= text_area_tag "usrconf[multiserverList]", JSON.pretty_generate(TerraNovaConfig["multiserverList"]) %></td>
         </tr>
         <tr>
             <td>enableHTTPAuth</td>
