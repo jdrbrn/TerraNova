@@ -1,41 +1,10 @@
 require 'json'
 
 def loadConfig
-  #Sets what keys should be found for prefs and default values
-  config={"TerraNovaVersion"=>"3.0",
-          "timezone"=>"Eastern Time (US & Canada)",
-          "name"=>"EDIT CONFIG FILE TO FINISH SETUP",
-          "enableMultiserver"=>"false",
-          "multiserverList"=>[["Mutli1","IP1"],["Multi2","IP2"],["Multi3","IP3"]],
-          "enableHTTPAuth"=>"false",
-          "HTTPAuth"=>{"username"=>"user","password"=>"secret"},
-          "enableAdminHTTPAuth"=>"true",
-          "adminHTTPAuth"=>{"username"=>"admin","password"=>"supersecret"},
-          "systemCSS"=>{"bodyBG"=>"#ecfbff",
-            "terrWarn"=>"#ffff00",
-            "terrLate"=>"#ff4a2b",
-            "toolbarBG"=>"#e5eeff",
-            "thBG"=>"#e5efff",
-            "tdBG"=>"#efefff"},
-          "dncCSS"=>{"dncCardWidth"=>"5in",
-            "specialDNC" => "#0000ff"},
-          "reportPrintLayout"=>{
-            "terrout"=>[
-              {"th"=>{"html"=>"<th>Territory</th>"},"td"=>{"function"=>"name(terrout)"}},
-              {"th"=>{"html"=>"<th>Last Complete</th>"},"td"=>{"function"=>"name(terrout)"}},
-              {"th"=>{"html"=>"<th>Publisher</th>"},"td"=>{"function"=>"publisher(terrout)"}},
-              {"th"=>{"html"=>"<th>Date Out</th>"},"td"=>{"function"=>"dateout(terrout)"}},
-              {"th"=>{"html"=>"<th>Date Due</th>"},"td"=>{"function"=>"datedue(terrout)"}},
-              {"th"=>{"html"=>"<th>Date Turned In</th>"},"td"=>{"html"=>"<td></td>"}},
-            ],
-            "terrin"=>{
-
-            },
-            "terr"=>{
-              
-            }}
-          }
-
+  # Loads default config
+  # Sets what keys should be found for prefs and default values
+  config=JSON.parse(File.read("config/default.json"))
+  
   #File name to use for the configFile
   configFileName="TerraNovaConfig.json"
   # If in development mode load a dev config file and save a default config with the latest defaults
