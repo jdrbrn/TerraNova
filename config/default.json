@@ -43,50 +43,51 @@
     "terrout": [
       {
         "th": {
-          "html": "<th>Territory</th>"
+          "html": "Territory"
         },
         "td": {
-          "function": "name(terrout)"
+          "class": "deadlineCSS",
+          "function": "name"
         }
       },
       {
         "th": {
-          "html": "<th>Last Complete</th>"
+          "html": "Last Complete"
         },
         "td": {
-          "function": "name(terrout)"
+          "function": "datecomp"
         }
       },
       {
         "th": {
-          "html": "<th>Publisher</th>"
+          "html": "Publisher"
         },
         "td": {
-          "function": "publisher(terrout)"
+          "function": "publisher"
         }
       },
       {
         "th": {
-          "html": "<th>Date Out</th>"
+          "html": "Date Out"
         },
         "td": {
-          "function": "dateout(terrout)"
+          "function": "dateout"
         }
       },
       {
         "th": {
-          "html": "<th>Date Due</th>"
+          "html": "Date Due"
         },
         "td": {
-          "function": "datedue(terrout)"
+          "function": "datedue"
         }
       },
       {
         "th": {
-          "html": "<th>Date Turned In</th>"
+          "html": "Date Turned In"
         },
         "td": {
-          "html": "<td></td>"
+          "html": ""
         }
       }
     ],

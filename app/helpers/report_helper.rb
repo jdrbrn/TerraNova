@@ -1,7 +1,7 @@
 module ReportHelper
     # Territory Functions
-    def name(territory)
-        tdclass = nil
+    def deadlineCSS(territory)
+        output = nil
 
         if territory.class != Terr
             terrid = territory.terrid
@@ -11,15 +11,19 @@ module ReportHelper
 
         if territory.class == Terrout
             if territory.datedue-Date.current<0
-                tdclass = "late"
+                output = "late"
             elsif (territory.datedue-1.months)-Date.current<0
-                tdclass = "warn"
+                output = "warn"
             end
         end
-        if (tdclass==nil)
-            tdclass = "normal"
+        if (output==nil)
+            output = "normal"
         end
 
+        output.html_safe
+    end
+
+    def fullname(territory)
         output = "<td class=\""+tdclass+"\">"
         output += @terrs.find(terrid).name + "<br>" + @terrs.find(terrid).region
         output += "</td>"
