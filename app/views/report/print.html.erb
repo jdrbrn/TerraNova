@@ -32,15 +32,13 @@
 <!-- table to display terrins -->
 <div id="terrIns">
   <h2>Available Territories</h2>
-
+  <% terrinConfig = TerraNovaConfig["reportPrintLayout"]["terrin"] %>
   <table>
     <thead>
       <tr>
-        <th>Territory</th>
-        <th>Last Complete</th>
-        <th>Date Out</th>
-        <th>Date Due</th>
-        <th>Publisher</th>
+        <% terrinConfig["headers"].each do |h| %>
+          <%= generateTH(h) %>
+        <% end %>
       </tr>
     </thead>
 
@@ -48,11 +46,9 @@
       <% @terrins.sort_by{|terrin| @terrs.find(terrin.terrid).datecomp}.each do |terrin| %>
         <% categorizedTerrs<<terrin.terrid %>
         <tr>
-          <%= fullname(terrin) %>
-          <%= datecomp(terrin) %>
-          <td></td>
-          <td></td>
-          <td class="pubEntry"></td>
+          <% terrinConfig["cells"].each do |c| %>
+            <%= generateTD(c, terrin) %>
+          <% end %>
         </tr>
       <% end %>
     </tbody>
@@ -64,16 +60,13 @@
   <!-- table to display terrs that aren't out or in -->
     <div id="otherTerrs">
       <h2>Other Territories</h2>
-
+      <% terrConfig = TerraNovaConfig["reportPrintLayout"]["terr"] %>
       <table id="terrtable">
         <thead>
           <tr>
-            <th>Territory</th>
-            <th>Last Complete</th>
-            <th>Date Out</th>
-            <th>Date Due</th>
-            <th>Publisher</th>
-            <th>Date Turned In</th>
+            <% terrConfig["headers"].each do |h| %>
+              <%= generateTH(h) %>
+            <% end %>
           </tr>
         </thead>
 
@@ -82,12 +75,9 @@
             <% if categorizedTerrs.find_index(terr.id) %>
             <% else %>
               <tr>
-                <%= fullname(terr) %>
-                <%= datecomp(terr) %>
-                <td></td>
-                <td></td>
-                <td class="pubEntry"></td>
-                <td></td>
+                <% terrConfig["cells"].each do |c| %>
+                  <%= generateTD(c, terr) %>
+                <% end %>
               </tr>
             <% end %>
           <% end %>

@@ -62,8 +62,44 @@
       ]
     },
     "terrin": {
+      "headers":[
+        {"html": "Territory"},
+        {"html": "Last Complete"},
+        {"html": "Date Out"},
+        {"html": "Date Due"},
+        {"html": "Publisher"}
+      ],
+      "cells":[
+        {"function": "fullname"},
+        {"function": "datecomp"},
+        {"html": ""},
+        {"html": ""},
+        {
+          "class": {"html": "pubEntry"},
+          "html": ""
+        }
+      ]
     },
     "terr": {
+      "headers":[
+        {"html": "Territory"},
+        {"html": "Last Complete"},
+        {"html": "Date Out"},
+        {"html": "Date Due"},
+        {"html": "Publisher"},
+        {"html": "Date Turned In"}
+      ],
+      "cells":[
+        {"function": "fullname"},
+        {"function": "datecomp"},
+        {"html": ""},
+        {"html": ""},
+        {
+          "class": {"html": "pubEntry"},
+          "html": ""
+        },
+        {"html": ""}
+      ]
     }
   }
 }
