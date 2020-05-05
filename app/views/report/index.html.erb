@@ -192,7 +192,7 @@ var multiLinksEnabled = <%=TerraNovaConfig["enableMultiserver"] %>
         <% @terrins.sort_by{|terrin| @terrs.find(terrin.terrid).datecomp}.each do |terrin| %>
           <% categorizedTerrs<<terrin.terrid %>
           <tr>
-            <td><%= fullname(terrin) %></td>
+            <td class="<%= deadlineCSS(terrin) %>"><%= fullname(terrin) %></td>
             <td><%= datecomp(terrin) %></td>
             <td><a href="#" onclick="terrinsViewDetails('<%= terrin.id %>');return false;">View Details</a></td>
             <td><%= link_to 'Check Out', [terrin,checkout: terrin.terrid], method: :delete, data: { confirm: "Are you sure you want to check out #{@terrs.find(terrin.terrid).name}?" } %></td>
@@ -219,7 +219,7 @@ var multiLinksEnabled = <%=TerraNovaConfig["enableMultiserver"] %>
           <% if categorizedTerrs.find_index(terr.id) %>
           <% else %>
             <tr>
-              <td><%= fullname(terr) %></td>
+              <td class="<%= deadlineCSS(terr) %>"><%= fullname(terr) %></td>
               <td><%= datecomp(terr) %></td>
               <td><a href='#' onclick="terrsViewDetails('<%= terr.id %>');return false;">View Details</a></td>
               <td><%= link_to 'Check Out', {:controller => "terrouts", :action => "new", :terrid => terr.id} %></td>
