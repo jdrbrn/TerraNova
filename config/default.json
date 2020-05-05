@@ -41,64 +41,132 @@
   },
   "reportPrintLayout": {
     "terrout": {
-      "headers":[
-        {"html": "Territory"},
-        {"html": "Last Complete"},
-        {"html": "Publisher"},
-        {"html": "Date Out"},
-        {"html": "Date Due"},
-        {"html": "Date Turned In"}
+      "headers": [
+        {
+          "html": "Territory"
+        },
+        {
+          "html": "Last Complete"
+        },
+        {
+          "html": "Publisher"
+        },
+        {
+          "html": "Date Out"
+        },
+        {
+          "html": "Date Due"
+        },
+        {
+          "html": "Date Turned In"
+        }
       ],
       "cells": [
         {
-          "class": {"function": "deadlineCSS"},
+          "class": {
+            "function": "deadlineCSS"
+          },
           "function": "fullname"
         },
-        {"function": "datecomp"},
-        {"function": "publisher"},
-        {"function": "dateout"},
-        {"function": "datedue"},
-        {"html": ""}
+        {
+          "function": "datecomp"
+        },
+        {
+          "function": "publisher"
+        },
+        {
+          "function": "dateout"
+        },
+        {
+          "function": "datedue"
+        },
+        {
+          "html": ""
+        }
       ]
     },
     "terrin": {
-      "headers":[
-        {"html": "Territory"},
-        {"html": "Last Complete"},
-        {"html": "Date Out"},
-        {"html": "Date Due"},
-        {"html": "Publisher"}
-      ],
-      "cells":[
-        {"function": "fullname"},
-        {"function": "datecomp"},
-        {"html": ""},
-        {"html": ""},
+      "headers": [
         {
-          "class": {"html": "pubEntry"},
+          "html": "Territory"
+        },
+        {
+          "html": "Last Complete"
+        },
+        {
+          "html": "Date Out"
+        },
+        {
+          "html": "Date Due"
+        },
+        {
+          "html": "Publisher"
+        }
+      ],
+      "cells": [
+        {
+          "function": "fullname"
+        },
+        {
+          "function": "datecomp"
+        },
+        {
+          "html": ""
+        },
+        {
+          "html": ""
+        },
+        {
+          "class": {
+            "html": "pubEntry"
+          },
           "html": ""
         }
       ]
     },
     "terr": {
-      "headers":[
-        {"html": "Territory"},
-        {"html": "Last Complete"},
-        {"html": "Date Out"},
-        {"html": "Date Due"},
-        {"html": "Publisher"},
-        {"html": "Date Turned In"}
-      ],
-      "cells":[
-        {"function": "fullname"},
-        {"function": "datecomp"},
-        {"html": ""},
-        {"html": ""},
+      "headers": [
         {
-          "class": {"html": "pubEntry"},
+          "html": "Territory"
+        },
+        {
+          "html": "Last Complete"
+        },
+        {
+          "html": "Date Out"
+        },
+        {
+          "html": "Date Due"
+        },
+        {
+          "html": "Publisher"
+        },
+        {
+          "html": "Date Turned In"
+        }
+      ],
+      "cells": [
+        {
+          "function": "fullname"
+        },
+        {
+          "function": "datecomp"
+        },
+        {
           "html": ""
         },
-        {"html": ""}
+        {
+          "html": ""
+        },
+        {
+          "class": {
+            "html": "pubEntry"
+          },
+          "html": ""
+        },
+        {
+          "html": ""
+        }
       ]
     }
   }
