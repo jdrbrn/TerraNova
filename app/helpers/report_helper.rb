@@ -1,13 +1,16 @@
 module ReportHelper
     # Territory Functions
+    def getID(territory)
+        if territory.class != Terr
+            territory.terrid
+        else
+            territory.id
+        end
+    end
+
     def deadlineCSS(territory)
         output = nil
-
-        if territory.class != Terr
-            terrid = territory.terrid
-        else
-            terrid = territory.id
-        end
+        terrid = getID(territory)
 
         if territory.class == Terrout
             if territory.datedue-Date.current<0
@@ -24,18 +27,16 @@ module ReportHelper
     end
 
     def fullname(territory)
-        output = "<td class=\""+tdclass+"\">"
+        terrid = getID(territory)
+
+        output = "<td class=\""+deadlineCSS(territory)+"\">"
         output += @terrs.find(terrid).name + "<br>" + @terrs.find(terrid).region
         output += "</td>"
         output.html_safe
     end
 
     def datecomp(territory)
-        if territory.class != Terr
-            terrid = territory.terrid
-        else
-            terrid = territory.id
-        end
+        terrid = getID(territory)
 
         output = "<td>"
         output += @terrs.find(terrid).datecomp.strftime("%m/%d/%y")

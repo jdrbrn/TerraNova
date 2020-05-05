@@ -6,7 +6,7 @@
 <!-- table to display terrouts -->
 <div id="terrOuts">
   <h2>Territories to Check-In</h2>
-  
+
   <table>
     <thead>
       <tr>
@@ -23,7 +23,7 @@
       <% @terrouts.sort_by{|terrout| terrout.datedue}.each do |terrout| %>
         <% categorizedTerrs<<terrout.terrid %>
         <tr>
-          <%= name(terrout) %>
+          <%= fullname(terrout) %>
           <%= datecomp(terrout) %>
           <%= publisher(terrout) %>
           <%= dateout(terrout) %>
@@ -54,7 +54,7 @@
       <% @terrins.sort_by{|terrin| @terrs.find(terrin.terrid).datecomp}.each do |terrin| %>
         <% categorizedTerrs<<terrin.terrid %>
         <tr>
-          <%= name(terrin) %>
+          <%= fullname(terrin) %>
           <%= datecomp(terrin) %>
           <td></td>
           <td></td>
@@ -88,7 +88,7 @@
             <% if categorizedTerrs.find_index(terr.id) %>
             <% else %>
               <tr>
-                <%= name(terr) %>
+                <%= fullname(terr) %>
                 <%= datecomp(terr) %>
                 <td></td>
                 <td></td>

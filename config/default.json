@@ -47,7 +47,7 @@
         },
         "td": {
           "class": "deadlineCSS",
-          "function": "name"
+          "function": "fullname"
         }
       },
       {
