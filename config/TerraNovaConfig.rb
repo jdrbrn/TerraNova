@@ -2,7 +2,7 @@ require 'json'
 
 def loadConfig
   #Sets what keys should be found for prefs and default values
-  config={"TerraNovaVersion"=>"2.2.1",
+  config={"TerraNovaVersion"=>"3.0",
           "timezone"=>"Eastern Time (US & Canada)",
           "name"=>"EDIT CONFIG FILE TO FINISH SETUP",
           "enableMultiserver"=>"false",
@@ -18,7 +18,22 @@ def loadConfig
             "thBG"=>"#e5efff",
             "tdBG"=>"#efefff"},
           "dncCSS"=>{"dncCardWidth"=>"5in",
-            "specialDNC" => "#0000ff"}
+            "specialDNC" => "#0000ff"},
+          "reportPrintLayout"=>{
+            "terrout"=>[
+              {"th"=>{"html"=>"<th>Territory</th>"},"td"=>{"function"=>"name(terrout)"}},
+              {"th"=>{"html"=>"<th>Last Complete</th>"},"td"=>{"function"=>"name(terrout)"}},
+              {"th"=>{"html"=>"<th>Publisher</th>"},"td"=>{"function"=>"publisher(terrout)"}},
+              {"th"=>{"html"=>"<th>Date Out</th>"},"td"=>{"function"=>"dateout(terrout)"}},
+              {"th"=>{"html"=>"<th>Date Due</th>"},"td"=>{"function"=>"datedue(terrout)"}},
+              {"th"=>{"html"=>"<th>Date Turned In</th>"},"td"=>{"html"=>"<td></td>"}},
+            ],
+            "terrin"=>{
+
+            },
+            "terr"=>{
+              
+            }}
           }
 
   #File name to use for the configFile
