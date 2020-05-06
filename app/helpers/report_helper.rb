@@ -85,24 +85,32 @@ module ReportHelper
 
     def generateTH(config)
         output="<th"
+        body=""
 
-        if config["class"]
-            output+=" class=\""
-            if config["class"]["html"]
-                output+=config["class"]["html"]
-            elsif config["class"]["function"]
-                output+=runFunctionTH(config["class"]["function"])
+        config.each do |layout|
+            if layout[0]=="body"
+                layout[1].each do |entry|
+                    if entry["html"]
+                        body+=entry["html"]
+                    elsif entry["function"]
+                        body+=runFunctionTH(entry["function"])
+                    end
+                end
+            else
+                output+=" #{layout[0]}=\""
+                layout[1].each do |entry|
+                    if entry["html"]
+                        output+=entry["html"]
+                    elsif entry["function"]
+                        output+=runFunctionTH(entry[1])
+                    end
+                end
+                output+="\""
             end
-            output+="\""
         end
         output+=">"
 
-        if config["html"]
-            output+=config["html"]
-        elsif config["function"]
-            output+=runFunctionTH(config["function"])
-        end
-
+        output+=body
         output+="</th>"
 
         output.html_safe
@@ -110,24 +118,39 @@ module ReportHelper
     
     def generateTD(config, territory)
         output="<td"
-
-        if config["class"]
-            output+=" class=\""
-            if config["class"]["html"]
-                output+=config["class"]["html"]
-            elsif config["class"]["function"]
-                output+=runFunctionTD(config["class"]["function"], territory)
+        body=""
+        puts "config:"
+        puts config
+        config.each do |layout|
+            puts "layout: "
+            puts layout
+            if layout[0]=="body"
+                layout[1].each do |entry|
+                    puts "entry:"
+                    puts entry
+                    if entry["html"]
+                        body+=entry["html"]
+                    elsif entry["function"]
+                        body+=runFunctionTD(entry["function"], territory)
+                    end
+                end
+            else
+                output+=" #{layout[0]}=\""
+                layout[1].each do |entry|
+                    puts "entry:"
+                    puts entry
+                    if entry["html"]
+                        output+=entry["html"]
+                    elsif entry["function"]
+                        output+=runFunctionTD(entry["function"], territory)
+                    end
+                end
+                output+="\""
             end
-            output+="\""
         end
         output+=">"
 
-        if config["html"]
-            output+=config["html"]
-        elsif config["function"]
-            output+=runFunctionTD(config["function"], territory)
-        end
-
+        output+=body
         output+="</td>"
 
         output.html_safe

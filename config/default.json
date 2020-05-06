@@ -43,129 +43,271 @@
     "terrout": {
       "headers": [
         {
-          "html": "Territory"
+          "body": [
+            {
+              "html": "Territory"
+            }
+          ]
         },
         {
-          "html": "Last Complete"
+          "body": [
+            {
+              "html": "Last Complete"
+            }
+          ]
         },
         {
-          "html": "Publisher"
+          "body": [
+            {
+              "html": "Publisher"
+            }
+          ]
         },
         {
-          "html": "Date Out"
+          "body": [
+            {
+              "html": "Date Out"
+            }
+          ]
         },
         {
-          "html": "Date Due"
+          "body": [
+            {
+              "html": "Date Due"
+            }
+          ]
         },
         {
-          "html": "Date Turned In"
+          "body": [
+            {
+              "html": "Date Turned In"
+            }
+          ]
         }
       ],
       "cells": [
         {
-          "class": {
-            "function": "deadlineCSS"
-          },
-          "function": "fullname"
+          "class": [
+            {
+              "function": "deadlineCSS"
+            }
+          ],
+          "body": [
+            {
+              "function": "fullname"
+            }
+          ]
         },
         {
-          "function": "datecomp"
+          "body": [
+            {
+              "function": "datecomp"
+            }
+          ]
         },
         {
-          "function": "publisher"
+          "body": [
+            {
+              "function": "publisher"
+            }
+          ]
         },
         {
-          "function": "dateout"
+          "body": [
+            {
+              "function": "dateout"
+            }
+          ]
         },
         {
-          "function": "datedue"
+          "body": [
+            {
+              "function": "datedue"
+            }
+          ]
         },
         {
-          "html": ""
+          "body": [
+            {
+              "html": ""
+            }
+          ]
         }
       ]
     },
     "terrin": {
       "headers": [
         {
-          "html": "Territory"
+          "body": [
+            {
+              "html": "Territory"
+            }
+          ]
         },
         {
-          "html": "Last Complete"
+          "body": [
+            {
+              "html": "Last Complete"
+            }
+          ]
         },
         {
-          "html": "Date Out"
+          "body": [
+            {
+              "html": "Date Out"
+            }
+          ]
         },
         {
-          "html": "Date Due"
+          "body": [
+            {
+              "html": "Date Due"
+            }
+          ]
         },
         {
-          "html": "Publisher"
+          "body": [
+            {
+              "html": "Publisher"
+            }
+          ]
         }
       ],
       "cells": [
         {
-          "function": "fullname"
+          "body": [
+            {
+              "function": "fullname"
+            }
+          ]
         },
         {
-          "function": "datecomp"
+          "body": [
+            {
+              "function": "datecomp"
+            }
+          ]
         },
         {
-          "html": ""
+          "body": [
+            {
+              "html": ""
+            }
+          ]
         },
         {
-          "html": ""
+          "body": [
+            {
+              "html": ""
+            }
+          ]
         },
         {
-          "class": {
-            "html": "pubEntry"
-          },
-          "html": ""
+          "class": [
+            {
+              "html": "pubEntry"
+            }
+          ],
+          "body": [
+            {
+              "html": ""
+            }
+          ]
         }
       ]
     },
     "terr": {
       "headers": [
         {
-          "html": "Territory"
+          "body": [
+            {
+              "html": "Territory"
+            }
+          ]
         },
         {
-          "html": "Last Complete"
+          "body": [
+            {
+              "html": "Last Complete"
+            }
+          ]
         },
         {
-          "html": "Date Out"
+          "body": [
+            {
+              "html": "Date Out"
+            }
+          ]
         },
         {
-          "html": "Date Due"
+          "body": [
+            {
+              "html": "Date Due"
+            }
+          ]
         },
         {
-          "html": "Publisher"
+          "body": [
+            {
+              "html": "Publisher"
+            }
+          ]
         },
         {
-          "html": "Date Turned In"
+          "body": [
+            {
+              "html": "Date Turned In"
+            }
+          ]
         }
       ],
       "cells": [
         {
-          "function": "fullname"
+          "body": [
+            {
+              "function": "fullname"
+            }
+          ]
         },
         {
-          "function": "datecomp"
+          "body": [
+            {
+              "function": "datecomp"
+            }
+          ]
         },
         {
-          "html": ""
+          "body": [
+            {
+              "html": ""
+            }
+          ]
         },
         {
-          "html": ""
+          "body": [
+            {
+              "html": ""
+            }
+          ]
         },
         {
-          "class": {
-            "html": "pubEntry"
-          },
-          "html": ""
+          "class": [
+            {
+              "html": "pubEntry"
+            }
+          ],
+          "body": [
+            {
+              "html": ""
+            }
+          ]
         },
         {
-          "html": ""
+          "body": [
+            {
+              "html": ""
+            }
+          ]
         }
       ]
     }

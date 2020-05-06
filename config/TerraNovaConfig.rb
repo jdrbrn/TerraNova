@@ -51,6 +51,39 @@ def loadConfig
       end
     end
   end
+
+# Temp to migrate config info
+  config["reportPrintLayout"].each do |layout|
+    layout[1]["headers"].each do |h|
+        if (!h["body"]) 
+          h["body"]=[] 
+        end
+        if (h["html"])
+          h["body"]<<{"html": h["html"]}
+          h.delete("html")
+        end
+        if (h["function"])
+          h["body"]<<{"function": h["function"]}
+          h.delete("function")
+        end
+    end
+    layout[1]["cells"].each do |h|
+        if (!h["body"]) 
+          h["body"]=[] 
+        end
+        if (h["html"])
+          h["body"]<<{"html": h["html"]}
+          h.delete("html")
+        end
+        if (h["function"])
+          h["body"]<<{"function": h["function"]}
+          h.delete("function")
+        end
+    end
+  end
+
+
+
   #Deletes the existing config and then saves the loaded config
   #This makes sure to easily add any keys that were missing or changed
   configFile=File.new(configFileName,"w")
