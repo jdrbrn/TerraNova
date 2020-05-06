@@ -13,6 +13,7 @@ class AdminController < ApplicationController
             # this changes the json back to an object so it can be saved properly at
             # the end
             newConfig["multiserverList"] = JSON.parse(newConfig["multiserverList"])
+            newConfig["reportPrintLayout"] = JSON.parse(newConfig["reportPrintLayout"])
 
             #Saves new config to a temp file
             #This file will be moved + loaded on next restart via config/application.rb
