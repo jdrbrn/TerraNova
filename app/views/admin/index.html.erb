@@ -52,7 +52,12 @@
                 // sets the value, with the function handling any nested objects
                 // if it's a text area it contains raw json which needs to be converted to an object
                 if (item.type == "textarea"){
+                    try {
                     usrconf=setValue(usrconf, keys, JSON.parse(item.value))
+                    }
+                    catch (err){
+                        alert("Error parsing "+item.id+" JSON \n("+err+")")
+                    }
                 }
                 else {
                     usrconf=setValue(usrconf, keys, item.value)
