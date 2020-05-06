@@ -62,9 +62,6 @@ module ReportHelper
     end
 
     # Table Gen Functions
-    def testing
-        return "TESTING"
-    end
 
     def runFunctionTH(functionString)
         # TH doesn't pass any paramaters so check if function
