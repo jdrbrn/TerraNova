@@ -233,8 +233,10 @@
         <td><input id="dncCSS_sepcialDNC" type="color" value="<%= TerraNovaConfig["dncCSS"]["specialDNC"] %>">
     </tr>
 </table>
+<br>
+
 <b>Worksheet Options</b>
-    <table>
+<table>
     <tr>
         <td>Table Design</td>
         <td><%= text_area_tag("usrconf[reportPrintLayout]", 
@@ -243,10 +245,10 @@
                 rows: 57,
                 style: "resize: none;")%></td>
     </tr>
-    </table>
-    <br>
-    <button type="button" onclick="configReset()">Reset to Default</button>
-    <button type="button" onclick="saveConfig()">Save Configuration</button>
+</table>
+<br>
+<button type="button" onclick="configReset()">Reset to Default</button>
+<button type="button" onclick="saveConfig()">Save Configuration</button>
 
 
 <br>
