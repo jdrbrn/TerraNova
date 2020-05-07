@@ -4,25 +4,6 @@ class AdminController < ApplicationController
     end
 
     def index
-        if params[:usrconf]
-            require 'fileutils'
-            #Create mutable hash of the submitted config
-            newConfig=params[:usrconf].to_unsafe_hash
-
-            # config is converted to JSON for editing then passed as a param
-            # this changes the json back to an object so it can be saved properly at
-            # the end
-            newConfig["multiserverList"] = JSON.parse(newConfig["multiserverList"])
-            newConfig["reportPrintLayout"] = JSON.parse(newConfig["reportPrintLayout"])
-
-            #Saves new config to a temp file
-            #This file will be moved + loaded on next restart via config/application.rb
-            #Invalid keys/values will silently fail and be replaced w/ default values at that time
-            configFile=File.new("tmp/UploadedConfig.json","w")
-            configFile.puts(JSON.pretty_generate(newConfig))
-            configFile.close
-        end
-
         if params[:configUp]
             require 'fileutils'
             FileUtils.move(params[:configUp].path,"tmp/UploadedConfig.json") 
@@ -76,6 +57,6 @@ class AdminController < ApplicationController
     #  end
 
     def admin_params
-        params.permit(:restart, :update, :usrconf, :dbUp, :dbDown, :confUp, :confDown)
+        params.permit(:restart, :update, :dbUp, :dbDown, :confUp, :confDown)
     end
 end
