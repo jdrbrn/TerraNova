@@ -27,10 +27,8 @@ module ReportHelper
     end
 
     def fullname(territory)
-        terrid = getID(territory)
-
         output = ""
-        output += @terrs.find(terrid).name + "<br>" + @terrs.find(terrid).region
+        output += name(territory) + "<br>" + region(territory)
         output.html_safe
     end
 
@@ -39,6 +37,22 @@ module ReportHelper
 
         output = ""
         output += @terrs.find(terrid).datecomp.strftime("%m/%d/%y")
+        output.html_safe
+    end
+
+    def name(territory)
+        terrid = getID(territory)
+
+        output = ""
+        output += @terrs.find(terrid).name
+        output.html_safe
+    end
+    
+    def region(territory)
+        terrid = getID(territory)
+
+        output = ""
+        output += @terrs.find(terrid).region
         output.html_safe
     end
 
