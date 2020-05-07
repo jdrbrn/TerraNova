@@ -33,3 +33,6 @@ DevTerraNovaConfig.json
 
 # Ignore config file so that it isn't overwritten
 TerraNovaConfig.json
+
+# Ignore Visual Studio folder
+/.vs
