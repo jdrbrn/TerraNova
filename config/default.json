@@ -39,7 +39,7 @@
     "dncCardWidth": "5in",
     "specialDNC": "#0000ff"
   },
-  "reportPrintLayout": {
+  "reportPrint": {
     "terrout": {
       "headers": [
         {

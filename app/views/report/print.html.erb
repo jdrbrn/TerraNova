@@ -6,11 +6,11 @@
 <!-- table to display terrouts -->
 <div id="terrOuts">
   <h2>Territories to Check-In</h2>
-  <% terroutConfig = TerraNovaConfig["reportPrintLayout"]["terrout"] %>
+  <% terroutConfig = TerraNovaConfig["reportPrint"]["terrout"] %>
   <table>
     <thead>
       <tr>
-        <%= makeTableHeaders("reportPrintLayout","terrout") %>
+        <%= makeTableHeaders("reportPrint","terrout") %>
       </tr>
     </thead>
 
@@ -18,7 +18,7 @@
       <% @terrouts.sort_by{|terrout| terrout.datedue}.each do |terrout| %>
         <% categorizedTerrs<<terrout.terrid %>
         <tr>
-          <%= makeTableData("reportPrintLayout", "terrout", terrout) %>
+          <%= makeTableData("reportPrint", "terrout", terrout) %>
         </tr>
       <% end %>
     </tbody>
@@ -28,7 +28,7 @@
 <!-- table to display terrins -->
 <div id="terrIns">
   <h2>Available Territories</h2>
-  <% terrinConfig = TerraNovaConfig["reportPrintLayout"]["terrin"] %>
+  <% terrinConfig = TerraNovaConfig["reportPrint"]["terrin"] %>
   <table>
     <thead>
       <tr>
@@ -56,7 +56,7 @@
   <!-- table to display terrs that aren't out or in -->
     <div id="otherTerrs">
       <h2>Other Territories</h2>
-      <% terrConfig = TerraNovaConfig["reportPrintLayout"]["terr"] %>
+      <% terrConfig = TerraNovaConfig["reportPrint"]["terr"] %>
       <table id="terrtable">
         <thead>
           <tr>
