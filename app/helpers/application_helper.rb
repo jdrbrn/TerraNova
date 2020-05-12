@@ -88,6 +88,11 @@ module ApplicationHelper
 
     def makeTableHeaders(page, table)
         output=""
+        if TerraNovaConfig[page][table]["extends"]
+            refPage = TerraNovaConfig[page][table]["extends"]["page"]
+            refTable = TerraNovaConfig[page][table]["extends"]["table"]
+            output += makeTableHeaders(refPage, refTable)
+        end
         TerraNovaConfig[page][table]["headers"].each do |header|
             output+=generateTH(header)
         end
@@ -96,6 +101,11 @@ module ApplicationHelper
 
     def makeTableData(page, table, object)
         output=""
+        if TerraNovaConfig[page][table]["extends"]
+            refPage = TerraNovaConfig[page][table]["extends"]["page"]
+            refTable = TerraNovaConfig[page][table]["extends"]["table"]
+            output += makeTableData(refPage, refTable, object)
+        end
         TerraNovaConfig[page][table]["cells"].each do |cell|
             output+=generateTD(cell, object)
         end
