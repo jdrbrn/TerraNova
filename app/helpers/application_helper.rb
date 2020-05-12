@@ -86,27 +86,27 @@ module ApplicationHelper
         output.html_safe
     end
 
-    def makeTableHeaders(page, table)
+    def makeTableHeaders(container, table)
         output=""
-        if TerraNovaConfig[page][table]["extends"]
-            refPage = TerraNovaConfig[page][table]["extends"]["page"]
-            refTable = TerraNovaConfig[page][table]["extends"]["table"]
-            output += makeTableHeaders(refPage, refTable)
+        if TerraNovaConfig[container][table]["extends"]
+            refContainer = TerraNovaConfig[container][table]["extends"]["container"]
+            refTable = TerraNovaConfig[container][table]["extends"]["table"]
+            output += makeTableHeaders(refContainer, refTable)
         end
-        TerraNovaConfig[page][table]["headers"].each do |header|
+        TerraNovaConfig[container][table]["headers"].each do |header|
             output+=generateTH(header)
         end
         output.html_safe
     end
 
-    def makeTableData(page, table, object)
+    def makeTableData(container, table, object)
         output=""
-        if TerraNovaConfig[page][table]["extends"]
-            refPage = TerraNovaConfig[page][table]["extends"]["page"]
-            refTable = TerraNovaConfig[page][table]["extends"]["table"]
-            output += makeTableData(refPage, refTable, object)
+        if TerraNovaConfig[container][table]["extends"]
+            refContainer = TerraNovaConfig[container][table]["extends"]["container"]
+            refTable = TerraNovaConfig[container][table]["extends"]["table"]
+            output += makeTableData(refContainer, refTable, object)
         end
-        TerraNovaConfig[page][table]["cells"].each do |cell|
+        TerraNovaConfig[container][table]["cells"].each do |cell|
             output+=generateTD(cell, object)
         end
         output.html_safe
