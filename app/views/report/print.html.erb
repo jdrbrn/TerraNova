@@ -10,9 +10,7 @@
   <table>
     <thead>
       <tr>
-        <% terroutConfig["headers"].each do |h| %>
-          <%= generateTH(h) %>
-        <% end %>
+        <%= makeTableHeaders("reportPrintLayout","terrout") %>
       </tr>
     </thead>
 
@@ -20,9 +18,7 @@
       <% @terrouts.sort_by{|terrout| terrout.datedue}.each do |terrout| %>
         <% categorizedTerrs<<terrout.terrid %>
         <tr>
-          <% terroutConfig["cells"].each do |c| %>
-            <%= generateTD(c, terrout) %>
-          <% end %>
+          <%= makeTableData("reportPrintLayout", "terrout", terrout) %>
         </tr>
       <% end %>
     </tbody>

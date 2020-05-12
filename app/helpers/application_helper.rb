@@ -85,4 +85,20 @@ module ApplicationHelper
 
         output.html_safe
     end
+
+    def makeTableHeaders(page, table)
+        output=""
+        TerraNovaConfig[page][table]["headers"].each do |header|
+            output+=generateTH(header)
+        end
+        output.html_safe
+    end
+
+    def makeTableData(page, table, object)
+        output=""
+        TerraNovaConfig[page][table]["cells"].each do |cell|
+            output+=generateTD(cell, object)
+        end
+        output.html_safe
+    end
 end
