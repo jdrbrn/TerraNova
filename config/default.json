@@ -219,39 +219,10 @@
     "terr": {
       "headers": [
         {
-          "body": [
-            {
-              "html": "Territory"
-            }
-          ]
-        },
-        {
-          "body": [
-            {
-              "html": "Last Complete"
-            }
-          ]
-        },
-        {
-          "body": [
-            {
-              "html": "Date Out"
-            }
-          ]
-        },
-        {
-          "body": [
-            {
-              "html": "Date Due"
-            }
-          ]
-        },
-        {
-          "body": [
-            {
-              "html": "Publisher"
-            }
-          ]
+          "includes":{
+            "container": "reportPrint",
+            "table": "terrin"
+          }
         },
         {
           "body": [
@@ -263,44 +234,10 @@
       ],
       "cells": [
         {
-          "body": [
-            {
-              "function": "fullname"
-            }
-          ]
-        },
-        {
-          "body": [
-            {
-              "function": "datecomp"
-            }
-          ]
-        },
-        {
-          "body": [
-            {
-              "html": ""
-            }
-          ]
-        },
-        {
-          "body": [
-            {
-              "html": ""
-            }
-          ]
-        },
-        {
-          "class": [
-            {
-              "html": "pubEntry"
-            }
-          ],
-          "body": [
-            {
-              "html": ""
-            }
-          ]
+          "includes":{
+            "container": "reportPrint",
+            "table": "terrin"
+          }
         },
         {
           "body": [
