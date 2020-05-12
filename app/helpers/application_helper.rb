@@ -40,7 +40,7 @@ module ApplicationHelper
                     if entry["html"]
                         output+=entry["html"]
                     elsif entry["function"]
-                        output+=runFunctionTH(entry[1])
+                        output+=runFunctionTH(entry["function"])
                     end
                 end
                 output+="\""
@@ -57,7 +57,6 @@ module ApplicationHelper
     def generateTD(config, territory)
         output="<td"
         body=""
-        
         config.each do |layout|
             if layout[0]=="body"
                 layout[1].each do |entry|

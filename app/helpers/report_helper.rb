@@ -10,7 +10,6 @@ module ReportHelper
 
     def deadlineCSS(territory)
         output = nil
-        terrid = getID(territory)
 
         if territory.class == Terrout
             if territory.datedue-Date.current<0
@@ -22,6 +21,8 @@ module ReportHelper
         if (output==nil)
             output = "normal"
         end
+
+        output
     end
 
     def fullname(territory)
