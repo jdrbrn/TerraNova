@@ -32,9 +32,7 @@
   <table>
     <thead>
       <tr>
-        <% terrinConfig["headers"].each do |h| %>
-          <%= generateTH(h) %>
-        <% end %>
+        <%= makeTableHeaders("reportPrint","terrin") %>
       </tr>
     </thead>
 
@@ -42,9 +40,7 @@
       <% @terrins.sort_by{|terrin| @terrs.find(terrin.terrid).datecomp}.each do |terrin| %>
         <% categorizedTerrs<<terrin.terrid %>
         <tr>
-          <% terrinConfig["cells"].each do |c| %>
-            <%= generateTD(c, terrin) %>
-          <% end %>
+          <%= makeTableData("reportPrint", "terrin", terrin) %>
         </tr>
       <% end %>
     </tbody>
@@ -60,9 +56,7 @@
       <table id="terrtable">
         <thead>
           <tr>
-            <% terrConfig["headers"].each do |h| %>
-              <%= generateTH(h) %>
-            <% end %>
+            <%= makeTableHeaders("reportPrint", "terr") %>
           </tr>
         </thead>
 
@@ -71,9 +65,7 @@
             <% if categorizedTerrs.find_index(terr.id) %>
             <% else %>
               <tr>
-                <% terrConfig["cells"].each do |c| %>
-                  <%= generateTD(c, terr) %>
-                <% end %>
+                <%= makeTableData("reportPrint","terr",terr) %>
               </tr>
             <% end %>
           <% end %>
