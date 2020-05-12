@@ -28,22 +28,6 @@
   <% end %>
 <% end %>
 
-<!-- User Settings Set in TerraNovaConfig.json-->
-<script>
-var congName = "<%= TerraNovaConfig["name"] %>"
-//If enabled links to other servers will be in the toolbar
-var multiLinksEnabled = <%=TerraNovaConfig["enableMultiserver"] %>
-
-<%# Only load multiServer data if needed %>
-<% if TerraNovaConfig["enableMultiserver"] %>
-  var multiServers=[]
-  //multiServers.push(["Type of Territory","IP of TerraNova Server for type"])
-  <% TerraNovaConfig["multiserverList"].each do |server| %>
-    multiServers.push(["<%= server[0] %>", "<%= server[1] %>"])
-  <% end %>
-<% end %>
-</script>
-
 <!-- Javascript Functions -->
 <script>
   function appendHTML(element, contents) {
@@ -66,14 +50,6 @@ var multiLinksEnabled = <%=TerraNovaConfig["enableMultiserver"] %>
     document.getElementById("detailFrame").src = ("terrs/" + terrid)
   }
 
-  function setToolbar() {
-    insertHTML("toolHead", (congName + " "))
-    if (multiLinksEnabled){
-      for (id=0; id<multiServers.length; id++){
-        appendHTML("toolLinks",("<td id='server"+id+"Link'><a href='http://"+multiServers[id][1]+"'>"+multiServers[id][0]+"</a></td>"))
-      }
-    }
-  }
   function downloadDB() {
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET", "report/download?db=1", true);
@@ -89,10 +65,21 @@ var multiLinksEnabled = <%=TerraNovaConfig["enableMultiserver"] %>
 </script>
 
 <div id="toolbar">
-    <div id="toolHead" align="left">Congregation Territory</div>
-    <table align="right">
-      <tr id="toolLinks"> </tr>
-    </table>
+    <div id="toolHead" align="left">
+      <%= TerraNovaConfig["name"] %> Congregation Territory
+    </div>
+
+    <%# Only load multiServer data if needed %>
+    <% if TerraNovaConfig["enableMultiserver"] %>
+      <table align="right">
+        <tr id="toolLinks"> 
+          <% TerraNovaConfig["multiserverList"].each do |server| %>
+            <td id='serverLink'> <a href="http://<%= server[1] %>"><%= server[0] %></a></td>
+          <% end %>
+        </tr>
+      </table>
+    <% end %>
+
 </div>
 
 <!-- Left side report view -->
@@ -236,8 +223,6 @@ var multiLinksEnabled = <%=TerraNovaConfig["enableMultiserver"] %>
 <div id="detailWindow">
   <iframe id="detailFrame"> </iframe>
 </div>
-
-<script>  window.onload = setToolbar(); </script>
 
 <script>
 //This script section creates a downloadable CSV of all the territory listings
