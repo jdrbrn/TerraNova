@@ -52,13 +52,6 @@
         {
           "body": [
             {
-              "html": "Last Complete"
-            }
-          ]
-        },
-        {
-          "body": [
-            {
               "html": "Publisher"
             }
           ]
@@ -95,13 +88,6 @@
           "body": [
             {
               "function": "fullname"
-            }
-          ]
-        },
-        {
-          "body": [
-            {
-              "function": "datecomp"
             }
           ]
         },
