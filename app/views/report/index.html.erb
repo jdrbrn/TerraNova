@@ -130,11 +130,7 @@
     <table id="terrouttable">
       <thead>
         <tr>
-          <th>Territory</th>
-          <th>Last Complete</th>
-          <th>Publisher</th>
-          <th>Date Out</th>
-          <th>Date Due</th>
+          <%= makeTableHeaders("reportIndex", "terrout") %>
         </tr>
       </thead>
 
@@ -142,13 +138,7 @@
         <% @terrouts.sort_by{|terrout| terrout.datedue}.each do |terrout| %>
           <% categorizedTerrs<<terrout.terrid %>
           <tr>
-            <td class="<%= deadlineCSS(terrout) %>%"><%= fullname(terrout).html_safe %></td>
-            <td><%= datecomp(terrout).html_safe %></td>
-            <td><%= publisher(terrout).html_safe %></td>
-            <td><%= dateout(terrout).html_safe %></td>
-            <td><%= datedue(terrout).html_safe %></td>
-            <td><a href="#" onclick="terroutsViewDetails('<%= terrout.id %>');return false;">View Details</a></td>
-            <td><%= link_to 'Check In', [terrout,checkin: terrout.terrid], method: :delete, data: { confirm: "Are you sure you want to check in #{@terrs.find(terrout.terrid).name}?" } %></td>
+            <%= makeTableData("reportIndex", "terrout", terrout) %>
           </tr>
         <% end %>
       </tbody>
@@ -162,8 +152,7 @@
     <table id="terrintable">
       <thead>
         <tr>
-          <th>Territory</th>
-          <th>Last Complete</th>
+          <%= makeTableHeaders("reportIndex", "terrin") %>
         </tr>
       </thead>
 
@@ -171,10 +160,7 @@
         <% @terrins.sort_by{|terrin| @terrs.find(terrin.terrid).datecomp}.each do |terrin| %>
           <% categorizedTerrs<<terrin.terrid %>
           <tr>
-            <td class="<%= deadlineCSS(terrin) %>"><%= fullname(terrin) %></td>
-            <td><%= datecomp(terrin) %></td>
-            <td><a href="#" onclick="terrinsViewDetails('<%= terrin.id %>');return false;">View Details</a></td>
-            <td><%= link_to 'Check Out', [terrin,checkout: terrin.terrid], method: :delete, data: { confirm: "Are you sure you want to check out #{@terrs.find(terrin.terrid).name}?" } %></td>
+            <%= makeTableData("reportIndex", "terrin", terrin) %>  
           </tr>
         <% end %>
       </tbody>
@@ -188,8 +174,7 @@
     <table id="terrtable">
       <thead>
         <tr>
-          <th>Territory</th>
-          <th>Last Complete</th>
+          <%= makeTableHeaders("reportIndex", "terr") %>
         </tr>
       </thead>
 
@@ -198,11 +183,7 @@
           <% if categorizedTerrs.find_index(terr.id) %>
           <% else %>
             <tr>
-              <td class="<%= deadlineCSS(terr) %>"><%= fullname(terr) %></td>
-              <td><%= datecomp(terr) %></td>
-              <td><a href='#' onclick="terrsViewDetails('<%= terr.id %>');return false;">View Details</a></td>
-              <td><%= link_to 'Check Out', {:controller => "terrouts", :action => "new", :terrid => terr.id} %></td>
-              <td><%= link_to 'Check In', {:controller => "terrins", :action => "new", :terrid => terr.id} %></td>
+              <%= makeTableData("reportIndex", "terr", terr) %>
             </tr>
           <% end %>
         <% end %>

@@ -220,7 +220,7 @@
       ],
       "cells": [
         {
-          "includes":{
+          "includes": {
             "container": "reportPrint",
             "table": "terrin"
           }
@@ -229,6 +229,33 @@
           "body": [
             {
               "html": ""
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "reportIndex":{
+    "terrout": {
+      "headers":[
+        {
+          "includes": {
+            "container": "reportPrint",
+            "table": "terrout"
+          }
+        }
+      ],
+      "cells":[
+        {
+          "includes": {
+            "container": "reportPrint",
+            "table": "terrout"
+          }
+        },
+        {
+          "body": [
+            {
+              "function": "testfunc"
             }
           ]
         }
