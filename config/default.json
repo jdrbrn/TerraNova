@@ -43,32 +43,10 @@
     "terrout": {
       "headers": [
         {
-          "body": [
-            {
-              "html": "Territory"
-            }
-          ]
-        },
-        {
-          "body": [
-            {
-              "html": "Publisher"
-            }
-          ]
-        },
-        {
-          "body": [
-            {
-              "html": "Date Out"
-            }
-          ]
-        },
-        {
-          "body": [
-            {
-              "html": "Date Due"
-            }
-          ]
+          "includes": {
+            "container": "tableTemplates",
+            "table": "terrout"
+          }
         },
         {
           "body": [
@@ -80,132 +58,37 @@
       ],
       "cells": [
         {
-          "class": [
-            {
-              "function": "deadlineCSS"
-            }
-          ],
-          "body": [
-            {
-              "function": "fullname"
-            }
-          ]
+          "includes": {
+            "container": "tableTemplates",
+            "table": "terrout"
+          }
         },
         {
-          "body": [
-            {
-              "function": "publisher"
-            }
-          ]
-        },
-        {
-          "body": [
-            {
-              "function": "dateout"
-            }
-          ]
-        },
-        {
-          "body": [
-            {
-              "function": "datedue"
-            }
-          ]
-        },
-        {
-          "body": [
-            {
-              "html": ""
-            }
-          ]
         }
       ]
     },
     "terrin": {
       "headers": [
         {
-          "body": [
-            {
-              "html": "Territory"
-            }
-          ]
-        },
-        {
-          "body": [
-            {
-              "html": "Last Complete"
-            }
-          ]
-        },
-        {
-          "body": [
-            {
-              "html": "Date Out"
-            }
-          ]
-        },
-        {
-          "body": [
-            {
-              "html": "Date Due"
-            }
-          ]
-        },
-        {
-          "body": [
-            {
-              "html": "Publisher"
-            }
-          ]
+          "includes": {
+            "container": "tableTemplates",
+            "table": "terrin"
+          }
         }
       ],
       "cells": [
         {
-          "body": [
-            {
-              "function": "fullname"
-            }
-          ]
-        },
-        {
-          "body": [
-            {
-              "function": "datecomp"
-            }
-          ]
-        },
-        {
-          "body": [
-            {
-              "html": ""
-            }
-          ]
-        },
-        {
-          "body": [
-            {
-              "html": ""
-            }
-          ]
-        },
-        {
-          "class": [
-            {
-              "html": "pubEntry"
-            }
-          ],
-          "body": [
-            {
-              "html": ""
-            }
-          ]
+          "includes": {
+            "container": "tableTemplates",
+            "table": "terrin"
+          }
         }
       ]
     },
     "terr": {
       "headers": [
         {
-          "includes":{
+          "includes": {
             "container": "reportPrint",
             "table": "terrin"
           }
@@ -235,27 +118,272 @@
       ]
     }
   },
-  "reportIndex":{
+  "reportIndex": {
     "terrout": {
-      "headers":[
+      "headers": [
         {
           "includes": {
-            "container": "reportPrint",
+            "container": "tableTemplates",
             "table": "terrout"
           }
         }
       ],
-      "cells":[
+      "cells": [
         {
           "includes": {
-            "container": "reportPrint",
+            "container": "tableTemplates",
             "table": "terrout"
           }
         },
         {
           "body": [
             {
-              "function": "testfunc"
+              "function": "viewdetails"
+            }
+          ]
+        },
+        {
+          "body": [
+            {
+              "function": "checkinTerrout"
+            }
+          ]
+        }
+      ]
+    },
+    "terrin": {
+      "headers": [
+        {
+          "includes": {
+            "container": "tableTemplates",
+            "table": "terrFullname"
+          }
+        },
+        {
+          "body": [
+            {
+              "html": "Last Complete"
+            }
+          ]
+        }
+      ],
+      "cells": [
+        {
+          "includes": {
+            "container": "tableTemplates",
+            "table": "terrFullname"
+          }
+        },
+        {
+          "body": [
+            {
+              "function": "datecomp"
+            }
+          ]
+        },
+        {
+          "body": [
+            {
+              "function": "viewdetails"
+            }
+          ]
+        },
+        {
+          "body": [
+            {
+              "function": "checkoutTerrin"
+            }
+          ]
+        }
+      ]
+    },
+    "terr": {
+      "headers": [
+        {
+          "includes": {
+            "container": "reportIndex",
+            "table": "terrin"
+          }
+        }
+      ],
+      "cells": [
+        {
+          "includes": {
+            "container": "tableTemplates",
+            "table": "terrFullname"
+          }
+        },
+        {
+          "body": [
+            {
+              "function": "datecomp"
+            }
+          ]
+        },
+        {
+          "body": [
+            {
+              "function": "viewdetails"
+            }
+          ]
+        },
+        {
+          "body": [
+            {
+              "function": "checkoutTerr"
+            }
+          ]
+        },
+        {
+          "body": [
+            {
+              "function": "checkinTerr"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "tableTemplates": {
+    "terrFullname": {
+      "headers": [
+        {
+          "body": [
+            {
+              "html": "Territory"
+            }
+          ]
+        }
+      ],
+      "cells": [
+        {
+          "body": [
+            {
+              "function": "fullname"
+            }
+          ],
+          "class": [
+            {
+              "function": "deadlineCSS"
+            }
+          ]
+        }
+      ]
+    },
+    "standardDataHeadings": {
+      "headers": [
+        {
+          "body": [
+            {
+              "html": "Date Out"
+            }
+          ]
+        },
+        {
+          "body": [
+            {
+              "html": "Date Due"
+            }
+          ]
+        },
+        {
+          "body": [
+            {
+              "html": "Publisher"
+            }
+          ]
+        }
+      ]
+    },
+    "terrout": {
+      "headers": [
+        {
+          "includes": {
+            "container": "tableTemplates",
+            "table": "terrFullname"
+          }
+        },
+        {
+          "includes": {
+            "container": "tableTemplates",
+            "table": "standardDataHeadings"
+          }
+        }
+      ],
+      "cells": [
+        {
+          "includes": {
+            "container": "tableTemplates",
+            "table": "terrFullname"
+          }
+        },
+        {
+          "body": [
+            {
+              "function": "dateoutTerrout"
+            }
+          ]
+        },
+        {
+          "body": [
+            {
+              "function": "datedueTerrout"
+            }
+          ]
+        },
+        {
+          "body": [
+            {
+              "function": "publisherTerrout"
+            }
+          ]
+        }
+      ]
+    },
+    "terrin": {
+      "headers": [
+        {
+          "includes": {
+            "container": "tableTemplates",
+            "table": "terrFullname"
+          }
+        },
+        {
+          "body": [
+            {
+              "html": "Last Complete"
+            }
+          ]
+        },
+        {
+          "includes": {
+            "container": "tableTemplates",
+            "table": "standardDataHeadings"
+          }
+        }
+      ],
+      "cells": [
+        {
+          "includes": {
+            "container": "tableTemplates",
+            "table": "terrFullname"
+          }
+        },
+        {
+          "body": [
+            {
+              "function": "datecomp"
+            }
+          ]
+        },
+        {
+        },
+        {
+        },
+        {
+          "class": [
+            {
+              "html": "pubEntry"
             }
           ]
         }
