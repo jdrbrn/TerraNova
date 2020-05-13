@@ -51,19 +51,44 @@ module ReportHelper
         output += @terrs.find(terrid).region
     end
 
+    def viewdetails(territory)
+        terrtype = territory.class.to_s.downcase
+        output = "<a href=\"#\" onclick=\""
+        output += terrtype
+        output += "sViewDetails('#{territory.id}');return false;\">View Details</a>"
+    end
+
     # Terrout Functions
-    def publisher(terrout)
+    def publisherTerrout(terrout)
         output = ""
         output += terrout.publisher
     end
 
-    def dateout(terrout)
+    def dateoutTerrout(terrout)
         output = ""
         output += terrout.dateout.strftime("%m/%d/%y")
     end
     
-    def datedue(terrout)
+    def datedueTerrout(terrout)
         output = ""
         output += terrout.datedue.strftime("%m/%d/%y")
+    end
+
+    def checkinTerrout(terrout)
+        link_to 'Check In', [terrout,checkin: terrout.terrid], method: :delete, data: { confirm: "Are you sure you want to check in #{@terrs.find(terrout.terrid).name}?" }
+    end
+
+    # Terrin Functions
+    def checkoutTerrin(terrin)
+        link_to 'Check Out', [terrin,checkout: terrin.terrid], method: :delete, data: { confirm: "Are you sure you want to check out #{@terrs.find(terrin.terrid).name}?" }
+    end
+
+    # Terr Functions
+    def checkoutTerr(terr)
+        link_to 'Check Out', {:controller => "terrouts", :action => "new", :terrid => terr.id}
+    end
+
+    def checkinTerr(terr)
+        link_to 'Check In', {:controller => "terrins", :action => "new", :terrid => terr.id}
     end
 end
