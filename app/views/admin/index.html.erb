@@ -235,14 +235,30 @@
 </table>
 <br>
 
-<b>Worksheet Options</b>
+<b>Table Options</b>
 <table>
     <tr>
-        <td>Table Design</td>
+        <td>Templates</td>
+        <td><%= text_area_tag("usrconf[tableTemplates]", 
+                JSON.pretty_generate(TerraNovaConfig["tableTemplates"]),
+                cols: 60,
+                rows: 60,
+                style: "resize: none;")%></td>
+    </tr>
+    <tr>
+        <td>Main Tables</td>
+        <td><%= text_area_tag("usrconf[reportIndex]", 
+                JSON.pretty_generate(TerraNovaConfig["reportIndex"]),
+                cols: 60,
+                rows: 60,
+                style: "resize: none;")%></td>
+    </tr>
+    <tr>
+        <td>Worksheet Tables</td>
         <td><%= text_area_tag("usrconf[reportPrint]", 
                 JSON.pretty_generate(TerraNovaConfig["reportPrint"]),
-                cols: 40,
-                rows: 57,
+                cols: 60,
+                rows: 60,
                 style: "resize: none;")%></td>
     </tr>
 </table>
