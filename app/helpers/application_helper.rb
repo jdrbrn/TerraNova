@@ -23,7 +23,7 @@ module ApplicationHelper
 
     def generateTH(config)
         # Setup the variables to store the output and body
-        # output is a broken tag as HTML attributes can be added
+        # output is a broken tag as html attributes can be added
         # body is seperate so that it can be combined after all generation is done
         output="<th"
         body=""
@@ -31,31 +31,31 @@ module ApplicationHelper
         # Iterate through each part of the header
         config.elements.each do |attribute|
             # Check if the header is defining the body content
-            # Else we set an HTML attribute with the name of the element
+            # Else we set an html attribute with the name of the element
             if attribute.name == "body"
                 # Iterate through the body elements
-                # Check to see if it's an HTML element or function
-                # HTML is stored into the body var
+                # Check to see if it's an html element or function
+                # html is stored into the body var
                 # function is run and stored
                 attribute.elements.each do |element|
-                    if element.name == "HTML"
+                    if element.name == "html"
                         body+=element.content
                     elsif element.name == "function"
                         body+=runFunctionTH(element.content)
                     end
                 end
             else
-                # Add the HTML attribute to the tag
+                # Add the html attribute to the tag
                 # Ex: output = "<th", attribute.name="class" => output="<th class=""
                 # This leaves an open quote that is closed at the end of the loop once the attribute
                 # has been defined
                 output += " #{attribute.name}=\""
                 # Iterate through the elements
-                # Check to see if it's an HTML element or function
-                # HTML is stored into the output var
+                # Check to see if it's an html element or function
+                # html is stored into the output var
                 # function is run and stored
                 attribute.elements.each do |element|
-                    if element.name == "HTML"
+                    if element.name == "html"
                         output+=element.content
                     elsif element.name == "function"
                         output+=runFunctionTH(element.content)
@@ -75,7 +75,7 @@ module ApplicationHelper
     
     def generateTD(config, territory)
         # Setup the variables to store the output and body
-        # output is a broken tag as HTML attributes can be added
+        # output is a broken tag as html attributes can be added
         # body is seperate so that it can be combined after all generation is done
         output="<td"
         body=""
@@ -83,31 +83,31 @@ module ApplicationHelper
         # Iterate through each part of the header
         config.elements.each do |attribute|
             # Check if the header is defining the body content
-            # Else we set an HTML attribute with the name of the element
+            # Else we set an html attribute with the name of the element
             if attribute.name == "body"
                 # Iterate through the body elements
-                # Check to see if it's an HTML element or function
-                # HTML is stored into the body var
+                # Check to see if it's an html element or function
+                # html is stored into the body var
                 # function is run and stored
                 attribute.elements.each do |element|
-                    if element.name == "HTML"
+                    if element.name == "html"
                         body+=element.content
                     elsif element.name == "function"
                         body+=runFunctionTD(element.content, territory)
                     end
                 end
             else
-                # Add the HTML attribute to the tag
+                # Add the html attribute to the tag
                 # Ex: output = "<td", attribute.name="class" => output="<td class=""
                 # This leaves an open quote that is closed at the end of the loop once the attribute
                 # has been defined
                 output += " #{attribute.name}=\""
                 # Iterate through the elements
-                # Check to see if it's an HTML element or function
-                # HTML is stored into the output var
+                # Check to see if it's an html element or function
+                # html is stored into the output var
                 # function is run and stored
                 attribute.elements.each do |element|
-                    if element.name == "HTML"
+                    if element.name == "html"
                         output+=element.content
                     elsif element.name == "function"
                         output+=runFunctionTD(element.content, territory)
