@@ -3,7 +3,7 @@ class ConfigHelper
 
   @defaultsDir="config/defaults/"
   @configDir="config/user/"
-  @layouts = {}
+  @layoutsTable = {}
 
   def self.loadConfig
     # Loads default config
@@ -66,7 +66,12 @@ class ConfigHelper
     config
   end
 
-  def self.loadLayout(layoutName)
+  def self.readLayout(layoutName)
+    if File.file?(@configDir+"layouts/"+layoutName)
+    elsif File.file?(@defaultsDir+"layouts/"+layoutName)
+    end
+  end
 
+  def self.loadLayouts
   end
 end
