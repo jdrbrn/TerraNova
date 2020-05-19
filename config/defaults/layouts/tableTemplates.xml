@@ -6,10 +6,10 @@
     </header>
     <cell>
         <class>
-            <Function>deadlineCSS</Function>
+            <function>deadlineCSS</function>
         </class>
         <body>
-            <Function>fullname</Function>
+            <function>fullname</function>
         </body>
     </cell>
 </terrFullname>
