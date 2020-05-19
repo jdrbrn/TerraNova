@@ -10,7 +10,9 @@
     <cell>
         <includes>tableTemplates/terrout</includes>
     </cell>
-    <cell><!--Empty Cell--></cell>
+    <cell>
+        <body><!--Empty Cell--></body>
+    </cell>
 </terrout>
 
 <terrin>
@@ -34,5 +36,7 @@
     <cell>
         <includes>reportPrint/terrin</includes>
     </cell>
-    <cell><!--Empty Cell--></cell>
+    <cell>
+        <body><!--Empty Cell--></body>
+    </cell>
 </terr>

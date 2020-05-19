@@ -74,9 +74,3 @@
         </body>
     </cell>
 </terr>
-
-<test>
-    <header>
-        <includes>reportPrint/terr</includes>
-    </header>
-</test>
