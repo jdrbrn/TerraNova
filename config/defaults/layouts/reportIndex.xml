@@ -1,0 +1,79 @@
+<terrout>
+    <header>
+        <includes>tableTemplates/terrout</includes>
+    </header>
+    <cell>
+        <includes>tableTemplates/terrout</includes>
+    </cell>
+    <cell>
+        <body>
+            <function>viewdetails</function>
+        </body>
+    </cell>
+    <cell>
+        <body>
+            <function>checkinTerrout</function>
+        </body>
+    </cell>
+</terrout>
+
+<terrin>
+    <header>
+        <includes>tableTemplates/terrFullname</includes>
+    </header>
+    <header>
+        <body>
+            <html>Last Complete</html>
+        </body>
+    </header>
+    <cell>
+        <includes>tableTemplates/terrFullname</includes>
+    </cell>
+    <cell>
+        <body>
+            <function>datecomp</function>
+        </body>
+    </cell>
+    <cell>
+        <body>
+            <function>viewdetails</function>
+        </body>
+    </cell>
+    <cell>
+        <body>
+            <function>checkoutTerrin</function>
+        </body>
+    </cell>
+</terrin>
+
+<terr>
+    <header>
+        <includes>reportIndex/terrin</includes>
+    </header>
+    <cell>
+        <includes>
+        <container>tableTemplates</container>
+        <table>terrFullname</table>
+        </includes>
+    </cell>
+    <cell>
+        <body>
+            <function>datecomp</function>
+        </body>
+    </cell>
+    <cell>
+        <body>
+            <function>viewdetails</function>
+        </body>
+    </cell>
+    <cell>
+        <body>
+            <function>checkoutTerr</function>
+        </body>
+    </cell>
+    <cell>
+        <body>
+            <function>checkinTerr</function>
+        </body>
+    </cell>
+</terr>

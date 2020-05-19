@@ -3,7 +3,7 @@ require 'json'
 def loadConfig
   # Loads default config
   # Sets what keys need to exist and default values
-  default=JSON.parse(File.read("config/default.json"))
+  default=JSON.parse(File.read("config/defaults/default.json"))
   
   #File name to use for the configFile
   configFileName="TerraNovaConfig.json"
