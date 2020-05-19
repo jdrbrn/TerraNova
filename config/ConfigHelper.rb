@@ -3,19 +3,20 @@ class ConfigHelper
 
   @defaultsDir="config/defaults/"
   @configDir="config/user/"
+  @configFile="TerraNovaConfig.json"
   @layoutsTable = {}
 
   def self.loadConfig
     # Loads default config
     # Sets what keys need to exist and default values
-    default=JSON.parse(File.read(@defaultsDir+"default.json"))
+    default=JSON.parse(File.read(@defaultsDir+@configFile))
     
     #File name to use for the configFile
-    configFileName=@configDir+"TerraNovaConfig.json"
+    configFileName=@configDir+@configFile
 
     #Checks to see if config file exists and creates if not
     if File.file?(configFileName)==false
-      File.new(configFileName,"a+").close
+      copyDefault(@configFile)
     end
 
     #Loads the JSON File
@@ -67,11 +68,50 @@ class ConfigHelper
   end
 
   def self.readLayout(layoutName)
-    if File.file?(@configDir+"layouts/"+layoutName)
-    elsif File.file?(@defaultsDir+"layouts/"+layoutName)
+    layoutFile = layoutName+".xml"
+    # Check for file, copy from defaults if exists there
+    if File.file?(@configDir+"layouts/"+layoutFile)
+      # Load layout file so we can read the XML
+      layoutXML=Nokogiri::XML.fragment(File.read(@configDir+"layouts/"+layoutFile))
+      # Get the table entries and add record their existance
+      @layoutsTable[layoutName]=[]
+      layoutXML.xpath("./*").each do |table|
+        @layoutsTable[layoutName]<<table.name
+      end
+      # Check for includes and import those tables as well
+      layoutXML.xpath(".//includes").each do |include|
+        if !includeCheck(include.content.split("/")[0], include.content.split("/")[1])
+          puts "Error: Failed to include #{include.content} from #{layoutName}"
+        end
+      end
+      @layoutsTable
+    elsif File.file?(@defaultsDir+"layouts/"+layoutFile)
+      copyDefault("layouts/"+layoutFile)
+      readLayout(layoutName)
+    else
+      puts "Error: No layout #{layoutName} found"
+      false
+    end
+  end
+
+  def self.includeCheck(layout, table)
+    if @layoutsTable[layout]
+      @layoutsTable[layout].include?(table)
+    else
+      self.readLayout(layout)
+      includeCheck(layout, table)
     end
   end
 
   def self.loadLayouts
+    output={}
+    @layoutsTable.keys.each do |layout|
+      output[layout]=Nokogiri::XML.fragment(File.read(@configDir+"layouts/"+layout+".xml"))
+    end
+    output
+  end
+
+  def self.copyDefault(fileName)
+    File.write(@configDir+fileName, File.read(@defaultsDir+fileName))
   end
 end

@@ -38,6 +38,7 @@ end
 Bundler.require(*Rails.groups)
 
 TerraNovaConfig=ConfigHelper.loadConfig
+TerraNovaLayouts=ConfigHelper.loadLayouts
 
 module TerraNova
   class Application < Rails::Application

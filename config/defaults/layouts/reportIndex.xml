@@ -51,10 +51,7 @@
         <includes>reportIndex/terrin</includes>
     </header>
     <cell>
-        <includes>
-        <container>tableTemplates</container>
-        <table>terrFullname</table>
-        </includes>
+        <includes>tableTemplates/terrFullname</includes>
     </cell>
     <cell>
         <body>
@@ -77,3 +74,9 @@
         </body>
     </cell>
 </terr>
+
+<test>
+    <header>
+        <includes>reportPrint/terr</includes>
+    </header>
+</test>
