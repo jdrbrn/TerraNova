@@ -6,7 +6,6 @@
 <!-- table to display terrouts -->
 <div id="terrOuts">
   <h2>Territories to Check-In</h2>
-  <% terroutConfig = TerraNovaConfig[TerraNovaConfig["reportPrintLayout"]]["terrout"] %>
   <table>
     <thead>
       <tr>
@@ -28,7 +27,6 @@
 <!-- table to display terrins -->
 <div id="terrIns">
   <h2>Available Territories</h2>
-  <% terrinConfig = TerraNovaConfig[TerraNovaConfig["reportPrintLayout"]]["terrin"] %>
   <table>
     <thead>
       <tr>
@@ -52,7 +50,6 @@
   <!-- table to display terrs that aren't out or in -->
     <div id="otherTerrs">
       <h2>Other Territories</h2>
-      <% terrConfig = TerraNovaConfig[TerraNovaConfig["reportPrintLayout"]]["terr"] %>
       <table id="terrtable">
         <thead>
           <tr>

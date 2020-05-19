@@ -144,20 +144,20 @@ module ApplicationHelper
         output.html_safe
     end
 
-    def makeTableData(container, table, object)
+    def makeTableData(layout, tableName, object)
         # Create output string
         output=""
         # Get a list of each cell in the table and iterate
-        cells = TerraNovaLayouts[layout].xpath(".//"+tableName+"//header")
+        cells = TerraNovaLayouts[layout].xpath(".//"+tableName+"//cell")
         cells.each do |cell|
             # Check if the cell is an includes and then import the cell it calls for
             # Else generate a TD from the header info
             if cell.elements[0].name=="includes"
                 includeLayout = cell.elements[0].content.split("/")[0]
                 includeTable = cell.elements[0].content.split("/")[1]
-                output += makeTableData(includeLayout, includeTable)
+                output += makeTableData(includeLayout, includeTable, object)
             else
-                output += generateTD(cell)
+                output += generateTD(cell, object)
             end
         end
         output.html_safe
