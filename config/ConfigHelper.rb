@@ -1,12 +1,17 @@
 require 'json'
-module ConfigHelper
-  def ConfigHelper.loadConfig
+class ConfigHelper
+
+  @defaultsDir="config/defaults/"
+  @configDir="config/user/"
+  @layouts = {}
+
+  def self.loadConfig
     # Loads default config
     # Sets what keys need to exist and default values
-    default=JSON.parse(File.read("config/defaults/default.json"))
+    default=JSON.parse(File.read(@defaultsDir+"default.json"))
     
     #File name to use for the configFile
-    configFileName="TerraNovaConfig.json"
+    configFileName=@configDir+"TerraNovaConfig.json"
 
     #Checks to see if config file exists and creates if not
     if File.file?(configFileName)==false
@@ -59,5 +64,9 @@ module ConfigHelper
     #Set constant config
     puts "Retreived Configuration #{configFileName}: #{config}"
     config
+  end
+
+  def self.loadLayout(layoutName)
+
   end
 end
