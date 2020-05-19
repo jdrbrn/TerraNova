@@ -10,20 +10,12 @@ class AdminController < ApplicationController
         end
         
         if params[:configDown]
-            if Rails.env.development? 
-                send_file("DevTerraNovaConfig.json")
-            else 
-                send_file("TerraNovaConfig.json")
-            end
+            send_file("config/user/TerraNovaConfig.json")
         end
         
         if params[:configReset]
             require 'fileutils'
-            if Rails.env.development? 
-                FileUtils.rm("DevTerraNovaConfig.json")
-            else 
-                FileUtils.rm("TerraNovaConfig.json")
-            end
+            FileUtils.rm("config/user/TerraNovaConfig.json")
         end
 
         if params[:dbUp]

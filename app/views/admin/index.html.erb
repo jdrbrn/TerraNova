@@ -114,154 +114,139 @@
     <%= submit_tag "Upload Configuration File", data: {confirm: "Overwrite current configuration with uploaded?"} %>
 <% end %>
 <br>
+<div id="configlayout">
+    <b>General Configuration</b>
+    <table>
+        <tr>
+            <td>Version</td>
+            <td>
+                <%= TerraNovaConfig["TerraNovaVersion"] %>
+                <input id="TerraNovaVersion" type="hidden" value="<%= TerraNovaConfig["TerraNovaVersion"] %>">
+            </td>
+        </tr>
+        <tr>
+            <td>Timezone</td>
+            <td>
+                <select id="timezone">
+                    <%= time_zone_options_for_select (selected=TerraNovaConfig["timezone"]) %>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Congregation Name</td>
+            <td><input id="name" type="text" value="<%= TerraNovaConfig["name"] %>"></td>
+        </tr>
+        </table>
+        <br>
+        <b>Multiserver</b>
+        <table>
+        <tr>
+            <td>Enabled</td>
+            <td><input id="enableMultiserver" type="checkbox" value="true"
+                <%= ("checked" if TerraNovaConfig["enableMultiserver"]=="true") %>>
+            </td>
+        </tr>
+        <tr>
+            <td>Server List</td>
+            <td>
+                <textarea id="multiserverList" cols="40" rows="15" style="resize: none"><%= JSON.pretty_generate(TerraNovaConfig["multiserverList"]) %></textarea>
+            </td>
+        </tr>
+        </table>
+        <br>
+        <b>Authentication</b>
+        <table>
+        <tr>
+            <td>Enable User Account</td>
+            <td><input id="enableHTTPAuth" type="checkbox" value="true"
+                <%= ("checked" if TerraNovaConfig["enableHTTPAuth"]=="true") %>>
+            </td>
+        </tr>
+        <tr>
+            <td>User Account</td>
+            <td>username</td>
+            <td><input id="HTTPAuth_username" type="text" value="<%= TerraNovaConfig["HTTPAuth"]["username"] %>">
+        </tr>
+        <tr>
+            <td></td>
+            <td>password</td>
+            <td><input id="HTTPAuth_password" type="text" value="<%= TerraNovaConfig["HTTPAuth"]["password"] %>">
+        </tr>
+        <tr>
+            <td>Enable Admin Account</td>
+            <td><input id="enableAdminHTTPAuth" type="checkbox" value="true"
+                <%= ("checked" if TerraNovaConfig["enableAdminHTTPAuth"]=="true") %>>
+            </td>
+        </tr>
+        <tr>
+            <td>Admin Acount</td>
+            <td>username</td>
+            <td><input id="adminHTTPAuth_username" type="text" value="<%= TerraNovaConfig["adminHTTPAuth"]["username"] %>">
+        </tr>
+        <tr>
+            <td></td>
+            <td>password</td>
+            <td><input id="adminHTTPAuth_password" type="text" value="<%= TerraNovaConfig["HTTPAuth"]["password"] %>">
+        </tr>
+        </table>
+        <br>
+        <b>Formatting</b>
+        <table>
+        <tr>
+            <td>systemCSS</td>
+            <td>bodyBG</td>
+            <td><input id="systemCSS_bodybg" type="color" value="<%= TerraNovaConfig["systemCSS"]["bodyBG"] %>">
+        </tr>
+        <tr>
+            <td></td>
+            <td>terrWarn</td>
+            <td><input id="systemCSS_terrWarn" type="color" value="<%= TerraNovaConfig["systemCSS"]["terrWarn"] %>">
+        </tr>
+        <tr>
+            <td></td>
+            <td>terrLate</td>
+            <td><input id="systemCSS_terrLate" type="color" value="<%= TerraNovaConfig["systemCSS"]["terrLate"] %>">
+        </tr>
+        <tr>
+            <td></td>
+            <td>toolbarBG</td>
+            <td><input id="systemCSS_toolbarBG" type="color" value="<%= TerraNovaConfig["systemCSS"]["toolbarBG"] %>">
+        </tr>
+        <tr>
+            <td></td>
+            <td>thBG</td>
+            <td><input id="systemCSS_thBG" type="color" value="<%= TerraNovaConfig["systemCSS"]["thBG"] %>">
+        </tr>
+        <tr>
+            <td></td>
+            <td>tdBG</td>
+            <td><input id="systemCSS_tdBG" type="color" value="<%= TerraNovaConfig["systemCSS"]["tdBG"] %>">
+        </tr>
+        <tr>
+            <td>dncCSS</td>
+            <td>dncCardWidth</td>
+            <td><input id="usrnconf_dncCSS_dncCardWidth" value="<%= TerraNovaConfig["dncCSS"]["dncCardWidth"] %>">
+        </tr>
+        <tr>
+            <td></td>
+            <td>specialDNC</td>
+            <td><input id="dncCSS_sepcialDNC" type="color" value="<%= TerraNovaConfig["dncCSS"]["specialDNC"] %>">
+        </tr>
+    </table>
+    <br>
 
-<b>General Configuration</b>
-<table>
-    <tr>
-        <td>Version</td>
-        <td>
-            <%= TerraNovaConfig["TerraNovaVersion"] %>
-            <input id="TerraNovaVersion" type="hidden" value="<%= TerraNovaConfig["TerraNovaVersion"] %>">
-        </td>
-    </tr>
-    <tr>
-        <td>Timezone</td>
-        <td>
-            <select id="timezone">
-                <%= time_zone_options_for_select (selected=TerraNovaConfig["timezone"]) %>
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <td>Congregation Name</td>
-        <td><input id="name" type="text" value="<%= TerraNovaConfig["name"] %>"></td>
-    </tr>
-    </table>
-    <br>
-    <b>Multiserver</b>
+    <b>Table Options</b>
     <table>
-    <tr>
-        <td>Enabled</td>
-        <td><input id="enableMultiserver" type="checkbox" value="true"
-            <%= ("checked" if TerraNovaConfig["enableMultiserver"]=="true") %>>
-        </td>
-    </tr>
-    <tr>
-        <td>Server List</td>
-        <td>
-            <textarea id="multiserverList" cols="40" rows="15" style="resize: none"><%= JSON.pretty_generate(TerraNovaConfig["multiserverList"]) %></textarea>
-        </td>
-    </tr>
+        <tr>
+            <td>Main Table Layout</td>
+            <td><input id="reportIndexLayout" type="text" value="<%= TerraNovaConfig["reportIndexLayout"] %>">
+        </tr>
+        <tr>
+            <td>Worksheet Table Layout</td>
+            <td><input id="reportPrintLayout" type="text" value="<%= TerraNovaConfig["reportPrintLayout"] %>">
+        </tr>
     </table>
-    <br>
-    <b>Authentication</b>
-    <table>
-    <tr>
-        <td>Enable User Account</td>
-        <td><input id="enableHTTPAuth" type="checkbox" value="true"
-            <%= ("checked" if TerraNovaConfig["enableHTTPAuth"]=="true") %>>
-        </td>
-    </tr>
-    <tr>
-        <td>User Account</td>
-        <td>username</td>
-        <td><input id="HTTPAuth_username" type="text" value="<%= TerraNovaConfig["HTTPAuth"]["username"] %>">
-    </tr>
-    <tr>
-        <td></td>
-        <td>password</td>
-        <td><input id="HTTPAuth_password" type="text" value="<%= TerraNovaConfig["HTTPAuth"]["password"] %>">
-    </tr>
-    <tr>
-        <td>Enable Admin Account</td>
-        <td><input id="enableAdminHTTPAuth" type="checkbox" value="true"
-            <%= ("checked" if TerraNovaConfig["enableAdminHTTPAuth"]=="true") %>>
-        </td>
-    </tr>
-    <tr>
-        <td>Admin Acount</td>
-        <td>username</td>
-        <td><input id="adminHTTPAuth_username" type="text" value="<%= TerraNovaConfig["adminHTTPAuth"]["username"] %>">
-    </tr>
-    <tr>
-        <td></td>
-        <td>password</td>
-        <td><input id="adminHTTPAuth_password" type="text" value="<%= TerraNovaConfig["HTTPAuth"]["password"] %>">
-    </tr>
-    </table>
-    <br>
-    <b>Formatting</b>
-    <table>
-    <tr>
-        <td>systemCSS</td>
-        <td>bodyBG</td>
-        <td><input id="systemCSS_bodybg" type="color" value="<%= TerraNovaConfig["systemCSS"]["bodyBG"] %>">
-    </tr>
-    <tr>
-        <td></td>
-        <td>terrWarn</td>
-        <td><input id="systemCSS_terrWarn" type="color" value="<%= TerraNovaConfig["systemCSS"]["terrWarn"] %>">
-    </tr>
-    <tr>
-        <td></td>
-        <td>terrLate</td>
-        <td><input id="systemCSS_terrLate" type="color" value="<%= TerraNovaConfig["systemCSS"]["terrLate"] %>">
-    </tr>
-    <tr>
-        <td></td>
-        <td>toolbarBG</td>
-        <td><input id="systemCSS_toolbarBG" type="color" value="<%= TerraNovaConfig["systemCSS"]["toolbarBG"] %>">
-    </tr>
-    <tr>
-        <td></td>
-        <td>thBG</td>
-        <td><input id="systemCSS_thBG" type="color" value="<%= TerraNovaConfig["systemCSS"]["thBG"] %>">
-    </tr>
-    <tr>
-        <td></td>
-        <td>tdBG</td>
-        <td><input id="systemCSS_tdBG" type="color" value="<%= TerraNovaConfig["systemCSS"]["tdBG"] %>">
-    </tr>
-    <tr>
-        <td>dncCSS</td>
-        <td>dncCardWidth</td>
-        <td><input id="usrnconf_dncCSS_dncCardWidth" value="<%= TerraNovaConfig["dncCSS"]["dncCardWidth"] %>">
-    </tr>
-    <tr>
-        <td></td>
-        <td>specialDNC</td>
-        <td><input id="dncCSS_sepcialDNC" type="color" value="<%= TerraNovaConfig["dncCSS"]["specialDNC"] %>">
-    </tr>
-</table>
-<br>
-
-<b>Table Options</b>
-<table>
-    <tr>
-        <td>Templates</td>
-        <td><%= text_area_tag("usrconf[tableTemplates]", 
-                JSON.pretty_generate(TerraNovaConfig["tableTemplates"]),
-                cols: 60,
-                rows: 60,
-                style: "resize: none;")%></td>
-    </tr>
-    <tr>
-        <td>Main Tables</td>
-        <td><%= text_area_tag("usrconf[reportIndex]", 
-                JSON.pretty_generate(TerraNovaConfig["reportIndex"]),
-                cols: 60,
-                rows: 60,
-                style: "resize: none;")%></td>
-    </tr>
-    <tr>
-        <td>Worksheet Tables</td>
-        <td><%= text_area_tag("usrconf[reportPrint]", 
-                JSON.pretty_generate(TerraNovaConfig["reportPrint"]),
-                cols: 60,
-                rows: 60,
-                style: "resize: none;")%></td>
-    </tr>
-</table>
+</div>
 <br>
 <button type="button" onclick="configReset()">Reset to Default</button>
 <button type="button" onclick="saveConfig()">Save Configuration</button>
