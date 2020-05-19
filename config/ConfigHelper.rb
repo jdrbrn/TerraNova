@@ -62,6 +62,9 @@ class ConfigHelper
     configFile.puts(JSON.pretty_generate(config))
     configFile.close
 
+    # Reset layoutsTable
+    @layoutsTable={}
+
     #Set constant config
     puts "Retreived Configuration #{configFileName}: #{config}"
     config
