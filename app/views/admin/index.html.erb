@@ -234,18 +234,19 @@
         </tr>
     </table>
     <br>
-
-    <b>Table Options</b>
-    <table>
-        <tr>
-            <td>Main Table Layout</td>
-            <td><input id="reportIndexLayout" type="text" value="<%= TerraNovaConfig["reportIndexLayout"] %>">
-        </tr>
-        <tr>
-            <td>Worksheet Table Layout</td>
-            <td><input id="reportPrintLayout" type="text" value="<%= TerraNovaConfig["reportPrintLayout"] %>">
-        </tr>
-    </table>
+    <div style="display: none">
+        <b>Table Options</b>
+        <table>
+            <tr>
+                <td>Main Table Layout</td>
+                <td><input id="reportIndexLayout" type="text" value="<%= TerraNovaConfig["reportIndexLayout"] %>">
+            </tr>
+            <tr>
+                <td>Worksheet Table Layout</td>
+                <td><input id="reportPrintLayout" type="text" value="<%= TerraNovaConfig["reportPrintLayout"] %>">
+            </tr>
+        </table>
+    </div>
 </div>
 <br>
 <button type="button" onclick="configReset()">Reset to Default</button>
