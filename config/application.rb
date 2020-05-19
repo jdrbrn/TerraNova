@@ -1,4 +1,4 @@
-require_relative 'TerraNovaConfig'
+require_relative 'ConfigHelper'
 require 'fileutils'
 
 require_relative 'boot'
@@ -37,7 +37,10 @@ end
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-TerraNovaConfig=loadConfig
+TerraNovaConfig=ConfigHelper.loadConfig
+ConfigHelper.readLayout(TerraNovaConfig["reportPrintLayout"])
+ConfigHelper.readLayout(TerraNovaConfig["reportIndexLayout"])
+TerraNovaLayouts=ConfigHelper.loadLayouts
 
 module TerraNova
   class Application < Rails::Application

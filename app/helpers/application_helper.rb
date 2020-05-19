@@ -22,32 +22,51 @@ module ApplicationHelper
     end
 
     def generateTH(config)
+        # Setup the variables to store the output and body
+        # output is a broken tag as html attributes can be added
+        # body is seperate so that it can be combined after all generation is done
         output="<th"
         body=""
 
-        config.each do |layout|
-            if layout[0]=="body"
-                layout[1].each do |entry|
-                    if entry["html"]
-                        body+=entry["html"]
-                    elsif entry["function"]
-                        body+=runFunctionTH(entry["function"])
+        # Iterate through each part of the header
+        config.elements.each do |attribute|
+            # Check if the header is defining the body content
+            # Else we set an html attribute with the name of the element
+            if attribute.name == "body"
+                # Iterate through the body elements
+                # Check to see if it's an html element or function
+                # html is stored into the body var
+                # function is run and stored
+                attribute.elements.each do |element|
+                    if element.name == "html"
+                        body+=element.content
+                    elsif element.name == "function"
+                        body+=runFunctionTH(element.content)
                     end
                 end
             else
-                output+=" #{layout[0]}=\""
-                layout[1].each do |entry|
-                    if entry["html"]
-                        output+=entry["html"]
-                    elsif entry["function"]
-                        output+=runFunctionTH(entry["function"])
+                # Add the html attribute to the tag
+                # Ex: output = "<th", attribute.name="class" => output="<th class=""
+                # This leaves an open quote that is closed at the end of the loop once the attribute
+                # has been defined
+                output += " #{attribute.name}=\""
+                # Iterate through the elements
+                # Check to see if it's an html element or function
+                # html is stored into the output var
+                # function is run and stored
+                attribute.elements.each do |element|
+                    if element.name == "html"
+                        output+=element.content
+                    elsif element.name == "function"
+                        output+=runFunctionTH(element.content)
                     end
                 end
-                output+="\""
+                output += "\""
             end
         end
-        output+=">"
 
+        # Close the opening tag, insert the body, add closing tag
+        output+=">"
         output+=body
         output+="</th>"
 
@@ -55,65 +74,90 @@ module ApplicationHelper
     end
     
     def generateTD(config, territory)
+        # Setup the variables to store the output and body
+        # output is a broken tag as html attributes can be added
+        # body is seperate so that it can be combined after all generation is done
         output="<td"
         body=""
-        config.each do |layout|
-            if layout[0]=="body"
-                layout[1].each do |entry|
-                    if entry["html"]
-                        body+=entry["html"]
-                    elsif entry["function"]
-                        body+=runFunctionTD(entry["function"], territory)
+
+        # Iterate through each part of the header
+        config.elements.each do |attribute|
+            # Check if the header is defining the body content
+            # Else we set an html attribute with the name of the element
+            if attribute.name == "body"
+                # Iterate through the body elements
+                # Check to see if it's an html element or function
+                # html is stored into the body var
+                # function is run and stored
+                attribute.elements.each do |element|
+                    if element.name == "html"
+                        body+=element.content
+                    elsif element.name == "function"
+                        body+=runFunctionTD(element.content, territory)
                     end
                 end
             else
-                output+=" #{layout[0]}=\""
-                layout[1].each do |entry|
-                    if entry["html"]
-                        output+=entry["html"]
-                    elsif entry["function"]
-                        output+=runFunctionTD(entry["function"], territory)
+                # Add the html attribute to the tag
+                # Ex: output = "<td", attribute.name="class" => output="<td class=""
+                # This leaves an open quote that is closed at the end of the loop once the attribute
+                # has been defined
+                output += " #{attribute.name}=\""
+                # Iterate through the elements
+                # Check to see if it's an html element or function
+                # html is stored into the output var
+                # function is run and stored
+                attribute.elements.each do |element|
+                    if element.name == "html"
+                        output+=element.content
+                    elsif element.name == "function"
+                        output+=runFunctionTD(element.content, territory)
                     end
                 end
-                output+="\""
+                output += "\""
             end
         end
-        output+=">"
 
+        # Close the opening tag, insert the body, add closing tag
+        output+=">"
         output+=body
         output+="</td>"
 
         output.html_safe
     end
 
-    def makeTableHeaders(container, table)
+    def makeTableHeaders(layout, tableName)
+        # Create output string
         output=""
-        if TerraNovaConfig[container][table]["extends"]
-            refContainer = TerraNovaConfig[container][table]["extends"]["container"]
-            refTable = TerraNovaConfig[container][table]["extends"]["table"]
-            output += makeTableHeaders(refContainer, refTable)
-        end
-        TerraNovaConfig[container][table]["headers"].each do |header|
-            if header["includes"]
-                refContainer = header["includes"]["container"]
-                refTable = header["includes"]["table"]
-                output += makeTableHeaders(refContainer, refTable)
+        # Get a list of each header in the table and iterate
+        headers = TerraNovaLayouts[layout].xpath(".//"+tableName+"//header")
+        headers.each do |header|
+            # Check if the header is an includes and then import the headers it calls for
+            # Else generate a TH from the header info
+            if header.elements[0].name=="includes"
+                includeLayout = header.elements[0].content.split("/")[0]
+                includeTable = header.elements[0].content.split("/")[1]
+                output += makeTableHeaders(includeLayout, includeTable)
             else
-                output+=generateTH(header)
+                output += generateTH(header)
             end
         end
         output.html_safe
     end
 
-    def makeTableData(container, table, object)
+    def makeTableData(layout, tableName, object)
+        # Create output string
         output=""
-        TerraNovaConfig[container][table]["cells"].each do |cell|
-            if cell["includes"]
-                refContainer = cell["includes"]["container"]
-                refTable = cell["includes"]["table"]
-                output += makeTableData(refContainer, refTable, object)
+        # Get a list of each cell in the table and iterate
+        cells = TerraNovaLayouts[layout].xpath(".//"+tableName+"//cell")
+        cells.each do |cell|
+            # Check if the cell is an includes and then import the cell it calls for
+            # Else generate a TD from the header info
+            if cell.elements[0].name=="includes"
+                includeLayout = cell.elements[0].content.split("/")[0]
+                includeTable = cell.elements[0].content.split("/")[1]
+                output += makeTableData(includeLayout, includeTable, object)
             else
-                output+=generateTD(cell, object)
+                output += generateTD(cell, object)
             end
         end
         output.html_safe

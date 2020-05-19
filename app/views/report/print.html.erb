@@ -6,11 +6,10 @@
 <!-- table to display terrouts -->
 <div id="terrOuts">
   <h2>Territories to Check-In</h2>
-  <% terroutConfig = TerraNovaConfig["reportPrint"]["terrout"] %>
   <table>
     <thead>
       <tr>
-        <%= makeTableHeaders("reportPrint","terrout") %>
+        <%= makeTableHeaders(TerraNovaConfig["reportPrintLayout"],"terrout") %>
       </tr>
     </thead>
 
@@ -18,7 +17,7 @@
       <% @terrouts.sort_by{|terrout| terrout.datedue}.each do |terrout| %>
         <% categorizedTerrs<<terrout.terrid %>
         <tr>
-          <%= makeTableData("reportPrint", "terrout", terrout) %>
+          <%= makeTableData(TerraNovaConfig["reportPrintLayout"], "terrout", terrout) %>
         </tr>
       <% end %>
     </tbody>
@@ -28,11 +27,10 @@
 <!-- table to display terrins -->
 <div id="terrIns">
   <h2>Available Territories</h2>
-  <% terrinConfig = TerraNovaConfig["reportPrint"]["terrin"] %>
   <table>
     <thead>
       <tr>
-        <%= makeTableHeaders("reportPrint","terrin") %>
+        <%= makeTableHeaders(TerraNovaConfig["reportPrintLayout"],"terrin") %>
       </tr>
     </thead>
 
@@ -40,7 +38,7 @@
       <% @terrins.sort_by{|terrin| @terrs.find(terrin.terrid).datecomp}.each do |terrin| %>
         <% categorizedTerrs<<terrin.terrid %>
         <tr>
-          <%= makeTableData("reportPrint", "terrin", terrin) %>
+          <%= makeTableData(TerraNovaConfig["reportPrintLayout"], "terrin", terrin) %>
         </tr>
       <% end %>
     </tbody>
@@ -52,11 +50,10 @@
   <!-- table to display terrs that aren't out or in -->
     <div id="otherTerrs">
       <h2>Other Territories</h2>
-      <% terrConfig = TerraNovaConfig["reportPrint"]["terr"] %>
       <table id="terrtable">
         <thead>
           <tr>
-            <%= makeTableHeaders("reportPrint", "terr") %>
+            <%= makeTableHeaders(TerraNovaConfig["reportPrintLayout"], "terr") %>
           </tr>
         </thead>
 
@@ -65,7 +62,7 @@
             <% if categorizedTerrs.find_index(terr.id) %>
             <% else %>
               <tr>
-                <%= makeTableData("reportPrint","terr",terr) %>
+                <%= makeTableData(TerraNovaConfig["reportPrintLayout"],"terr",terr) %>
               </tr>
             <% end %>
           <% end %>

@@ -1,0 +1,42 @@
+<terrout>
+    <header>
+        <includes>tableTemplates/terrout</includes>
+    </header>
+    <header>
+        <body>
+            <html>Date Turned In</html>
+        </body>
+    </header>
+    <cell>
+        <includes>tableTemplates/terrout</includes>
+    </cell>
+    <cell>
+        <body><!--Empty Cell--></body>
+    </cell>
+</terrout>
+
+<terrin>
+    <header>
+        <includes>tableTemplates/terrin</includes>
+    </header>
+    <cell>
+        <includes>tableTemplates/terrin</includes>
+    </cell>
+</terrin>
+
+<terr>
+    <header>
+        <includes>reportPrint/terrin</includes>
+    </header>
+    <header>
+        <body>
+        <html>Date Turned In</html>
+        </body>
+    </header>
+    <cell>
+        <includes>reportPrint/terrin</includes>
+    </cell>
+    <cell>
+        <body><!--Empty Cell--></body>
+    </cell>
+</terr>
