@@ -59,6 +59,9 @@
                         alert("Error parsing "+item.id+" JSON \n("+err+")")
                     }
                 }
+                else if (item.type == "checkbox"){
+                    usrconf=setValue(usrconf, keys, item.checked)
+                }
                 else {
                     usrconf=setValue(usrconf, keys, item.value)
                 }
@@ -114,7 +117,6 @@
     <%= submit_tag "Upload Configuration File", data: {confirm: "Overwrite current configuration with uploaded?"} %>
 <% end %>
 <br>
-<div id="configlayout">
     <b>General Configuration</b>
     <table>
         <tr>
@@ -186,7 +188,7 @@
         <tr>
             <td></td>
             <td>password</td>
-            <td><input id="adminHTTPAuth_password" type="text" value="<%= TerraNovaConfig["HTTPAuth"]["password"] %>">
+            <td><input id="adminHTTPAuth_password" type="text" value="<%= TerraNovaConfig["adminHTTPAuth"]["password"] %>">
         </tr>
         </table>
         <br>
@@ -225,7 +227,7 @@
         <tr>
             <td>dncCSS</td>
             <td>dncCardWidth</td>
-            <td><input id="usrnconf_dncCSS_dncCardWidth" value="<%= TerraNovaConfig["dncCSS"]["dncCardWidth"] %>">
+            <td><input id="dncCSS_dncCardWidth" value="<%= TerraNovaConfig["dncCSS"]["dncCardWidth"] %>">
         </tr>
         <tr>
             <td></td>
@@ -234,7 +236,6 @@
         </tr>
     </table>
     <br>
-    <div style="display: none">
         <b>Table Options</b>
         <table>
             <tr>
