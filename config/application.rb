@@ -7,16 +7,22 @@ require 'rails/all'
 
 #Moves any uploaded config/db files to proper locations at this time
 if File.file?("tmp/UploadedConfig.json")
-  FileUtils.rm("config/user/TerraNovaConfig.json")
+  if File.file?("config/user/TerraNovaConfig.json")
+    FileUtils.rm("config/user/TerraNovaConfig.json")
+  end
   FileUtils.move("tmp/UploadedConfig.json", "config/user/TerraNovaConfig.json")  
 end
 
 if File.file?("tmp/UploadedDB.sqlite3")
   if Rails.env.development? 
-    FileUtils.rm("db/development.sqlite3")
+    if File.file?("db/development.sqlite3")
+      FileUtils.rm("db/development.sqlite3")
+    end
     FileUtils.move("tmp/UploadedDB.sqlite3", "db/development.sqlite3") 
   else 
-    FileUtils.rm("db/production.sqlite3")
+    if File.file?("db/production.sqlite3")
+      FileUtils.rm("db/production.sqlite3")
+    end
     FileUtils.move("tmp/UploadedDB.sqlite3", "db/production.sqlite3")  
   end
 end
