@@ -35,23 +35,36 @@ class ConfigHelper
       config["TerraNovaVersion"]=default["TerraNovaVersion"]
     end
 
-    # Goes through each default key to verify that all needed keys exist and are valid types
-    default.each do |key|
-      # Check to see if the key exists and is a valid type
-      if config[key[0]] && config[key[0]].class == default[key[0]].class
-        # If hash or array make sure all required values are included
-        if default[key[0]].class == Hash
-          default[key[0]].each do |hashKey|
-            # Check to see if the hashKey should exist and loadedConfig contains the type of value it should
-            # If not, the value is reset
-            if config[key[0]][hashKey[0]] && config[key[0]][hashKey[0]].class != default[key[0]][hashKey[0]].class
-              config[key[0]][hashKey[0]]=default[key[0]][hashKey[0]]
+    # Goes through each config key to verify that all needed keys exist and are valid types
+    config.each do |key|
+      # Check to see if the key should exist
+      if default[key[0]]
+        # Makes sure it's a valid type
+        if default[key[0]].class == key[1].class
+          # If hash or array make sure all required values are included
+          if default[key[0]].class == Hash
+            default[key[0]].each do |hashKey|
+              # Check to see if the hashKey exists and loadedConfig contains the type of value it should
+              # If not, the value is reset
+              if config[key[0]][hashKey[0]] && config[key[0]][hashKey[0]].class != default[key[0]][hashKey[0]].class
+                config[key[0]][hashKey[0]]=default[key[0]][hashKey[0]]
+              end
             end
           end
+        # If key doesn't exist or is malformed
+        else
+          config[key[0]]=default[key[0]]
         end
-      # If key doesn't exist copy it into user config
+      # If the key isn't a default key
       else
-        config[key[0]]=default[key[0]]
+        # Assume imported data and create new file with key name as name/location and key contents
+        # Check if file already exists and delete if so
+        if File.file?(@configDir+key[0])
+          File.rm(@configDir+key[0])
+        end
+        File.write(@configDir+key[0], key[1])
+        # Remove the extraneous key
+        config.delete(key[0])
       end
     end
 
