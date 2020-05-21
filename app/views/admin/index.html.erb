@@ -1,5 +1,6 @@
 <!-- Backend Interface Functions -->
 <script>
+
     function signalRestart() {
         if (window.confirm("Continue: Restart TerraNova?")){
             <% if Rails.env.development? %>
@@ -50,8 +51,8 @@
                 // get the JSON keys from the id
                 keys=item.id.split("_")
                 // sets the value, with the function handling any nested objects
-                // if it's a text area it contains raw json which needs to be converted to an object
-                if (item.type == "textarea"){
+                // if it's multiserverList it contains raw json which needs to be converted to an object
+                if (item.id == "multiserverList"){
                     try {
                     usrconf=setValue(usrconf, keys, JSON.parse(item.value))
                     }
@@ -59,14 +60,20 @@
                         alert("Error parsing "+item.id+" JSON \n("+err+")")
                     }
                 }
+                // Checkboxes need item.checked instead of item.value
                 else if (item.type == "checkbox"){
                     usrconf=setValue(usrconf, keys, item.checked)
+                }
+                // Keys/IDs starting with editor are for the XML editor
+                else if (keys[0]=="editor"){
+                    usrconf=setValue(usrconf, [keys[1]], item.value)
                 }
                 else {
                     usrconf=setValue(usrconf, keys, item.value)
                 }
             }
         }
+
         var formData = new FormData();
         var blob = new Blob([JSON.stringify(usrconf)])
         formData.append('configUp', blob, 'config.json')
@@ -76,6 +83,15 @@
         request.open('POST', "admin", true)
         request.setRequestHeader('X-CSRF-Token', token)
         request.send(formData)
+    }
+
+    function editorLoad() {
+        editorSelect = document.getElementsByName("editorSelect")[0]
+        docs = document.getElementsByName("editorTD")[0].children
+        for (i=0; i<docs.length; i++){
+            docs[i].style.display="none"
+        }
+        document.getElementById(editorSelect.value).style.display=""
     }
 </script>
 
@@ -251,6 +267,28 @@
                 <td><input id="reportPrintLayout" type="text" value="<%= TerraNovaConfig["reportPrintLayout"] %>">
             </tr>
         </table>
+        <br>
+        <b>Layout Editor</b>
+        <table>
+            <tr>
+                <td>
+                    <select name="editorSelect" onChange = "javascript:editorLoad()">
+                        <% TerraNovaLayouts.keys.sort.each do |layout| %> 
+                            <option value = "editor_layouts/<%= layout %>.xml"><%= layout %></option>
+                        <% end %>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td name="editorTD">
+                    <% TerraNovaLayouts.keys.sort.each do |layout| %>
+                        <textarea id="editor_layouts/<%= layout %>.xml" 
+                            cols="75" rows="50" style="display: none; resize: none" 
+                            spellcheck="false"><%= TerraNovaLayouts[layout] %></textarea>
+                    <% end %>
+                </td>
+            </tr>
+        </table>
     </div>
 </div>
 <br>
@@ -267,3 +305,7 @@
 <br>
 <h3>System</h3>
 <button type="button" onclick="signalRestart()"><b>Restart TerraNova</button>
+
+<script>
+window.onload = editorLoad()
+</script>
