@@ -93,6 +93,55 @@
         }
         document.getElementById(editorSelect.value).style.display=""
     }
+
+    function newLayout() {
+        nameOK = false
+        namePrompt = "Name for new layout:"
+        while (!nameOK){
+            newName = prompt(namePrompt)
+            if (newName.includes("_")){}
+            else if (newName.includes("/")) {}
+            else if (newName.includes("\"")) {}
+            else if (newName.includes("\'")) {}
+            else if (newName.includes("\\")) {}
+            else if (newName.includes("*")) {}
+            else if (newName.includes("<")) {}
+            else if (newName.includes(">")) {}
+            else if (newName.includes(":")) {}
+            else if (newName.includes("|")) {}
+            else if (newName.includes("?")) {}
+            else if (newName.includes("*")) {}
+            else {
+                nameOK=true
+            }
+            namePrompt = "Invalid Name (contains _/\"\'\\*<>:|?*):"
+        }
+
+        if (newName==null){}
+        else if (newName==""){}
+        else {
+            newLayoutTextarea(newName)
+            editorLoad()
+        }
+    }
+
+    function newLayoutTextarea(name){
+        newDoc = document.createElement("textarea")
+        newDoc.id="editor_layouts/"+name+".xml"
+        newDoc.cols="75"
+        newDoc.rows="50"
+        newDoc.style.display="none"
+        newDoc.style.resize="none"
+        newDoc.spellcheck="false"
+        document.getElementsByName("editorTD")[0].appendChild(newDoc)
+
+        editorSelect = document.getElementsByName("editorSelect")[0]
+        newOption = document.createElement("option")
+        newOption.value = "editor_layouts/"+name+".xml"
+        newOption.innerHTML=name
+        editorSelect.append(newOption)
+        editorSelect.selectedIndex = editorSelect.length - 1
+    }
 </script>
 
 <%#Gets latest version number from github %>
@@ -277,6 +326,7 @@
                             <option value = "editor_layouts/<%= layout %>.xml"><%= layout %></option>
                         <% end %>
                     </select>
+                    <button onclick="newLayout()">New Layout</button>
                 </td>
             </tr>
             <tr>
