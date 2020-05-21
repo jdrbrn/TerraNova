@@ -58,11 +58,8 @@ class ConfigHelper
       # If the key isn't a default key
       else
         # Assume imported data and create new file with key name as name/location and key contents
-        # Check if file already exists and delete if so
-        if File.file?(@configDir+key[0])
-          File.rm(@configDir+key[0])
-        end
-        File.write(@configDir+key[0], key[1])
+        # Overwrites existing file
+        File.write(@configDir+key[0], key[1], mode: "w+")
         # Remove the extraneous key
         config.delete(key[0])
       end
