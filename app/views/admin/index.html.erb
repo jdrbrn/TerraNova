@@ -117,6 +117,8 @@
     <%= submit_tag "Upload Configuration File", data: {confirm: "Overwrite current configuration with uploaded?"} %>
 <% end %>
 <br>
+<div id="configlayout" style="display: grid; grid-template-columns: 500px">
+    <div style="grid-column: 1">
     <b>General Configuration</b>
     <table>
         <tr>
@@ -236,6 +238,8 @@
         </tr>
     </table>
     <br>
+    </div>
+    <div style="grid-column: 2">
         <b>Table Options</b>
         <table>
             <tr>
