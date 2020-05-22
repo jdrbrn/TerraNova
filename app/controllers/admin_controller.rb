@@ -10,7 +10,15 @@ class AdminController < ApplicationController
         end
         
         if params[:configDown]
-            send_file("config/user/TerraNovaConfig.json")
+            tempConfig = TerraNovaConfig.dup
+            TerraNovaLayouts.keys.each do |key|
+                puts TerraNovaLayouts[key]
+                tempConfig[key] = TerraNovaLayouts[key]
+            end
+            tempFile=File.new("tmp/TerraNovaConfig.json","w")
+            tempFile.printf(JSON.pretty_generate(tempConfig))
+            tempFile.close
+            send_file("tmp/TerraNovaConfig.json")
         end
         
         if params[:configReset]
