@@ -41,5 +41,6 @@
   },
   "reportPrintLayout": "reportPrint",
   "reportIndexLayout": "reportIndex",
-  "dncLayout": "dnc"
+  "dncLayout": "dnc",
+  "showLayout": "show"
 }

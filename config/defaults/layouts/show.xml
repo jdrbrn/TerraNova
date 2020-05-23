@@ -1,0 +1,33 @@
+<terrout>
+    <header>
+        <body>
+            <html>Publisher</html>
+        </body>
+    </header>
+    <header>
+        <body>
+            <html>Date Out</html>
+        </body>
+    </header>
+    <header>
+        <body>
+            <html>Date Due</html>
+        </body>
+    </header>
+    <cell>
+        <body>
+            <function>terroutPublisher</function>
+        </body>
+    </cell>
+    <cell>
+        <body>
+            <function>terroutDateout</function>
+        </body>
+    </cell>
+    <cell>
+        <body>
+            <function>terroutDatedue</function>
+        </body>
+    </cell>
+
+</terrout>

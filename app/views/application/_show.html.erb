@@ -13,12 +13,27 @@
 <% end %>
 
 <p>
-<strong>Status:</strong> <%= status %>
+    <strong>Status:</strong> <%= status %>
+    <% if territory.class == Terrout %>
+        <table>
+            <thead>
+                <tr>
+                    <%= makeTableHeaders(TerraNovaConfig["showLayout"], "terrout") %>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <%= makeTableData(TerraNovaConfig["showLayout"], "terrout", territory) %>
+                </tr>
+            </tbody>
+        </table>
+    <% end %>
 </p>
 
 <p>
-<strong>Notes:</strong>
-<%= territoryNotes(territory) %>
+    <strong>Notes:</strong>
+    <%= territoryNotes(territory) %>
 </p>
 
 </p>
