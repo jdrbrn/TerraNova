@@ -118,7 +118,7 @@ class ConfigHelper
       end
     elsif File.file?(@defaultsDir+"layouts/"+layoutFile)
       copyDefault("layouts/"+layoutFile)
-      loadLayout(layoutName)
+      loadTableLayout(layoutName, tableName)
     else
       "Error: No layout #{layoutName} found"
     end
