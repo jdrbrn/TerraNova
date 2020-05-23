@@ -11,12 +11,17 @@ class AdminController < ApplicationController
         
         if params[:configDown]
             tempConfig = TerraNovaConfig.dup
-            TerraNovaLayouts.keys.each do |key|
-                puts TerraNovaLayouts[key]
-                tempConfig[key] = TerraNovaLayouts[key]
+            layouts=[]
+            Dir.children("config/user/layouts").each do |file|
+                if file.include?(".xml")
+                    layouts << file.sub(".xml", "")
+                end
+            end
+            layouts.each do |key|
+                tempConfig[key] = File.read("config/user/layouts/"+key+".xml")
             end
             tempFile=File.new("tmp/TerraNovaConfig.json","w")
-            tempFile.printf(JSON.pretty_generate(tempConfig))
+            tempFile.puts(JSON.pretty_generate(tempConfig))
             tempFile.close
             send_file("tmp/TerraNovaConfig.json")
         end
