@@ -28,32 +28,8 @@
   <% end %>
 <% end %>
 
-<!-- User Settings Set in TerraNovaConfig.json-->
-<script>
-var congName = "<%= TerraNovaConfig["name"] %>"
-//If enabled links to other servers will be in the toolbar
-var multiLinksEnabled = <%=TerraNovaConfig["enableMultiserver"] %>
-
-<%# Only load multiServer data if needed %>
-<% if TerraNovaConfig["enableMultiserver"] %>
-  var multiServers=[]
-  //multiServers.push(["Type of Territory","IP of TerraNova Server for type"])
-  <% TerraNovaConfig["multiserverList"].each do |server| %>
-    multiServers.push(["<%= server[0] %>", "<%= server[1] %>"])
-  <% end %>
-<% end %>
-</script>
-
 <!-- Javascript Functions -->
 <script>
-  function appendHTML(element, contents) {
-    document.getElementById(element).innerHTML=(document.getElementById(element).innerHTML + contents)
-  }
-
-  function insertHTML(element, contents) {
-    document.getElementById(element).innerHTML=(contents + document.getElementById(element).innerHTML)
-  }
-
   function terrinsViewDetails(terrinid) {
     document.getElementById("detailFrame").src = ("terrins/" + terrinid)
   }
@@ -66,14 +42,6 @@ var multiLinksEnabled = <%=TerraNovaConfig["enableMultiserver"] %>
     document.getElementById("detailFrame").src = ("terrs/" + terrid)
   }
 
-  function setToolbar() {
-    insertHTML("toolHead", (congName + " "))
-    if (multiLinksEnabled){
-      for (id=0; id<multiServers.length; id++){
-        appendHTML("toolLinks",("<td id='server"+id+"Link'><a href='http://"+multiServers[id][1]+"'>"+multiServers[id][0]+"</a></td>"))
-      }
-    }
-  }
   function downloadDB() {
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET", "report/download?db=1", true);
@@ -89,10 +57,21 @@ var multiLinksEnabled = <%=TerraNovaConfig["enableMultiserver"] %>
 </script>
 
 <div id="toolbar">
-    <div id="toolHead" align="left">Congregation Territory</div>
-    <table align="right">
-      <tr id="toolLinks"> </tr>
-    </table>
+    <div id="toolHead" align="left">
+      <%= TerraNovaConfig["name"] %> Congregation Territory
+    </div>
+
+    <%# Only load multiServer data if needed %>
+    <% if TerraNovaConfig["enableMultiserver"] %>
+      <table align="right">
+        <tr id="toolLinks"> 
+          <% TerraNovaConfig["multiserverList"].each do |server| %>
+            <td id='serverLink'> <a href="http://<%= server[1] %>"><%= server[0] %></a></td>
+          <% end %>
+        </tr>
+      </table>
+    <% end %>
+
 </div>
 
 <!-- Left side report view -->
@@ -151,32 +130,15 @@ var multiLinksEnabled = <%=TerraNovaConfig["enableMultiserver"] %>
     <table id="terrouttable">
       <thead>
         <tr>
-          <th>Territory</th>
-          <th>Last Complete</th>
-          <th>Publisher</th>
-          <th>Date Out</th>
-          <th>Date Due</th>
+          <%= makeTableHeaders(TerraNovaConfig["reportIndexLayout"], "terrout") %>
         </tr>
       </thead>
 
       <tbody>
         <% @terrouts.sort_by{|terrout| terrout.datedue}.each do |terrout| %>
           <% categorizedTerrs<<terrout.terrid %>
-          <% if terrout.datedue-Date.current<0 %>
-            <% dateClass="late" %>
-          <% elsif (terrout.datedue-1.months)-Date.current<0%>
-            <% dateClass="warn" %>
-          <% else %>
-            <% dateClass="normal" %>
-          <% end %>
           <tr>
-            <td class="<%= dateClass %>"><%= @terrs.find(terrout.terrid).name %><br><%= @terrs.find(terrout.terrid).region %></td>
-            <td><%= @terrs.find(terrout.terrid).datecomp.strftime("%m/%d/%y") %></td>
-            <td><%= terrout.publisher %></td>
-            <td><%= terrout.dateout.strftime("%m/%d/%y") %></td>
-            <td><%= terrout.datedue.strftime("%m/%d/%y") %></td>
-            <td><a href="#" onclick="terroutsViewDetails('<%= terrout.id %>');return false;">View Details</a></td>
-            <td><%= link_to 'Check In', [terrout,checkin: terrout.terrid], method: :delete, data: { confirm: "Are you sure you want to check in #{@terrs.find(terrout.terrid).name}?" } %></td>
+            <%= makeTableData(TerraNovaConfig["reportIndexLayout"], "terrout", terrout) %>
           </tr>
         <% end %>
       </tbody>
@@ -190,8 +152,7 @@ var multiLinksEnabled = <%=TerraNovaConfig["enableMultiserver"] %>
     <table id="terrintable">
       <thead>
         <tr>
-          <th>Territory</th>
-          <th>Last Complete</th>
+          <%= makeTableHeaders(TerraNovaConfig["reportIndexLayout"], "terrin") %>
         </tr>
       </thead>
 
@@ -199,10 +160,7 @@ var multiLinksEnabled = <%=TerraNovaConfig["enableMultiserver"] %>
         <% @terrins.sort_by{|terrin| @terrs.find(terrin.terrid).datecomp}.each do |terrin| %>
           <% categorizedTerrs<<terrin.terrid %>
           <tr>
-            <td class="normal"><%= @terrs.find(terrin.terrid).name %><br><%= @terrs.find(terrin.terrid).region %></td>
-            <td><%= @terrs.find(terrin.terrid).datecomp.strftime("%m/%d/%y") %></td>
-            <td><a href="#" onclick="terrinsViewDetails('<%= terrin.id %>');return false;">View Details</a></td>
-            <td><%= link_to 'Check Out', [terrin,checkout: terrin.terrid], method: :delete, data: { confirm: "Are you sure you want to check out #{@terrs.find(terrin.terrid).name}?" } %></td>
+            <%= makeTableData(TerraNovaConfig["reportIndexLayout"], "terrin", terrin) %>  
           </tr>
         <% end %>
       </tbody>
@@ -216,8 +174,7 @@ var multiLinksEnabled = <%=TerraNovaConfig["enableMultiserver"] %>
     <table id="terrtable">
       <thead>
         <tr>
-          <th>Territory</th>
-          <th>Last Complete</th>
+          <%= makeTableHeaders(TerraNovaConfig["reportIndexLayout"], "terr") %>
         </tr>
       </thead>
 
@@ -226,11 +183,7 @@ var multiLinksEnabled = <%=TerraNovaConfig["enableMultiserver"] %>
           <% if categorizedTerrs.find_index(terr.id) %>
           <% else %>
             <tr>
-              <td class="normal"><%= terr.name %><br><%=terr.region %></td>
-              <td><%= terr.datecomp.strftime("%m/%d/%y") %></td>
-              <td><a href='#' onclick="terrsViewDetails('<%= terr.id %>');return false;">View Details</a></td>
-              <td><%= link_to 'Check Out', {:controller => "terrouts", :action => "new", :terrid => terr.id} %></td>
-              <td><%= link_to 'Check In', {:controller => "terrins", :action => "new", :terrid => terr.id} %></td>
+              <%= makeTableData(TerraNovaConfig["reportIndexLayout"], "terr", terr) %>
             </tr>
           <% end %>
         <% end %>
@@ -243,8 +196,6 @@ var multiLinksEnabled = <%=TerraNovaConfig["enableMultiserver"] %>
 <div id="detailWindow">
   <iframe id="detailFrame"> </iframe>
 </div>
-
-<script>  window.onload = setToolbar(); </script>
 
 <script>
 //This script section creates a downloadable CSV of all the territory listings

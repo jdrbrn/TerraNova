@@ -11,6 +11,7 @@
 /db/*.sqlite3
 /db/*.sqlite3-journal
 /db/open
+*.sqlite3
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -28,8 +29,9 @@ config/secrets.yml.key
 config/secrets.yml.enc
 config/secrets.yml
 
-# Ignore development config file
-DevTerraNovaConfig.json
+# Ignore user config files so that it isn't overwritten
+config/user/TerraNovaConfig.json
+config/user/layouts/*.xml
 
-# Ignore config file so that it isn't overwritten
-TerraNovaConfig.json
+# Ignore Visual Studio folder
+/.vs

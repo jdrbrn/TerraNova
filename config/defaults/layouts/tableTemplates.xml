@@ -1,0 +1,93 @@
+<terrFullname>
+    <header>
+        <body>
+            <html>Territory</html>
+        </body>
+    </header>
+    <cell>
+        <class>
+            <function>territoryDeadlineCSS</function>
+        </class>
+        <body>
+            <function>territoryFullname</function>
+        </body>
+    </cell>
+</terrFullname>
+
+<standardDataHeadings>
+    <header>
+        <body>
+            <html>Date Out</html>
+        </body>
+    </header>
+    <header>
+        <body>
+            <html>Date Due</html>
+        </body>
+    </header>
+    <header>
+        <body>
+            <html>Publisher</html>
+        </body>
+    </header>
+</standardDataHeadings>
+
+<terrout>
+    <header>
+        <includes>tableTemplates/terrFullname</includes>
+    </header>
+    <header>
+        <includes>tableTemplates/standardDataHeadings</includes>
+    </header>
+    <cell>
+        <includes>tableTemplates/terrFullname</includes>
+    </cell>
+    <cell>
+        <body>
+            <function>terroutDateout</function>
+        </body>
+    </cell>
+    <cell>
+        <body>
+            <function>terroutDatedue</function>
+        </body>
+    </cell>
+    <cell>
+        <body>
+            <function>terroutPublisher</function>
+        </body>
+    </cell>
+</terrout>
+
+<terrin>
+    <header>
+        <includes>tableTemplates/terrFullname</includes>
+    </header>
+    <header>
+        <body>
+            <html>Last Complete</html>
+        </body>
+    </header>
+    <header>
+        <includes>tableTemplates/standardDataHeadings</includes>
+    </header>
+    <cell>
+        <includes>tableTemplates/terrFullname</includes>
+    </cell>
+    <cell>
+        <body>
+            <function>territoryDatecomp</function>
+        </body>
+    </cell>
+    <cell>
+        <body><!--Empty Cell--></body>
+    </cell>
+    <cell>
+        <body><!--Empty Cell--></body>
+    </cell>
+    <cell>
+        <class>
+            <html>pubEntry</html>
+        </class>
+    </cell>
+</terrin>

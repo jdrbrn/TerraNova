@@ -6,36 +6,18 @@
 <!-- table to display terrouts -->
 <div id="terrOuts">
   <h2>Territories to Check-In</h2>
-
   <table>
     <thead>
       <tr>
-        <th>Territory</th>
-        <th>Last Complete</th>
-        <th>Publisher</th>
-        <th>Date Out</th>
-        <th>Date Due</th>
-        <th>Date Turned In</th>
+        <%= makeTableHeaders(TerraNovaConfig["reportPrintLayout"],"terrout") %>
       </tr>
     </thead>
 
     <tbody>
       <% @terrouts.sort_by{|terrout| terrout.datedue}.each do |terrout| %>
         <% categorizedTerrs<<terrout.terrid %>
-        <% if terrout.datedue-Date.current<0 %>
-          <% dateClass="late" %>
-        <% elsif (terrout.datedue-1.months)-Date.current<0%>
-          <% dateClass="warn" %>
-        <% else %>
-          <% dateClass="normal" %>
-        <% end %>
         <tr>
-          <td class="<%= dateClass %>"><%= @terrs.find(terrout.terrid).name %><br><%= @terrs.find(terrout.terrid).region %></td>
-          <td><%= @terrs.find(terrout.terrid).datecomp.strftime("%m/%d/%y") %></td>
-          <td><%= terrout.publisher %></td>
-          <td><%= terrout.dateout.strftime("%m/%d/%y") %></td>
-          <td><%= terrout.datedue.strftime("%m/%d/%y") %></td>
-          <td></td>
+          <%= makeTableData(TerraNovaConfig["reportPrintLayout"], "terrout", terrout) %>
         </tr>
       <% end %>
     </tbody>
@@ -45,15 +27,10 @@
 <!-- table to display terrins -->
 <div id="terrIns">
   <h2>Available Territories</h2>
-
   <table>
     <thead>
       <tr>
-        <th>Territory</th>
-        <th>Last Complete</th>
-        <th>Date Out</th>
-        <th>Date Due</th>
-        <th>Publisher</th>
+        <%= makeTableHeaders(TerraNovaConfig["reportPrintLayout"],"terrin") %>
       </tr>
     </thead>
 
@@ -61,11 +38,7 @@
       <% @terrins.sort_by{|terrin| @terrs.find(terrin.terrid).datecomp}.each do |terrin| %>
         <% categorizedTerrs<<terrin.terrid %>
         <tr>
-          <td class="normal"><%= @terrs.find(terrin.terrid).name %><br><%= @terrs.find(terrin.terrid).region %></td>
-          <td><%= @terrs.find(terrin.terrid).datecomp.strftime("%m/%d/%y") %></td>
-          <td></td>
-          <td></td>
-          <td class="pubEntry"></td>
+          <%= makeTableData(TerraNovaConfig["reportPrintLayout"], "terrin", terrin) %>
         </tr>
       <% end %>
     </tbody>
@@ -77,16 +50,10 @@
   <!-- table to display terrs that aren't out or in -->
     <div id="otherTerrs">
       <h2>Other Territories</h2>
-
       <table id="terrtable">
         <thead>
           <tr>
-            <th>Territory</th>
-            <th>Last Complete</th>
-            <th>Date Out</th>
-            <th>Date Due</th>
-            <th>Publisher</th>
-            <th>Date Turned In</th>
+            <%= makeTableHeaders(TerraNovaConfig["reportPrintLayout"], "terr") %>
           </tr>
         </thead>
 
@@ -95,12 +62,7 @@
             <% if categorizedTerrs.find_index(terr.id) %>
             <% else %>
               <tr>
-                <td class="normal"><%= terr.name %><br><%=terr.region %></td>
-                <td><%= terr.datecomp.strftime("%m/%d/%y") %></td>
-                <td></td>
-                <td></td>
-                <td class="pubEntry"></td>
-                <td></td>
+                <%= makeTableData(TerraNovaConfig["reportPrintLayout"],"terr",terr) %>
               </tr>
             <% end %>
           <% end %>

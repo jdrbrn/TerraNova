@@ -1,0 +1,76 @@
+<terrout>
+    <header>
+        <includes>tableTemplates/terrout</includes>
+    </header>
+    <cell>
+        <includes>tableTemplates/terrout</includes>
+    </cell>
+    <cell>
+        <body>
+            <function>territoryViewdetails</function>
+        </body>
+    </cell>
+    <cell>
+        <body>
+            <function>territoryCheckin</function>
+        </body>
+    </cell>
+</terrout>
+
+<terrin>
+    <header>
+        <includes>tableTemplates/terrFullname</includes>
+    </header>
+    <header>
+        <body>
+            <html>Last Complete</html>
+        </body>
+    </header>
+    <cell>
+        <includes>tableTemplates/terrFullname</includes>
+    </cell>
+    <cell>
+        <body>
+            <function>territoryDatecomp</function>
+        </body>
+    </cell>
+    <cell>
+        <body>
+            <function>territoryViewdetails</function>
+        </body>
+    </cell>
+    <cell>
+        <body>
+            <function>territoryCheckout</function>
+        </body>
+    </cell>
+</terrin>
+
+<terr>
+    <header>
+        <includes>reportIndex/terrin</includes>
+    </header>
+    <cell>
+        <includes>tableTemplates/terrFullname</includes>
+    </cell>
+    <cell>
+        <body>
+            <function>territoryDatecomp</function>
+        </body>
+    </cell>
+    <cell>
+        <body>
+            <function>territoryViewdetails</function>
+        </body>
+    </cell>
+    <cell>
+        <body>
+            <function>territoryCheckout</function>
+        </body>
+    </cell>
+    <cell>
+        <body>
+            <function>territoryCheckin</function>
+        </body>
+    </cell>
+</terr>

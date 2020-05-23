@@ -1,5 +1,5 @@
 {
-  "TerraNovaVersion": "2.2.0",
+  "TerraNovaVersion": "3.0",
   "timezone": "Eastern Time (US & Canada)",
   "name": "EDIT CONFIG FILE TO FINISH SETUP",
   "enableMultiserver": "false",
@@ -38,5 +38,9 @@
   "dncCSS": {
     "dncCardWidth": "5in",
     "specialDNC": "#0000ff"
-  }
+  },
+  "reportPrintLayout": "reportPrint",
+  "reportIndexLayout": "reportIndex",
+  "dncPrintLayout": "dncPrint",
+  "showLayout": "show"
 }
