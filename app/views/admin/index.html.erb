@@ -19,6 +19,7 @@
             xhttp.open("GET", "admin?configReset=1", true);
             xhttp.send();
         }
+        window.location.reload()
     }
 
     // helper function for saveConfig()
@@ -83,6 +84,7 @@
         request.open('POST', "admin", true)
         request.setRequestHeader('X-CSRF-Token', token)
         request.send(formData)
+        window.location.reload()
     }
 
     function editorLoad() {
@@ -178,7 +180,6 @@
     </h2>
 <% end %>
 <h2>Admin Page</h2>
-<b>All Changes Apply on Restart</b>
 <h3>Configuration <button type="button" onclick="location.href='admin?configDown=1'">Download Configuration File</button></h3>
 <%= form_tag "/admin", multipart: true do %>
     <b>Upload Configuration: </b>
@@ -318,6 +319,10 @@
             <tr>
                 <td>Worksheet Table Layout</td>
                 <td><input id="reportPrintLayout" type="text" value="<%= TerraNovaConfig["reportPrintLayout"] %>">
+            </tr>
+            <tr>
+                <td>DNC Table Layout</td>
+                <td><input id="dncLayout" type="text" value="<%= TerraNovaConfig["dncLayout"] %>">
             </tr>
         </table>
         <br>

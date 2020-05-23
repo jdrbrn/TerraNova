@@ -6,7 +6,7 @@ class AdminController < ApplicationController
     def index
         if params[:configUp]
             require 'fileutils'
-            FileUtils.move(params[:configUp].path,"tmp/UploadedConfig.json") 
+            FileUtils.move(params[:configUp].path,"config/user/TerraNovaConfig.json")
         end
         
         if params[:configDown]
@@ -33,7 +33,22 @@ class AdminController < ApplicationController
 
         if params[:dbUp]
             require 'fileutils'
-            FileUtils.move(params[:dbUp].path,"tmp/UploadedDB.sqlite3") 
+            if Rails.env.development? 
+                if File.file?("db/development.sqlite3")
+                  FileUtils.rm("db/development.sqlite3")
+                end
+                FileUtils.move(params[:dbUp].path, "db/development.sqlite3") 
+            elsif Rails.env.test? 
+                if File.file?("db/test.sqlite3")
+                  FileUtils.rm("db/test.sqlite3")
+                end
+                FileUtils.move(params[:dbUp].path, "db/test.sqlite3") 
+              else 
+                if File.file?("db/production.sqlite3")
+                  FileUtils.rm("db/production.sqlite3")
+                end
+                FileUtils.move(params[:dbUp].path, "db/production.sqlite3")  
+              end
         end
 
         if params[:dbDown]
@@ -54,6 +69,10 @@ class AdminController < ApplicationController
         if params[:restart]
             `touch tmp/restart.txt`
         end
+
+        puts "Reloading TerraNovaConfig.rb"
+        Object.const_set("TerraNovaConfig", ConfigHelper.loadConfig)
+        puts "Set TerraNovaConfig to #{TerraNovaConfig}"
     end
 
     #Required for HTML Post for file upload
