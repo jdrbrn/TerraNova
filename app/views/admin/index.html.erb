@@ -318,11 +318,17 @@
         </table>
         <br>
         <b>Layout Editor</b>
+        <% layouts=[] %>
+        <% Dir.children("config/user/layouts").each do |file| %>
+            <% if file.include?(".xml") %>
+                <% layouts << file.sub(".xml", "") %>
+            <% end %>
+        <% end %>
         <table>
             <tr>
                 <td>
                     <select name="editorSelect" onChange = "javascript:editorLoad()">
-                        <% TerraNovaLayouts.keys.sort.each do |layout| %> 
+                        <% layouts.sort.each do |layout| %> 
                             <option value = "editor_layouts/<%= layout %>.xml"><%= layout %></option>
                         <% end %>
                     </select>
@@ -331,10 +337,10 @@
             </tr>
             <tr>
                 <td name="editorTD">
-                    <% TerraNovaLayouts.keys.sort.each do |layout| %>
+                    <% layouts.sort.each do |layout| %>
                         <textarea id="editor_layouts/<%= layout %>.xml" 
                             cols="75" rows="50" style="display: none; resize: none" 
-                            spellcheck="false"><%= TerraNovaLayouts[layout] %></textarea>
+                            spellcheck="false"><%= File.read("config/user/layouts/"+layout+".xml") %></textarea>
                     <% end %>
                 </td>
             </tr>
