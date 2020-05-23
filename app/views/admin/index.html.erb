@@ -146,7 +146,7 @@
     }
 </script>
 
-<%#Gets latest version number from github %>
+<%# Gets latest version number from github %>
 <% begin %>
     <% require 'net/http' %>
     <% response = Net::HTTP.get(URI("https://api.github.com/repos/jdrbrn/TerraNova/releases/latest")) %>
@@ -154,13 +154,18 @@
 <% rescue %>
     <% response = {} %>
 <% end %>
-<%# if request fails it sets latest version to 0 %>
+<%# if request fails it sets latest version to current version %>
+<%# Also set to current version if in development %>
 <% if (latestVersion=response["tag_name"]) %>
 <% else %>
-    <% latestVersion="0"%>
+    <% latestVersion=TerraNovaConfig["TerraNovaVersion"] %>
 <% end %>
-<%#Checks if that version is newer, if so page includes update related stuff %>
-<% if latestVersion>TerraNovaConfig["TerraNovaVersion"] %>
+<% if Rails.env.development? %>
+    <% latestVersion=TerraNovaConfig["TerraNovaVersion"] %>
+<% end %>
+<%# Checks if that version is newer, if so page includes update related stuff %>
+<%# If in development mode display update message anyway %>
+<% if latestVersion>TerraNovaConfig["TerraNovaVersion"] || Rails.env.development? %>
     <script>
         function signalUpdate() {
             if (window.confirm("Continue: Update on Restart? This may cause merge issues to manually fix")){
@@ -179,6 +184,7 @@
         <button type="button" onclick="signalUpdate()"><b>Update TerraNova on Restart</button> 
     </h2>
 <% end %>
+
 <h2>Admin Page</h2>
 <h3>Configuration <button type="button" onclick="location.href='admin?configDown=1'">Download Configuration File</button></h3>
 <%= form_tag "/admin", multipart: true do %>
@@ -267,43 +273,43 @@
         <b>Formatting</b>
         <table>
         <tr>
-            <td>systemCSS</td>
-            <td>bodyBG</td>
+            <td>General</td>
+            <td>Background</td>
             <td><input id="systemCSS_bodyBG" type="color" value="<%= TerraNovaConfig["systemCSS"]["bodyBG"] %>">
         </tr>
         <tr>
             <td></td>
-            <td>terrWarn</td>
+            <td>Warning Color</td>
             <td><input id="systemCSS_terrWarn" type="color" value="<%= TerraNovaConfig["systemCSS"]["terrWarn"] %>">
         </tr>
         <tr>
             <td></td>
-            <td>terrLate</td>
+            <td>Overdue Color</td>
             <td><input id="systemCSS_terrLate" type="color" value="<%= TerraNovaConfig["systemCSS"]["terrLate"] %>">
         </tr>
         <tr>
             <td></td>
-            <td>toolbarBG</td>
+            <td>Toolbar Background</td>
             <td><input id="systemCSS_toolbarBG" type="color" value="<%= TerraNovaConfig["systemCSS"]["toolbarBG"] %>">
         </tr>
         <tr>
             <td></td>
-            <td>thBG</td>
+            <td>Table Header Background</td>
             <td><input id="systemCSS_thBG" type="color" value="<%= TerraNovaConfig["systemCSS"]["thBG"] %>">
         </tr>
         <tr>
             <td></td>
-            <td>tdBG</td>
+            <td>Table Body Background</td>
             <td><input id="systemCSS_tdBG" type="color" value="<%= TerraNovaConfig["systemCSS"]["tdBG"] %>">
         </tr>
         <tr>
-            <td>dncCSS</td>
-            <td>dncCardWidth</td>
+            <td>DNCs</td>
+            <td>Card Width</td>
             <td><input id="dncCSS_dncCardWidth" value="<%= TerraNovaConfig["dncCSS"]["dncCardWidth"] %>">
         </tr>
         <tr>
             <td></td>
-            <td>specialDNC</td>
+            <td>Special Text Color</td>
             <td><input id="dncCSS_specialDNC" type="color" value="<%= TerraNovaConfig["dncCSS"]["specialDNC"] %>">
         </tr>
     </table>
@@ -321,8 +327,8 @@
                 <td><input id="reportPrintLayout" type="text" value="<%= TerraNovaConfig["reportPrintLayout"] %>">
             </tr>
             <tr>
-                <td>DNC Table Layout</td>
-                <td><input id="dncLayout" type="text" value="<%= TerraNovaConfig["dncLayout"] %>">
+                <td>DNC Card Table Layout</td>
+                <td><input id="dncPrintLayout" type="text" value="<%= TerraNovaConfig["dncPrintLayout"] %>">
             </tr>
             <tr>
                 <td>Show Table Layout</td>
@@ -352,7 +358,7 @@
                 <td name="editorTD">
                     <% layouts.sort.each do |layout| %>
                         <textarea id="editor_layouts/<%= layout %>.xml" 
-                            cols="75" rows="50" style="display: none; resize: none" 
+                            cols="75" rows="47" style="display: none; resize: none" 
                             spellcheck="false"><%= File.read("config/user/layouts/"+layout+".xml") %></textarea>
                     <% end %>
                 </td>
@@ -360,11 +366,9 @@
         </table>
     </div>
 </div>
-<br>
 <button type="button" onclick="configReset()">Reset to Default</button>
 <button type="button" onclick="saveConfig()">Save Configuration</button>
-
-
+<br>
 <br>
 <h3>Database <button type="button" onclick="location.href='admin?dbDown=1'">Download Database</button></h3>
 <%= form_tag "/admin", multipart: true do %>
