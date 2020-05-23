@@ -11,10 +11,6 @@ class ReportController < ApplicationController
       puts "Reloading TerraNovaConfig.rb"
       load "#{Dir.pwd}/config/ConfigHelper.rb"
       Object.const_set("TerraNovaConfig", ConfigHelper.loadConfig)
-      ConfigHelper.readLayout(TerraNovaConfig["reportPrintLayout"])
-      ConfigHelper.readLayout(TerraNovaConfig["reportIndexLayout"])
-      ConfigHelper.readLayout(TerraNovaConfig["dncLayout"])
-      Object.const_set("TerraNovaLayouts", ConfigHelper.loadLayouts)
       puts "Set TerraNovaConfig to #{TerraNovaConfig}"
     end
     @terrins=Terrin.all

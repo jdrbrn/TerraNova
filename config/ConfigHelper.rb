@@ -80,48 +80,24 @@ class ConfigHelper
     config
   end
 
-  def self.readLayout(layoutName)
+  def self.loadTableLayout(layoutName, tableName)
     layoutFile = layoutName+".xml"
     # Check for file, copy from defaults if exists there
     if File.file?(@configDir+"layouts/"+layoutFile)
-      # Load layout file so we can read the XML
-      layoutXML=Nokogiri::XML.fragment(File.read(@configDir+"layouts/"+layoutFile))
-      # Get the table entries and add record their existance
-      @layoutsTable[layoutName]=[]
-      layoutXML.xpath("./*").each do |table|
-        @layoutsTable[layoutName]<<table.name
+      # Return XML of layout
+      layout=Nokogiri::XML.fragment(File.read(@configDir+"layouts/"+layoutFile))
+      table = layout.xpath("./"+tableName)
+      if table.to_s == ""
+        "Error: No table #{tableName} in layout #{layoutName}"
+      else
+        table
       end
-      # Check for includes and import those tables as well
-      layoutXML.xpath(".//includes").each do |include|
-        if !includeCheck(include.content.split("/")[0], include.content.split("/")[1])
-          puts "Error: Failed to include #{include.content} from #{layoutName}"
-        end
-      end
-      @layoutsTable
     elsif File.file?(@defaultsDir+"layouts/"+layoutFile)
       copyDefault("layouts/"+layoutFile)
-      readLayout(layoutName)
+      loadLayout(layoutName)
     else
-      puts "Error: No layout #{layoutName} found"
-      false
+      "Error: No layout #{layoutName} found"
     end
-  end
-
-  def self.includeCheck(layout, table)
-    if @layoutsTable[layout]
-      @layoutsTable[layout].include?(table)
-    else
-      self.readLayout(layout)
-      includeCheck(layout, table)
-    end
-  end
-
-  def self.loadLayouts
-    output={}
-    @layoutsTable.keys.each do |layout|
-      output[layout]=Nokogiri::XML.fragment(File.read(@configDir+"layouts/"+layout+".xml"))
-    end
-    output
   end
 
   def self.copyDefault(fileName)

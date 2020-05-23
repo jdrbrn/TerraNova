@@ -39,10 +39,6 @@ end
 Bundler.require(*Rails.groups)
 
 TerraNovaConfig=ConfigHelper.loadConfig
-ConfigHelper.readLayout(TerraNovaConfig["reportPrintLayout"])
-ConfigHelper.readLayout(TerraNovaConfig["reportIndexLayout"])
-ConfigHelper.readLayout(TerraNovaConfig["dncLayout"])
-TerraNovaLayouts=ConfigHelper.loadLayouts
 
 module TerraNova
   class Application < Rails::Application

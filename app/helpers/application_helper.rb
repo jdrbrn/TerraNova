@@ -125,40 +125,50 @@ module ApplicationHelper
         output.html_safe
     end
 
-    def makeTableHeaders(layout, tableName)
+    def makeTableHeaders(layoutName, tableName)
         # Create output string
         output=""
         # Get a list of each header in the table and iterate
-        headers = TerraNovaLayouts[layout].xpath(".//"+tableName+"//header")
-        headers.each do |header|
-            # Check if the header is an includes and then import the headers it calls for
-            # Else generate a TH from the header info
-            if header.elements[0].name=="includes"
-                includeLayout = header.elements[0].content.split("/")[0]
-                includeTable = header.elements[0].content.split("/")[1]
-                output += makeTableHeaders(includeLayout, includeTable)
-            else
-                output += generateTH(header)
+        table=ConfigHelper.loadTableLayout(layoutName, tableName)
+        if table.class.to_s != "String"
+            headers = table.xpath(".//header")
+            headers.each do |header|
+                # Check if the header is an includes and then import the headers it calls for
+                # Else generate a TH from the header info
+                if header.elements[0].name=="includes"
+                    includeLayout = header.elements[0].content.split("/")[0]
+                    includeTable = header.elements[0].content.split("/")[1]
+                    output += makeTableHeaders(includeLayout, includeTable)
+                else
+                    output += generateTH(header)
+                end
             end
+        else
+            output = table
         end
         output.html_safe
     end
 
-    def makeTableData(layout, tableName, object)
+    def makeTableData(layoutName, tableName, object)
         # Create output string
         output=""
         # Get a list of each cell in the table and iterate
-        cells = TerraNovaLayouts[layout].xpath(".//"+tableName+"//cell")
-        cells.each do |cell|
-            # Check if the cell is an includes and then import the cell it calls for
-            # Else generate a TD from the header info
-            if cell.elements[0].name=="includes"
-                includeLayout = cell.elements[0].content.split("/")[0]
-                includeTable = cell.elements[0].content.split("/")[1]
-                output += makeTableData(includeLayout, includeTable, object)
-            else
-                output += generateTD(cell, object)
+        table=ConfigHelper.loadTableLayout(layoutName, tableName)
+        if table.class.to_s != "String"
+            cells = table.xpath(".//cell")
+            cells.each do |cell|
+                # Check if the cell is an includes and then import the cell it calls for
+                # Else generate a TD from the header info
+                if cell.elements[0].name=="includes"
+                    includeLayout = cell.elements[0].content.split("/")[0]
+                    includeTable = cell.elements[0].content.split("/")[1]
+                    output += makeTableData(includeLayout, includeTable, object)
+                else
+                    output += generateTD(cell, object)
+                end
             end
+        else
+            output = table
         end
         output.html_safe
     end
