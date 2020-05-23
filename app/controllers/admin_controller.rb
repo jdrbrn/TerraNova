@@ -29,6 +29,11 @@ class AdminController < ApplicationController
         if params[:configReset]
             require 'fileutils'
             FileUtils.rm("config/user/TerraNovaConfig.json")
+            Dir.children("config/user/layouts").each do |file|
+                if file.include?(".xml")
+                    FileUtils.rm("config/user/layouts/"+file)
+                end
+            end
         end
 
         if params[:dbUp]
@@ -72,6 +77,7 @@ class AdminController < ApplicationController
 
         puts "Reloading TerraNovaConfig.rb"
         Object.const_set("TerraNovaConfig", ConfigHelper.loadConfig)
+        ConfigHelper.loadLayouts
         puts "Set TerraNovaConfig to #{TerraNovaConfig}"
     end
 

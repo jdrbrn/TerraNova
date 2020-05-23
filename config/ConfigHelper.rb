@@ -80,13 +80,37 @@ class ConfigHelper
     config
   end
 
-  def self.loadTableLayout(layoutName, tableName)
+  def self.loadLayouts
+    TerraNovaConfig.keys.each do |key|
+      if key.include?("Layout")
+        self.loadLayout(TerraNovaConfig[key])
+      end
+    end
+  end
+
+  def self.loadLayout(layoutName)
     layoutFile = layoutName+".xml"
     # Check for file, copy from defaults if exists there
     if File.file?(@configDir+"layouts/"+layoutFile)
       # Return XML of layout
+      Nokogiri::XML.fragment(File.read(@configDir+"layouts/"+layoutFile))
+    elsif File.file?(@defaultsDir+"layouts/"+layoutFile)
+      copyDefault("layouts/"+layoutFile)
+      loadLayout(layoutName)
+    else
+      "Error: No layout #{layoutName} found"
+    end
+  end
+
+  def self.loadTableLayout(layoutName, tableName)
+    layoutFile = layoutName+".xml"
+    # Check for file, copy from defaults if exists there
+    if File.file?(@configDir+"layouts/"+layoutFile)
+      # Get XML of layout
       layout=Nokogiri::XML.fragment(File.read(@configDir+"layouts/"+layoutFile))
+      # Get the table
       table = layout.xpath("./"+tableName)
+      # Check if table actually exists
       if table.to_s == ""
         "Error: No table #{tableName} in layout #{layoutName}"
       else
