@@ -40,5 +40,6 @@
     "specialDNC": "#0000ff"
   },
   "reportPrintLayout": "reportPrint",
-  "reportIndexLayout": "reportIndex"
+  "reportIndexLayout": "reportIndex",
+  "dncLayout": "dnc"
 }

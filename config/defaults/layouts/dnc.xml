@@ -1,0 +1,84 @@
+<dncPrint>
+    <header>
+        <body>
+            <html>Date</html>
+        </body>
+    </header>
+    <header>
+        <body>
+            <html>Name</html>
+        </body>
+    </header>
+    <header>
+        <body>
+            <html>Address</html>
+        </body>
+    </header>
+    <header>
+        <body>
+            <html>Publisher</html>
+        </body>
+    </header>
+    <header>
+        <body>
+            <html>Notes</html>
+        </body>
+    </header>
+    <cell>
+        <body>
+            <function>dncDate</function>
+        </body>
+    </cell>
+    <cell>
+        <body>
+            <function>dncName</function>
+            <!-- &#160; is a nbsp character-->
+            <!-- This allows the break to be displayed instead of nulled out-->
+            <!-- The break makes room on the printed DNC card for writing in edits-->
+            <html><br/>&#160;</html>
+        </body>
+    </cell>
+    <cell>
+        <body>
+            <function>dncAddress</function>
+        </body>
+    </cell>
+    <cell>
+        <body>
+            <function>dncPublisher</function>
+        </body>
+    </cell>
+    <cell>
+        <body>
+            <function>dncNotes</function>
+        </body>
+    </cell>
+</dncPrint>
+
+<dncBlank>
+    <cell>
+        <width>
+            <html>9.2%</html>
+        </width>
+    </cell>
+    <cell>
+        <width>
+            <html>14%</html>
+        </width>
+    </cell>
+    <cell>
+        <width>
+            <html>21%</html>
+        </width>
+    </cell>
+    <cell>
+        <width>
+            <html>14%</html>
+        </width>
+    </cell>
+    <cell>
+        <height>
+            <html>36px</html>
+        </height>
+    </cell>
+</dncBlank>

@@ -11,10 +11,10 @@ module ApplicationHelper
         end
     end
 
-    def runFunctionTD(functionString, territory)
+    def runFunctionTD(functionString, object)
         if respond_to?(functionString)
             if method(functionString).parameters!=[]
-                method(functionString).call(territory)
+                method(functionString).call(object)
             else
                 method(functionString).call
             end
@@ -73,7 +73,7 @@ module ApplicationHelper
         output.html_safe
     end
     
-    def generateTD(config, territory)
+    def generateTD(config, object)
         # Setup the variables to store the output and body
         # output is a broken tag as html attributes can be added
         # body is seperate so that it can be combined after all generation is done
@@ -91,9 +91,9 @@ module ApplicationHelper
                 # function is run and stored
                 attribute.elements.each do |element|
                     if element.name == "html"
-                        body+=element.content
+                        body+=element.children.to_s
                     elsif element.name == "function"
-                        body+=runFunctionTD(element.content, territory)
+                        body+=runFunctionTD(element.content, object)
                     end
                 end
             else
@@ -110,7 +110,7 @@ module ApplicationHelper
                     if element.name == "html"
                         output+=element.content
                     elsif element.name == "function"
-                        output+=runFunctionTD(element.content, territory)
+                        output+=runFunctionTD(element.content, object)
                     end
                 end
                 output += "\""
@@ -161,5 +161,44 @@ module ApplicationHelper
             end
         end
         output.html_safe
+    end
+
+    # DNC Table Functions
+    # Put here as they need to be accessed throughout the program
+    # On DNC pages and on individual territory pages
+
+    def dncDate(dnc)
+        if dnc.date == nil
+            ""
+        else
+            dnc.date.strftime("%m/%d/%y")
+        end
+    end
+    
+    def dncName(dnc)
+        dnc.name
+    end
+
+    def dncAddress(dnc)
+        output = ""
+        output += dncNumber(dnc) 
+        output += " "
+        output += dncStreet(dnc)
+    end
+
+    def dncNumber(dnc)
+        dnc.number
+    end
+
+    def dncStreet(dnc)
+        dnc.street
+    end
+
+    def dncPublisher(dnc)
+        dnc.publisher
+    end
+
+    def dncNotes(dnc)
+        dnc.notes
     end
 end
