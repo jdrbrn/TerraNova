@@ -6,13 +6,6 @@ class ReportController < ApplicationController
 
   #Setup for letting the report pages easily reference needed entries
   def index
-    # If in development reload TerraNovaConfig when loading report/index
-    if Rails.env.development?
-      puts "Reloading TerraNovaConfig.rb"
-      load "#{Dir.pwd}/config/ConfigHelper.rb"
-      Object.const_set("TerraNovaConfig", ConfigHelper.loadConfig)
-      puts "Set TerraNovaConfig to #{TerraNovaConfig}"
-    end
     @terrins=Terrin.all
     @terrouts=Terrout.all
     @terrs=Terr.all
