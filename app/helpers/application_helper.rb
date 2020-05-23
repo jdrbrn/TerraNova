@@ -208,21 +208,34 @@ module ApplicationHelper
         terrid = territoryGetID(territory)
 
         output = ""
-        output += @terrs.find(terrid).datecomp.strftime("%m/%d/%y")
+        output += Terr.all.find(terrid).datecomp.strftime("%m/%d/%y")
     end
 
     def territoryName(territory)
         terrid = territoryGetID(territory)
 
         output = ""
-        output += @terrs.find(terrid).name
+        output += Terr.all.find(terrid).name
     end
     
     def territoryRegion(territory)
         terrid = territoryGetID(territory)
 
         output = ""
-        output += @terrs.find(terrid).region
+        output += Terr.all.find(terrid).region
+    end
+    
+    def territoryNotes(territory)
+        terrid = territoryGetID(territory)
+
+        output = ""
+        output += Terr.all.find(terrid).notes
+    end
+    
+    def territoryHistoryRaw(territory)
+        terrid = territoryGetID(territory)
+
+        Terr.all.find(terrid).history
     end
 
     def territoryViewdetails(territory)
@@ -234,7 +247,7 @@ module ApplicationHelper
 
     def territoryCheckin(territory)
         if territory.class.to_s == "Terrout"
-            link_to 'Check In', [territory,checkin: territory.terrid], method: :delete, data: { confirm: "Are you sure you want to check in #{@terrs.find(territory.terrid).name}?" }
+            link_to 'Check In', [territory,checkin: territory.terrid], method: :delete, data: { confirm: "Are you sure you want to check in #{Terr.all.find(territory.terrid).name}?" }
         elsif territory.class.to_s == "Terr"
             link_to 'Check In', {:controller => "terrins", :action => "new", :terrid => territory.id}
         else
@@ -244,7 +257,7 @@ module ApplicationHelper
 
     def territoryCheckout(territory)
         if territory.class.to_s == "Terrin"
-            link_to 'Check Out', [territory,checkout: territory.terrid], method: :delete, data: { confirm: "Are you sure you want to check out #{@terrs.find(territory.terrid).name}?" }
+            link_to 'Check Out', [territory,checkout: territory.terrid], method: :delete, data: { confirm: "Are you sure you want to check out #{Terr.all.find(territory.terrid).name}?" }
         elsif territory.class.to_s == "Terr"
             link_to 'Check Out', {:controller => "terrouts", :action => "new", :terrid => territory.id}
         else
