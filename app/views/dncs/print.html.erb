@@ -55,7 +55,7 @@
 			<table class="dncTable">
 				<thead>
 					<tr>
-						<%= makeTableHeaders(TerraNovaConfig["dncLayout"],"dncPrint") %>
+						<%= makeTableHeaders(TerraNovaConfig["dncPrintLayout"],"dnc") %>
 					</tr>
 		  		</thead>
 		  		<tbody>
@@ -65,12 +65,12 @@
 							<% else %>
 								<tr>
 							<% end %>
-						<%= makeTableData(TerraNovaConfig["dncLayout"], "dncPrint", dnc) %>
+						<%= makeTableData(TerraNovaConfig["dncPrintLayout"], "dnc", dnc) %>
 					</tr>
 					<% end %>
 					<% (1..3).each do %>
 						<tr>
-							<%= makeTableData(TerraNovaConfig["dncLayout"], "dncBlank", nil) %>
+							<%= makeTableData(TerraNovaConfig["dncPrintLayout"], "dncBlank", nil) %>
 						</tr>
 					<% end %>
 				</tbody>
