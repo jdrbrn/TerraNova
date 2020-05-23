@@ -42,38 +42,22 @@
     <table>
         <thead>
             <tr>
-            <th>Date</th>
-            <th>Name</th>
-                <th>Number</th>
-                <th>Street</th>
-                <th>Publisher</th>
-                <th>Notes</th>
-            <td><%= link_to 'New DNC', {:controller => "dncs", :action => "new", :terrid => terrid, :terrtype => territory.class.to_s.downcase, :redirid => territory.id} %></td>
-            <td><a href='/dncs/print?terr=<%= terrid %>' target='_blank'>Print DNC List</a></td>
+                <%= makeTableHeaders(TerraNovaConfig["showLayout"], "dnc") %>
+                <td><%= link_to 'New DNC', {:controller => "dncs", :action => "new", :terrid => terrid, :terrtype => territory.class.to_s.downcase, :redirid => territory.id} %></td>
+                <td><a href='/dncs/print?terr=<%= terrid %>' target='_blank'>Print DNC List</a></td>
             </tr>
         </thead>
 
         <tbody>
             <% @dncs.each do |dnc| %>
-            <% if dnc.notes.include?("Territory") %>
-            <tr class="special">
-            <% else %>
-            <tr>
-            <% end %>
-            <td>
-                <% if dnc.date == nil %>
-                <%= dnc.date %>
+                <% if dnc.notes.include?("Territory") %>
+                    <tr class="special">
                 <% else %>
-                <%= dnc.date.strftime("%m/%d/%y") %>
+                    <tr>
                 <% end %>
-            </td>
-            <td><%= dnc.name %></td>
-                    <td><%= dnc.number %></td>
-                    <td><%= dnc.street %></td>
-                    <td><%= dnc.publisher %></td>
-                    <td><%= dnc.notes %></td>
-            <td><%= link_to 'Edit', {:controller => "dncs", :action => "edit", :id => dnc.id, :terrtype => territory.class.to_s.downcase,:redirid => territory.id} %></td>
-            <td><%= link_to 'Delete', [dnc,terrtype: territory.class.to_s.downcase, redirid: territory.id], method: :delete, data: { confirm: "Are you sure you want to delete?" } %></td>
+                    <%= makeTableData(TerraNovaConfig["showLayout"], "dnc", dnc) %>
+                    <td><%= link_to 'Edit', {:controller => "dncs", :action => "edit", :id => dnc.id, :terrtype => territory.class.to_s.downcase,:redirid => territory.id} %></td>
+                    <td><%= link_to 'Delete', [dnc,terrtype: territory.class.to_s.downcase, redirid: territory.id], method: :delete, data: { confirm: "Are you sure you want to delete?" } %></td>
                 </tr>
             <% end %>
         </tbody>

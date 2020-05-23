@@ -29,5 +29,67 @@
             <function>terroutDatedue</function>
         </body>
     </cell>
-
 </terrout>
+
+<dnc>
+    <header>
+        <body>
+            <html>Date</html>
+        </body>
+    </header>
+    <header>
+        <body>
+            <html>Name</html>
+        </body>
+    </header>
+    <header>
+        <body>
+            <html>Number</html>
+        </body>
+    </header>
+    <header>
+        <body>
+            <html>Street</html>
+        </body>
+    </header>
+    <header>
+        <body>
+            <html>Publisher</html>
+        </body>
+    </header>
+    <header>
+        <body>
+            <html>Notes</html>
+        </body>
+    </header>
+    <cell>
+        <body>
+            <function>dncDate</function>
+        </body>
+    </cell>
+    <cell>
+        <body>
+            <function>dncName</function>
+        </body>
+    </cell>
+    <cell>
+        <body>
+            <function>dncNumber</function>
+        </body>
+    </cell>
+    <cell>
+        <body>
+            <function>dncStreet</function>
+        </body>
+    </cell>
+    <cell>
+        <body>
+            <function>dncPublisher</function>
+        </body>
+    </cell>
+    <cell>
+        <body>
+            <function>dncNotes</function>
+        </body>
+    </cell>
+</dnc>
