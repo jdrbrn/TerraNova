@@ -6,10 +6,10 @@
     </header>
     <cell>
         <class>
-            <function>deadlineCSS</function>
+            <function>territoryDeadlineCSS</function>
         </class>
         <body>
-            <function>fullname</function>
+            <function>territoryFullname</function>
         </body>
     </cell>
 </terrFullname>
@@ -44,17 +44,17 @@
     </cell>
     <cell>
         <body>
-            <function>dateoutTerrout</function>
+            <function>terroutDateout</function>
         </body>
     </cell>
     <cell>
         <body>
-            <function>datedueTerrout</function>
+            <function>terroutDatedue</function>
         </body>
     </cell>
     <cell>
         <body>
-            <function>publisherTerrout</function>
+            <function>terroutPublisher</function>
         </body>
     </cell>
 </terrout>
@@ -76,7 +76,7 @@
     </cell>
     <cell>
         <body>
-            <function>datecomp</function>
+            <function>territoryDatecomp</function>
         </body>
     </cell>
     <cell>

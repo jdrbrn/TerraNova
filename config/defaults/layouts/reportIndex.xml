@@ -7,12 +7,12 @@
     </cell>
     <cell>
         <body>
-            <function>viewdetails</function>
+            <function>territoryViewdetails</function>
         </body>
     </cell>
     <cell>
         <body>
-            <function>checkinTerrout</function>
+            <function>territoryCheckin</function>
         </body>
     </cell>
 </terrout>
@@ -31,17 +31,17 @@
     </cell>
     <cell>
         <body>
-            <function>datecomp</function>
+            <function>territoryDatecomp</function>
         </body>
     </cell>
     <cell>
         <body>
-            <function>viewdetails</function>
+            <function>territoryViewdetails</function>
         </body>
     </cell>
     <cell>
         <body>
-            <function>checkoutTerrin</function>
+            <function>territoryCheckout</function>
         </body>
     </cell>
 </terrin>
@@ -55,22 +55,22 @@
     </cell>
     <cell>
         <body>
-            <function>datecomp</function>
+            <function>territoryDatecomp</function>
         </body>
     </cell>
     <cell>
         <body>
-            <function>viewdetails</function>
+            <function>territoryViewdetails</function>
         </body>
     </cell>
     <cell>
         <body>
-            <function>checkoutTerr</function>
+            <function>territoryCheckout</function>
         </body>
     </cell>
     <cell>
         <body>
-            <function>checkinTerr</function>
+            <function>territoryCheckin</function>
         </body>
     </cell>
 </terr>
