@@ -145,9 +145,13 @@
 </script>
 
 <%#Gets latest version number from github %>
-<% require 'net/http' %>
-<% response = Net::HTTP.get(URI("https://api.github.com/repos/jdrbrn/TerraNova/releases/latest")) %>
-<% response=JSON.parse(response) %>
+<% begin %>
+    <% require 'net/http' %>
+    <% response = Net::HTTP.get(URI("https://api.github.com/repos/jdrbrn/TerraNova/releases/latest")) %>
+    <% response=JSON.parse(response) %>
+<% rescue %>
+    <% response = {} %>
+<% end %>
 <%# if request fails it sets latest version to 0 %>
 <% if (latestVersion=response["tag_name"]) %>
 <% else %>
