@@ -19,7 +19,7 @@
             xhttp.open("GET", "admin?configReset=1", true);
             xhttp.send();
         }
-        window.location.reload()
+        Location.reload()
     }
 
     // helper function for saveConfig()
@@ -84,7 +84,7 @@
         request.open('POST', "admin", true)
         request.setRequestHeader('X-CSRF-Token', token)
         request.send(formData)
-        window.location.reload()
+        Location.reload()
     }
 
     function editorLoad() {
