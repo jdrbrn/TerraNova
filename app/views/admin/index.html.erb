@@ -63,7 +63,7 @@
                 }
                 // Checkboxes need item.checked instead of item.value
                 else if (item.type == "checkbox"){
-                    usrconf=setValue(usrconf, keys, item.checked)
+                    usrconf=setValue(usrconf, keys, item.checked.toString())
                 }
                 // Keys/IDs starting with editor are for the XML editor
                 else if (keys[0]=="editor"){
