@@ -19,7 +19,7 @@
             xhttp.open("GET", "admin?configReset=1", true);
             xhttp.send();
         }
-        window.location.reload()
+        Location.reload()
     }
 
     // helper function for saveConfig()
@@ -63,7 +63,7 @@
                 }
                 // Checkboxes need item.checked instead of item.value
                 else if (item.type == "checkbox"){
-                    usrconf=setValue(usrconf, keys, item.checked)
+                    usrconf=setValue(usrconf, keys, item.checked.toString())
                 }
                 // Keys/IDs starting with editor are for the XML editor
                 else if (keys[0]=="editor"){
@@ -84,7 +84,7 @@
         request.open('POST', "admin", true)
         request.setRequestHeader('X-CSRF-Token', token)
         request.send(formData)
-        window.location.reload()
+        Location.reload()
     }
 
     function editorLoad() {
